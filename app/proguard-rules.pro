@@ -95,3 +95,13 @@
 
 #androidannotation
 -dontwarn org.androidannotations.api.rest.**
+
+#Eventbus
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    public void onEvent*(***);
+}
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends de.greenrobot.event.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
