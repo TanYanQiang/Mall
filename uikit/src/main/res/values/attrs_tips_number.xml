@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TipsNumberView">
+        <attr name="TipsNumber_scale" format="float"/>
+        <attr name="TipsNumber_bgColor" format="color"/>
+        <attr name="TipsNumber_bgDrawable" format="reference"/>
+        <attr name="TipsNumber_textColor" format="color"/>
+        <attr name="TipsNumber_maxNumber" format="integer"/>
+        <attr name="TipsNumber_number" format="integer"/>
+        <attr name="TipsNumber_border" format="dimension"/>
+        <attr name="TipsNumber_borderLeft" format="dimension"/>
+        <attr name="TipsNumber_borderRight" format="dimension"/>
+        <attr name="TipsNumber_borderTop" format="dimension"/>
+        <attr name="TipsNumber_borderBottom" format="dimension"/>
+        <attr name="TipsNumber_noNumber" format="boolean"/>
+
+    </declare-styleable>
+
+</resources>

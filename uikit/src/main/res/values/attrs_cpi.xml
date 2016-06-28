@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CirclePageIndicator">
+        <attr name="CPI_SelDrawable" format="reference"/>
+        <attr name="CPI_NorDrawable" format="reference"/>
+        <attr name="CPI_Padding" format="dimension"/>
+    </declare-styleable>
+</resources>

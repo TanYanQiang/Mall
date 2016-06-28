@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LineView">
+        <attr name="LineView_Title" format="string"/>
+        <attr name="LineView_Content" format="string"/>
+        <attr name="LineView_TitleSize" format="dimension"/>
+        <attr name="LineView_ContentSize" format="dimension"/>
+        <attr name="LineView_TitleColor" format="color"/>
+        <attr name="LineView_ContentColor" format="color"/>
+        <attr name="LineView_ForwardIcon" format="reference"/>
+        <attr name="LineView_TitleIcon" format="reference"/>
+        <attr name="LineView_ContentBg" format="reference"/>
+    </declare-styleable>
+
+</resources>

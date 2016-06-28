@@ -45,6 +45,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
 
     compile project(":core")
+    compile project(":uikit")
 
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"

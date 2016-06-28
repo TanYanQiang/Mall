@@ -1,0 +1,12 @@
+<resources>
+    <string name="choose_image_error">选择图片失败</string>
+    <string name="cancel">取消</string>
+    <string name="no_camera_app">您的设备缺少拍照类应用</string>
+    <string name="no_gallery_app">您的设备缺少相册类应用</string>
+    <string name="image_processing">图片处理中</string>
+
+    <string-array name="pick_image">
+        <item>拍照</item>
+        <item>相册</item>
+    </string-array>
+</resources>

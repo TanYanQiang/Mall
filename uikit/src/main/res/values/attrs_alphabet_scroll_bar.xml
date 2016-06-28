@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="AlphabetScrollBar">
+        <attr name="ASB_norTextColor" format="color" />
+        <attr name="ASB_pressedTextColor" format="color" />
+        <attr name="ASB_norBackground" format="color" />
+        <attr name="ASB_pressedBackground" format="color" />
+        <attr name="ASB_textSize" format="dimension" />
+        <attr name="ASB_arrays" format="string" />
+    </declare-styleable>
+</resources>

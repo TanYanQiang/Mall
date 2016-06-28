@@ -1,0 +1,12 @@
+<resources>
+    <string name="choose_image_error">Choose Image Error</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_camera_app">Missing Camera App Installed on Your Device</string>
+    <string name="no_gallery_app">Missing Gallery App Installed on Your Device</string>
+    <string name="image_processing">Image Processing</string>
+
+    <string-array name="pick_image">
+        <item>Take a Picture</item>
+        <item>Photo Album</item>
+    </string-array>
+</resources>
