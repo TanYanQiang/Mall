@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permission_record_audio">请允许KKPoker访问您的录音权限,否则将会部导致分功能无法使用！</string>
+    <string name="permission_storage">请允许KKPoker访问您设备上的照片、媒体内容和文件权限，否则将会部导致分功能无法使用！</string>
+</resources>

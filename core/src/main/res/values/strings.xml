@@ -1,0 +1,5 @@
+<resources>
+    <string name="permission_storage">Please allow KKPoker to access photos, media content, and file permissions on your device, otherwise it will not be used!</string>
+    <string name="permission_record_audio">Please allow KKPoker to access your recording rights, otherwise it will result in a function that can not be used!</string>
+    <string name="permission_default">Please allow KkPoker permissions on you devices</string>
+</resources>
