@@ -11,8 +11,11 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.api.TestApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.dialog.DialogBuilder;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
@@ -22,7 +25,7 @@ import jp.wasabeef.glide.transformations.CropTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void test() {
+
+        confirm("提示", "是否启动网络加载", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+                Logger.i("Dialog Alert click right");
+            }
+        });
+
         Request request = TestApi.test(new Response.Listener<Void>() {
             @Override
             public void onResponse(Void response) {
@@ -56,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         VolleyHelper.execute(request, this);
+
     }
 
     @Override
