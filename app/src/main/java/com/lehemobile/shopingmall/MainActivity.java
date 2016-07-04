@@ -48,22 +48,18 @@ public class MainActivity extends BaseActivity {
 
     private void test() {
 
-        confirm("提示", "是否启动网络加载", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
-                Logger.i("Dialog Alert click right");
-            }
-        });
+        showLoading("正在加载数据....");
 
         Request request = TestApi.test(new Response.Listener<Void>() {
             @Override
             public void onResponse(Void response) {
+                dismissLoading();
 
             }
         }, new AppErrorListener(this) {
             @Override
             public void onError(int code, String msg) {
+                dismissLoading();
                 super.onError(code, msg);
             }
         });
