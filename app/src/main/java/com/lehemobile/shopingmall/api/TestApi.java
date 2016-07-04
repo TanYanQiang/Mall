@@ -14,12 +14,12 @@ import org.json.JSONObject;
  * Created by tanyq on 27/6/16.
  */
 public class TestApi {
-    public static Request test(Response.Listener<Void> listener, AppErrorListener errorListener) {
-        BaseRequest<Void> request = new BaseRequest<Void>(Request.Method.GET, "https://gank.io/api/data/Android/10/1", null, listener, errorListener) {
+    public static Request test(Response.Listener<String> listener, AppErrorListener errorListener) {
+        BaseRequest<String> request = new BaseRequest<String>(Request.Method.GET, "https://gank.io/api/data/Android/10/1", null, listener, errorListener) {
 
             @Override
-            protected Void treatResponse(JSONObject baseJson) throws Exception {
-                return null;
+            protected String treatResponse(JSONObject baseJson) throws Exception {
+                return baseJson.toString();
             }
         };
         return request;

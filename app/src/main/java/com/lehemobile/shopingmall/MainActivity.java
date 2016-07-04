@@ -50,9 +50,10 @@ public class MainActivity extends BaseActivity {
 
         showLoading("正在加载数据....");
 
-        Request request = TestApi.test(new Response.Listener<Void>() {
+        Request request = TestApi.test(new Response.Listener<String>() {
             @Override
-            public void onResponse(Void response) {
+            public void onResponse(String response) {
+                showToast(response);
                 dismissLoading();
 
             }
@@ -64,7 +65,6 @@ public class MainActivity extends BaseActivity {
             }
         });
         VolleyHelper.execute(request, this);
-
     }
 
     @Override
