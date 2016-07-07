@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.tgh.devkit.view.ClearableEditText
+        android:id="@+id/inputMobile"
+        style="@style/ActionLine.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_marginTop="20dp"
+        android:hint="手机号"
+        android:inputType="phone"
+        android:maxLength="11" />
+
+    <com.tgh.devkit.view.ClearableEditText
+        android:id="@+id/inputPassword"
+        style="@style/ActionLine.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="密码"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/loginButton"
+        style="@style/Button.RedCorners"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:text="登  录" />
+
+    <TextView
+        android:id="@+id/forgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="20dp"
+        android:text="忘记密码"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_size_lv3" />
+
+</LinearLayout>

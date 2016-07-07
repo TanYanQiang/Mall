@@ -9,4 +9,18 @@
     <color name="line_color">#e5e5e5</color>
 
     <color name="color_btn_pressed">#EF6C00</color>
+
+    <color name="text_color_lv1">#cc000000</color>
+    <color name="text_color_lv2">#66000000</color>
+    <color name="text_color_lv3">#1A000000</color>
+
+    <color name="text_color_light_lv1">#ffffff</color>
+    <color name="text_color_light_lv2">#ccffffff</color>
+
+    <color name="alpha_orange">#ccef683c</color>
+    <color name="orange">#ef683c</color>
+    <color name="btn_bg_red">#d65d35</color>
+    <color name="dark_red">#cf532b</color>
+    <color name="light_gray">#dedede</color>
+    <color name="blue">#3098f9</color>
 </resources>

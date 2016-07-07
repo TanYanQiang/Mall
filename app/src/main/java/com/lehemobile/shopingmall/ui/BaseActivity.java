@@ -1,14 +1,19 @@
 package com.lehemobile.shopingmall.ui;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lehemobile.shopingmall.utils.DialogUtils;
+import com.orhanobut.logger.Logger;
 
 /**
  * Created by tanyq on 28/6/16.
@@ -63,6 +68,30 @@ public class BaseActivity extends AppCompatActivity {
     public void complain(@StringRes int message) {
         DialogUtils.alert(this, message);
     }
+
+    public String getInputText(EditText editText) {
+        return editText.getText().toString().trim();
+    }
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initActionBar();
+    }
+
+    protected void initActionBar() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        Logger.i("action -->" + actionBar);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
 
     @Override
     protected void onDestroy() {

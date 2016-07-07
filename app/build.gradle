@@ -3,6 +3,9 @@ apply plugin: "android-apt"
 def AAVersion = '4.0.0'
 
 android {
+    def APP_HOST = "appHost";
+    def APP_PORT = "appPort";
+
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -13,6 +16,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        buildConfigField("String", APP_HOST, "\"www.baidu.com\"")
+        buildConfigField("int", APP_PORT, "80")
     }
     signingConfigs {
         lehe {
@@ -43,19 +49,20 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
     compile project(":core")
     compile project(":uikit")
 
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
+
+
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.bumptech.glide:volley-integration:1.4.0@aar'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
-
     compile 'de.greenrobot:eventbus:2.4.0'
-
     compile 'com.orhanobut:logger:1.14'
+
 }

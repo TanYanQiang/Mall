@@ -9,6 +9,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.orhanobut.logger.Logger;
 
 import org.json.JSONObject;
@@ -54,6 +55,11 @@ public class AppErrorListener implements Response.ErrorListener {
 
     public void onError(int code, String msg) {
         showToast(msg);
+        if (context != null) {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).dismissLoading();
+            }
+        }
     }
 
     private void showToast(String msg) {

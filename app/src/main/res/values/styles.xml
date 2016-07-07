@@ -20,5 +20,80 @@
         <item name="android:layout_width">0.5dp</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="ActionLine">
+        <item name="android:background">@drawable/input_box</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:textColor">@color/text_color_lv1</item>
+        <item name="android:textColorHint">@color/text_color_lv2</item>
+        <item name="android:textSize">@dimen/text_size_lv2</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="WithDrawEditText">
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:textColor">@color/text_color_lv1</item>
+        <item name="android:textColorHint">@color/text_color_lv2</item>
+        <item name="android:textSize">@dimen/text_size_lv3</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ActionLine.EditText" parent="ActionLine">
+        <item name="android:textColorHint">@color/text_color_lv2</item>
+    </style>
+
+
+    <style name="ActionLine.EditText.Multi" parent="ActionLine.EditText">
+        <item name="android:singleLine">false</item>
+        <item name="android:gravity">left|top</item>
+        <item name="android:minHeight">200dp</item>
+        <item name="android:maxLength">250</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+    </style>
+
+
+    <style name="Button">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_height_lv2</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/text_size_lv2</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="Button.RedCorners" parent="Button">
+        <item name="android:background">@drawable/btn_red_corners</item>
+        <item name="android:textColor">@color/text_red_solid</item>
+    </style>
+
+    <style name="Button.RedEmptyCorners" parent="Button">
+        <item name="android:background">@drawable/btn_red_empty_corners</item>
+        <item name="android:textColor">@color/text_red</item>
+    </style>
+
+    <style name="Button.WhiteEmpty" parent="Button">
+        <item name="android:background">@drawable/btn_white_empty</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 </resources>

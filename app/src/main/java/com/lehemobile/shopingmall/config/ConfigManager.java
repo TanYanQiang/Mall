@@ -26,4 +26,15 @@ public class ConfigManager {
         storeInternal.save(USER_ID, userId);
     }
 
+    public static class Device {
+        public static final String LAST_MOBILE = "last_mobile";
+
+        public static String getLastMobile() {
+            return getDefaultBindVersionStore().getString(LAST_MOBILE, null);
+        }
+
+        public static void setLastMobile(String mobile) {
+            getDefaultBindVersionStore().save(LAST_MOBILE, mobile);
+        }
+    }
 }
