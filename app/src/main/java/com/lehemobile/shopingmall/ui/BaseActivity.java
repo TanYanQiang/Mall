@@ -1,13 +1,14 @@
 package com.lehemobile.shopingmall.ui;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -81,7 +82,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void initActionBar() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
+        Logger.i("actionbar :"+actionBar);
+        Logger.i("getSupportActionBar :"+getSupportActionBar());
         if (actionBar == null) {
             return;
         }
@@ -92,6 +95,16 @@ public class BaseActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Logger.i("item:"+item.getItemId());
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onDestroy() {
