@@ -6,6 +6,7 @@ import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.IPConfig;
 import com.lehemobile.shopingmall.model.User;
+import com.tgh.devkit.core.encrypt.Md5;
 
 import org.json.JSONObject;
 
@@ -21,7 +22,7 @@ public class UserApi {
     public static BaseRequest<User> login(String mobile, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
-        params.put("password", password);
+        params.put("password", Md5.toString(password));
         return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "/User/login", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
@@ -63,7 +64,7 @@ public class UserApi {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
         params.put("smsCode", smsCode);
-        params.put("password", password); //TODO密码加密
+        params.put("password", Md5.toString(password));
         return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "/User/register", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
