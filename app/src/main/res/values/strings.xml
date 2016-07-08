@@ -6,4 +6,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="register_sms_code_tips">验证码短信已发送至%s</string>
 </resources>

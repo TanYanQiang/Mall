@@ -31,4 +31,45 @@ public class UserApi {
             }
         };
     }
+
+    /**
+     * 请求短信验证码
+     */
+    public static BaseRequest<Map<String, Object>> requestSmsCode(
+            String mobile, int type,
+            Response.Listener<Map<String, Object>> listener,
+            AppErrorListener errorListener) {
+        Map<String, String> parmas = new HashMap<>();
+        parmas.put("mobile", mobile);
+        parmas.put("source", "" + type);
+        return new BaseRequest<Map<String, Object>>(Request.Method.GET, IPConfig.getAPIBaseUrl() + "ShortMessage/getMessage", parmas, listener, errorListener) {
+
+            @Override
+            protected Map<String, Object> treatResponse(JSONObject baseJson) throws Exception {
+                return null;
+            }
+        };
+    }
+
+    /**
+     * @param mobile
+     * @param smsCode
+     * @param password
+     * @param listener
+     * @param errorListener
+     * @return
+     */
+    public static BaseRequest<User> register(String mobile, String smsCode, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
+        Map<String, String> params = new HashMap<>();
+        params.put("mobile", mobile);
+        params.put("smsCode", smsCode);
+        params.put("password", password); //TODO密码加密
+        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "/User/register", params, listener, errorListener) {
+            @Override
+            protected User treatResponse(JSONObject baseJson) throws Exception {
+                User user = new User();
+                return user;
+            }
+        };
+    }
 }

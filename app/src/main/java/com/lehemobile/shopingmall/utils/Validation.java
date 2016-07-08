@@ -186,4 +186,24 @@ public class Validation {
         return !TextUtils.isEmpty(url) && url.toLowerCase(Locale.US).startsWith("http://");
     }
 
+    private static final Pattern numRegex = Pattern.compile(".*[0-9].*");
+    private static final Pattern alphaRegex = Pattern.compile(".*[A-Za-z].*");
+
+    /**
+     * 业务要求密码必须包含数字和字母，以及长度在6~20位
+     *
+     * @param password
+     * @return
+     */
+    public static boolean isPassword(String password) {
+        if (password == null) {
+            return false;
+        }
+
+        if (password.length() < 6 || password.length() > 20) {
+            return false;
+        }
+        return numRegex.matcher(password).matches() && alphaRegex.matcher(password).matches();
+    }
+
 }

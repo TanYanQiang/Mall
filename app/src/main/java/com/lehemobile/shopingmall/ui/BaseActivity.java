@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,10 +82,10 @@ public class BaseActivity extends AppCompatActivity {
         initActionBar();
     }
 
-    protected void initActionBar() {
+    private void initActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        Logger.i("actionbar :"+actionBar);
-        Logger.i("getSupportActionBar :"+getSupportActionBar());
+        Logger.i("actionbar :" + actionBar);
+        Logger.i("getSupportActionBar :" + getSupportActionBar());
         if (actionBar == null) {
             return;
         }
@@ -95,10 +96,15 @@ public class BaseActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
+    public void initActionBar(Toolbar toolbar) {
+        setSupportActionBar(toolbar);
+        initActionBar();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Logger.i("item:"+item.getItemId());
-        switch (item.getItemId()){
+        Logger.i("item:" + item.getItemId());
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;

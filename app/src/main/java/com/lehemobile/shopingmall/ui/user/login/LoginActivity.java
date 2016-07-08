@@ -1,5 +1,8 @@
-package com.lehemobile.shopingmall.ui;
+package com.lehemobile.shopingmall.ui.user.login;
 
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -10,20 +13,25 @@ import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.model.User;
+import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.AfterTextChange;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 /**
  * Created by tanyq on 7/7/16.
  */
 @EActivity(R.layout.activity_login)
+@OptionsMenu(R.menu.menu_login)
 public class LoginActivity extends BaseActivity {
     @ViewById
     EditText inputMobile;
@@ -31,6 +39,9 @@ public class LoginActivity extends BaseActivity {
     EditText inputPassword;
     @ViewById
     Button loginButton;
+
+    @ViewById
+    Toolbar toolbar;
 
     @Click
     void forgetPassword() {
@@ -85,6 +96,10 @@ public class LoginActivity extends BaseActivity {
         inputMobile.setSelection(inputMobile.length());
     }
 
+    @OptionsItem(R.id.action_register)
+    void register(){
+        RegisterStep1Activity_.intent(this).start();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

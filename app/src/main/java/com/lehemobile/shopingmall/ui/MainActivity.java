@@ -16,21 +16,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.tgh.devkit.viewpager.BaseViewPager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.CropSquareTransformation;
-import jp.wasabeef.glide.transformations.GrayscaleTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 @EActivity(R.layout.activity_main2)
 public class MainActivity extends BaseActivity

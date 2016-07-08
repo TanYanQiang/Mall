@@ -4,7 +4,9 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.lehemobile.shopingmall.BuildConfig;
 import com.lehemobile.shopingmall.MyApplication;
+import com.lehemobile.shopingmall.config.IPConfig;
 import com.orhanobut.logger.Logger;
 
 import org.json.JSONObject;
@@ -31,6 +33,14 @@ public abstract class BaseRequest<T> extends Request<T> {
     }
 
     @Override
+    public String getUrl() {
+        if (BuildConfig.DEBUG) { //TODO 临时测试代码
+            return IPConfig.getAPIBaseUrl() + "/test.jsp";
+        }
+        return super.getUrl();
+    }
+
+    @Override
     public Map<String, String> getParams() {
         Logger.i("params:" + params);
         return params;
@@ -45,15 +55,10 @@ public abstract class BaseRequest<T> extends Request<T> {
             JSONObject base = new JSONObject(json);
 
             Logger.i(base.toString());
-            //TODO
-            boolean error = base.optBoolean("error", false);
-            if (error) {
-                return Response.error(new AppServerError(response));
-            }
-            /*int code = base.optInt("code", -1);
+            int code = base.optInt("code", -1);
             if (code != 0) {
                 return Response.error(new AppServerError(response));
-            }*/
+            }
             return Response.success(treatResponse(base), HttpHeaderParser.parseCacheHeaders(response));
         } catch (Exception e) {
             return Response.error(new AppServerError(response));
