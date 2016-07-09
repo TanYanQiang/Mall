@@ -22,8 +22,8 @@ import org.androidannotations.annotations.ViewById;
 /**
  * Created by tanyq on 8/7/16.
  */
-@EActivity(R.layout.activity_register_step2)
-public class RegisterStep2Activity extends BaseActivity {
+@EActivity(R.layout.activity_reset_password_step2)
+public class RestPasswordStep2Activity extends BaseActivity {
     @Extra
     String mobile;
 
@@ -37,14 +37,15 @@ public class RegisterStep2Activity extends BaseActivity {
     void init() {
         mobileTips.setText(getString(R.string.register_sms_code_tips, mobile));
 
-        smsCodePasswordFragment = RequestSmsCodePasswordFragment_.builder().mobile(mobile).type(UserApi.TYPE_REGISTER).build();
+        smsCodePasswordFragment = RequestSmsCodePasswordFragment_.builder().mobile(mobile).passwordLabelText("新密码")
+                .type(UserApi.TYPE_REGISTER).build();
 
         getFragmentManager().beginTransaction().add(R.id.container, smsCodePasswordFragment).commit();
     }
 
 
-    @Click(R.id.btnRegister)
-    void onRegister() {
+    @Click(R.id.btnComplete)
+    void onRestPassword() {
         String smsCode = smsCodePasswordFragment.getSmsCode();
         if (Strings.isNullOrEmpty(smsCode)) {
             showToast("请输入短信验证码");
@@ -62,11 +63,13 @@ public class RegisterStep2Activity extends BaseActivity {
 
         //TODO 调用接口注册
         showLoading("正在提交信息...");
-        BaseRequest<User> request = UserApi.register(mobile, smsCode, password, new Response.Listener<User>() {
+        BaseRequest<User> request = UserApi.restPassword(mobile, smsCode, password, new Response.Listener<User>() {
             @Override
             public void onResponse(User response) {
                 dismissLoading();
-                showToast("注册成功");
+                showToast("密码设置成功");
+                LoginActivity_.intent(RestPasswordStep2Activity.this).start();
+                finish();
             }
         }, new AppErrorListener(this) {
             @Override

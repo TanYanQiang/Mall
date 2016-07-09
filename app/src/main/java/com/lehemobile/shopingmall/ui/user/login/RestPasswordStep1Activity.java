@@ -25,15 +25,12 @@ import java.util.Map;
 
 import static com.tgh.devkit.core.utils.Strings.isNullOrEmpty;
 
-
 /**
- * 用户注册第一步，验证手机号
- * Created by albert on 11/27/14.
+ * Created by tanyq on 9/7/16.
  */
-@EActivity(R.layout.activity_register_step1)
-public class RegisterStep1Activity extends BaseActivity {
-    public static final int TYPE_REGISTER = 1;
-    public static final int TYPE_RESET_PASSWORD = 2;
+@EActivity(R.layout.activity_reset_passwrod_step1)
+public class RestPasswordStep1Activity extends BaseActivity {
+
     @ViewById(R.id.btnNext)
     Button nextBtn;
     @ViewById
@@ -66,13 +63,12 @@ public class RegisterStep1Activity extends BaseActivity {
             showToast("请输入正确的手机格式");
             return;
         }
-        //TODO  调用该接口获取验证码
         showLoading("正在发送验证码...");
-        BaseRequest<Map<String, Object>> request = UserApi.requestSmsCode(mobile, UserApi.TYPE_REGISTER, new Response.Listener<Map<String, Object>>() {
+        BaseRequest<Map<String, Object>> request = UserApi.requestSmsCode(mobile, UserApi.TYPE_RESET_PASSWORD, new Response.Listener<Map<String, Object>>() {
             @Override
             public void onResponse(Map<String, Object> response) {
                 dismissLoading();
-                RegisterStep2Activity_.intent(RegisterStep1Activity.this).mobile(mobile).start();
+                RestPasswordStep2Activity_.intent(RestPasswordStep1Activity.this).mobile(mobile).start();
             }
         }, new AppErrorListener(this) {
             @Override
@@ -82,11 +78,6 @@ public class RegisterStep1Activity extends BaseActivity {
         });
         VolleyHelper.execute(request, this);
 
-    }
-
-    @Click(R.id.login)
-    void onLogin() {
-        LoginActivity_.intent(this).start();
     }
 
     @Override

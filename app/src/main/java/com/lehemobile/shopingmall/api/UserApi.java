@@ -19,6 +19,10 @@ import java.util.Map;
  */
 public class UserApi {
 
+
+    public static final int TYPE_REGISTER = 1;
+    public static final int TYPE_RESET_PASSWORD = 2;
+
     public static BaseRequest<User> login(String mobile, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
@@ -61,6 +65,27 @@ public class UserApi {
      * @return
      */
     public static BaseRequest<User> register(String mobile, String smsCode, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
+        Map<String, String> params = new HashMap<>();
+        params.put("mobile", mobile);
+        params.put("smsCode", smsCode);
+        params.put("password", Md5.toString(password));
+        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "/User/register", params, listener, errorListener) {
+            @Override
+            protected User treatResponse(JSONObject baseJson) throws Exception {
+                User user = new User();
+                return user;
+            }
+        };
+    }
+    /**
+     * @param mobile
+     * @param smsCode
+     * @param password
+     * @param listener
+     * @param errorListener
+     * @return
+     */
+    public static BaseRequest<User> restPassword(String mobile, String smsCode, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
         params.put("smsCode", smsCode);

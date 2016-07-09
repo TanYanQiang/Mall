@@ -46,6 +46,7 @@ public class LoginActivity extends BaseActivity {
     @Click
     void forgetPassword() {
         //TODO 忘记密码
+        RestPasswordStep1Activity_.intent(this).start();
     }
 
     @Click(R.id.loginButton)

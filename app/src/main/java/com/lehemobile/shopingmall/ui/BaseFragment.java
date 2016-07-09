@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lehemobile.shopingmall.utils.DialogUtils;
@@ -71,6 +72,9 @@ public class BaseFragment extends Fragment {
     public void complain(@StringRes int message) {
         if (isActive()) return;
         DialogUtils.alert(getActivity(), message);
+    }
+    public String getInputText(EditText editText) {
+        return editText.getText().toString().trim();
     }
 
     @Override
