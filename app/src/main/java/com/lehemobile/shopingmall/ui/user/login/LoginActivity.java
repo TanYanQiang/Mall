@@ -1,8 +1,5 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,7 +13,6 @@ import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
-import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.AfterTextChange;
@@ -40,12 +36,8 @@ public class LoginActivity extends BaseActivity {
     @ViewById
     Button loginButton;
 
-    @ViewById
-    Toolbar toolbar;
-
     @Click
     void forgetPassword() {
-        //TODO 忘记密码
         RestPasswordStep1Activity_.intent(this).start();
     }
 
