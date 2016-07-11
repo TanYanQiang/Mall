@@ -58,6 +58,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(User response) {
                 dismissLoading();
+                showToast(response.getNick());
             }
         }, new AppErrorListener(this) {
             @Override

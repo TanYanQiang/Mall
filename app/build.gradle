@@ -17,7 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", APP_HOST, "\"wechartpay.cheguoguo.com\"")
+        buildConfigField("String", APP_HOST, "\"cn-api.kkpoker.com\"")
         buildConfigField("int", APP_PORT, "80")
     }
     signingConfigs {

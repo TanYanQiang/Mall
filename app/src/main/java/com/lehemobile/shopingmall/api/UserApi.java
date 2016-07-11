@@ -2,6 +2,7 @@ package com.lehemobile.shopingmall.api;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.lehemobile.shopingmall.api.base.ApiUtils;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.IPConfig;
@@ -23,15 +24,30 @@ public class UserApi {
     public static final int TYPE_REGISTER = 1;
     public static final int TYPE_RESET_PASSWORD = 2;
 
-    public static BaseRequest<User> login(String mobile, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
+    private static ApiUtils.ParseJsonObject<User> parseUser = new ApiUtils.ParseJsonObject<User>() {
+        @Override
+        public User parse(JSONObject jobj) throws Exception {
+            User user = new User();
+            user.setUserId(jobj.optInt("user_id"));
+            user.setNick(jobj.optString("user_nick"));
+            user.setAvatar(jobj.optString("user_avatar"));
+            user.setGender(jobj.optInt("user_gender"));
+            user.setMobile(jobj.optString("user_mobile"));
+            return user;
+        }
+    };
+
+    public static BaseRequest<User> login(final String mobile, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
         params.put("password", Md5.toString(password));
-        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "/User/login", params, listener, errorListener) {
+        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/login", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
-                User user = new User();
+
                 //TODO 解析登录json 返回User信息
+                JSONObject result = baseJson.getJSONObject("result");
+                User user = parseUser.parse(result);
                 return user;
             }
         };
@@ -69,7 +85,7 @@ public class UserApi {
         params.put("mobile", mobile);
         params.put("smsCode", smsCode);
         params.put("password", Md5.toString(password));
-        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "/User/register", params, listener, errorListener) {
+        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/register", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
                 User user = new User();
@@ -77,6 +93,7 @@ public class UserApi {
             }
         };
     }
+
     /**
      * @param mobile
      * @param smsCode
@@ -90,7 +107,7 @@ public class UserApi {
         params.put("mobile", mobile);
         params.put("smsCode", smsCode);
         params.put("password", Md5.toString(password));
-        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "/User/register", params, listener, errorListener) {
+        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/register", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
                 User user = new User();

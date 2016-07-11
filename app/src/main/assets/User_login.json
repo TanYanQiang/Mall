@@ -1,0 +1,11 @@
+{
+  "code": 0,
+  "msg": "success",
+  "result": {
+    "user_id": 1,
+    "user_nick": "强哥",
+    "user_avatar": "http://h.hiphotos.baidu.com/image/h%3D200/sign=796472dcdcb44aed464eb9e4831d876a/6a63f6246b600c337838af5e1c4c510fd8f9a1e7.jpg",
+    "user_gender": 1,
+    "user_mobile": "18600950000"
+  }
+}
