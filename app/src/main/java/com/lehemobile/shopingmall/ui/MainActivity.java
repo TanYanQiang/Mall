@@ -2,7 +2,6 @@ package com.lehemobile.shopingmall.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,14 +11,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
+import com.lehemobile.shopingmall.ui.common.NavigationView;
 import com.tgh.devkit.viewpager.BaseViewPager;
 
 import org.androidannotations.annotations.AfterViews;
@@ -29,9 +27,8 @@ import org.androidannotations.annotations.ViewById;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.CropSquareTransformation;
 
-@EActivity(R.layout.activity_main2)
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+@EActivity(R.layout.activity_main)
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @ViewById
     Toolbar toolbar;
@@ -41,6 +38,7 @@ public class MainActivity extends BaseActivity
 
     @ViewById(R.id.nav_view)
     NavigationView navigationView;
+
 
     @ViewById(R.id.tabs)
     TabLayout tabLayout;
@@ -55,8 +53,8 @@ public class MainActivity extends BaseActivity
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
+        navigationView.setOnNavigationItemSelectedListener(this);
 
-        navigationView.setNavigationItemSelectedListener(this);
         viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -72,31 +70,10 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            //TODO
-            LoginActivity_.intent(this).start();
-
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    public boolean onNavigationItemSelected(View view) {
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
     }
 
     private class SectionPagerAdapter extends FragmentPagerAdapter {

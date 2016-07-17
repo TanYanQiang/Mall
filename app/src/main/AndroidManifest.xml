@@ -16,15 +16,22 @@
             android:value="GlideModule" />
 
         <activity
-            android:name=".ui.MainActivity_"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.SetupActivity_"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.MainActivity_"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.user.login.LoginActivity_"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -53,7 +60,8 @@
             android:exported="false"
             android:label="@string/title_activity_RestPasswordStep1"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />  <activity
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
             android:name=".ui.user.login.RestPasswordStep2Activity_"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"

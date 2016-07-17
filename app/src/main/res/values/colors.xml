@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e4007f</color>
-    <color name="colorPrimaryDark">#fe4195</color>
-    <color name="colorAccent">#f02387</color>
+    <color name="colorPrimary">#e5be64</color>
+    <color name="colorPrimaryDark">#e5be64</color>
+    <color name="colorAccent">#e5be64</color>
 
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00ffffff</color>
     <color name="line_color">#e5e5e5</color>
 
-    <color name="color_btn_pressed">#de3d96</color>
+    <color name="color_btn_pressed">#e5be64</color>
 
     <color name="text_color_lv1">#cc000000</color>
     <color name="text_color_lv2">#66000000</color>
@@ -17,10 +17,10 @@
     <color name="text_color_light_lv1">#ffffff</color>
     <color name="text_color_light_lv2">#ccffffff</color>
 
-    <color name="alpha_orange">#ccde3d96</color>
-    <color name="orange">#de3d96</color>
-    <color name="btn_bg_red">#de3d96</color>
-    <color name="dark_red">#cb2b82</color>
+    <color name="alpha_orange">#e5be64</color>
+    <color name="orange">#e5be64</color>
+    <color name="btn_bg_red">#e5be64</color>
+    <color name="dark_red">#e5be64</color>
     <color name="light_gray">#dedede</color>
     <color name="blue">#3098f9</color>
 </resources>
