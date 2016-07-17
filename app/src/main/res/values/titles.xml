@@ -5,4 +5,5 @@
     <string name="title_activity_RegisterStep2">设置登录密码</string>
     <string name="title_activity_RestPasswordStep1">忘记密码</string>
     <string name="title_activity_RestPasswordStep2">找回密码</string>
+    <string name="title_activity_Profile">会员中心</string>
 </resources>

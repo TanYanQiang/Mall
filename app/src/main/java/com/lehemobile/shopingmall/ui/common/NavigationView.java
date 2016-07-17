@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.ui.user.ProfileActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 
 import org.androidannotations.annotations.AfterViews;
@@ -74,9 +75,7 @@ public class NavigationView extends FrameLayout {
     @Click(R.id.avatar)
     void goProfile(View view) {
         if (setSelected(view)) return;
-
-
-        LoginActivity_.intent(getContext()).start();
+        ProfileActivity_.intent(getContext()).start();
     }
 
 
