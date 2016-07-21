@@ -37,6 +37,7 @@ public class ProfileActivity extends BaseActivity {
     @ViewById
     TextView mobile;
     private PickImageHelper pickImageHelper;
+    private User user;
 
     private void initPickImage() {
         pickImageHelper = new PickImageHelper(this);
@@ -45,6 +46,7 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onPickImageSuccess(String imageFile) {
                 Logger.i("imageFile" + imageFile);
+                uploadAvatar(imageFile);
             }
 
             @Override
@@ -58,13 +60,25 @@ public class ProfileActivity extends BaseActivity {
     @AfterViews
     void init() {
 
+        user = ConfigManager.getUser();
+
         initPickImage();
 
+        updateAvatar();
 
-        User user = ConfigManager.getUser();
-        Glide.with(this).load(user.getAvatar()).bitmapTransform(new CropCircleTransformation(this)).into(avatar);
-        nick.setText(user.getNick());
+        updateNick();
+
         mobile.setText(user.getMobile());
+    }
+
+
+    private void updateAvatar() {
+        Glide.with(this).load(user.getAvatar()).bitmapTransform(new CropCircleTransformation(this)).into(avatar);
+    }
+
+    private void updateNick() {
+        User user = ConfigManager.getUser();
+        nick.setText(user.getNick());
     }
 
     @Click(R.id.avatarLayout)
@@ -81,6 +95,8 @@ public class ProfileActivity extends BaseActivity {
             public void onClick(View view) {
                 String nick = nickEidt.getText().toString().trim();
                 Logger.i("nick:" + nick);
+                user.setNick(nick);
+                updateNick();
             }
         });
     }
@@ -94,5 +110,9 @@ public class ProfileActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         pickImageHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void uploadAvatar(String imagePath) {
+        //TODO 上传图片
     }
 }
