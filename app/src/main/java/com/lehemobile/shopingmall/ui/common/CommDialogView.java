@@ -5,6 +5,7 @@ import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
@@ -35,6 +36,9 @@ public class CommDialogView extends FrameLayout {
     TextView tv_right;
     @ViewById
     TextView tv_center;
+
+    @ViewById
+    LinearLayout customView;
 
     @ViewById
     View innerSpace;
@@ -129,6 +133,13 @@ public class CommDialogView extends FrameLayout {
 
     public CommDialogView setCenterButtonVisible(boolean visible) {
         tv_center.setVisibility(visible ? VISIBLE : GONE);
+        return this;
+    }
+
+    public CommDialogView setCustomeView(View view) {
+        customView.removeAllViews();
+        customView.addView(view);
+        customView.setVisibility(VISIBLE);
         return this;
     }
 

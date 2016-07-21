@@ -10,7 +10,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="32dp" />
+        android:layout_height="@dimen/activity_vertical_margin" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -23,7 +23,8 @@
     <Space
         android:id="@+id/innerSpace"
         android:layout_width="match_parent"
-        android:layout_height="8dp" />
+        android:layout_height="8dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_message"
@@ -31,18 +32,26 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone"
         tools:text="msg" />
+
+    <LinearLayout
+        android:id="@+id/customView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="32dp" />
+        android:layout_height="@dimen/activity_vertical_margin" />
 
     <View style="@style/HorizontalLineStyle" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/line_height_lv1"
         android:divider="@drawable/divider_vertical"
         android:orientation="horizontal"
         android:showDividers="middle">
@@ -56,6 +65,7 @@
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="Cancel" />
+
         <TextView
             android:id="@+id/tv_center"
             android:layout_width="0dp"
@@ -66,8 +76,8 @@
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
             android:visibility="gone"
-            tools:text="Send"
-            />
+            tools:text="Send" />
+
         <TextView
             android:id="@+id/tv_right"
             android:layout_width="0dp"

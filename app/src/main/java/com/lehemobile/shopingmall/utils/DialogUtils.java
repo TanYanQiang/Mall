@@ -29,6 +29,35 @@ public class DialogUtils {
     }
 
     public static Dialog alert(Activity activity,
+                               String title, View customeView,
+                               @StringRes int leftString, final View.OnClickListener leftListener,
+                               @StringRes int rightString, final View.OnClickListener rightListener) {
+
+        CommDialogView view = CommDialogView_.build(activity)
+                .setTitle(title).setCustomeView(customeView)
+                .setLeftButton(leftString, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        if (leftListener != null) {
+                            leftListener.onClick(view);
+                        }
+                    }
+                })
+                .setRightButton(rightString, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        if (rightListener != null) {
+                            rightListener.onClick(view);
+                        }
+                    }
+                });
+        innerShow(activity, view);
+        return dialog;
+    }
+
+    public static Dialog alert(Activity activity,
                                String title, String message,
                                @StringRes int leftString, final View.OnClickListener leftListener,
                                @StringRes int rightString, final View.OnClickListener rightListener) {

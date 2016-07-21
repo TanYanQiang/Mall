@@ -7,5 +7,6 @@
     <string name="title_activity_RestPasswordStep2">找回密码</string>
     <string name="title_activity_Profile">个人资料</string>
     <string name="title_activity_Account">会员中心</string>
+    <string name="title_activity_UpdatePassword">修改密码</string>
     <string name="title_activity_Settings">设置</string>
 </resources>

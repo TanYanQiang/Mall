@@ -1,6 +1,8 @@
 package com.lehemobile.shopingmall.ui.user;
 
 import android.content.Intent;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,7 +11,9 @@ import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.dialog.DialogBuilder;
 import com.tgh.devkit.pickimage.PickImageHelper;
 
 import org.androidannotations.annotations.AfterViews;
@@ -70,12 +74,20 @@ public class ProfileActivity extends BaseActivity {
 
     @Click(R.id.nickLayout)
     void nickLayout() {
-
+        View view = getLayoutInflater().inflate(R.layout.v_input_dialog, null);
+        final EditText nickEidt = (EditText) view.findViewById(R.id.nickEdit);
+        DialogUtils.alert(this, "修改昵称", view, android.R.string.cancel, null, android.R.string.ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nick = nickEidt.getText().toString().trim();
+                Logger.i("nick:" + nick);
+            }
+        });
     }
 
     @Click
     void resetPasswordLayout() {
-
+        UpdatePasswordActivity_.intent(this).start();
     }
 
     @Override
