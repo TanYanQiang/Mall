@@ -4,6 +4,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.Response;
+import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
@@ -58,7 +59,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(User response) {
                 dismissLoading();
-                showToast(response.getNick());
+                MyApplication.getInstance().onUserLogin(response);
+                finish();
             }
         }, new AppErrorListener(this) {
             @Override
@@ -91,9 +93,10 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OptionsItem(R.id.action_register)
-    void register(){
+    void register() {
         RegisterStep1Activity_.intent(this).start();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

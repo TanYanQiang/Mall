@@ -6,7 +6,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#272c35"
+        android:background="@drawable/side_nav_bar"
         android:orientation="vertical">
 
         <LinearLayout
@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_menu_manage"
-                        android:text=" 消息通知(0)"
+                        android:text="消息通知(0)"
                         android:drawablePadding="5dp"
                         android:textColor="@color/text_color_light_lv1"
                         android:textSize="@dimen/text_size_lv2" />

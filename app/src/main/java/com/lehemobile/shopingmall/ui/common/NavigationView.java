@@ -10,14 +10,19 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.event.LoginEvent;
+import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.user.ProfileActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
+import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
+import de.greenrobot.event.EventBus;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
@@ -55,14 +60,30 @@ public class NavigationView extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        EventBus.getDefault().unregister(this);
+    }
+
     @AfterViews
     void initViews() {
-        Glide.with(getContext())
-                .load("http://s.cn.bing.net/az/hprichbg/rb/KenaiFjordsHumpback_ZH-CN10219728807_1920x1080.jpg")
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .bitmapTransform(new CropCircleTransformation(getContext()))
-                .into(avatar);
+        updateUI();
+    }
+
+    private void updateUI() {
+        if (ConfigManager.isLogin()) {
+            User user = ConfigManager.getUser();
+            Glide.with(getContext()).load(user.getAvatar()).bitmapTransform(new CropCircleTransformation(getContext())).into(avatar);
+        } else {
+            Glide.with(getContext()).load("").placeholder(R.mipmap.ic_launcher).into(avatar);
+        }
     }
 
     boolean setSelected(View view) {
@@ -112,4 +133,9 @@ public class NavigationView extends FrameLayout {
         if (setSelected(view)) return;
     }
 
+
+    public void onEventMainThread(LoginEvent event) {
+        Logger.i("Login Success");
+        updateUI();
+    }
 }

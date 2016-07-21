@@ -1,9 +1,11 @@
 package com.lehemobile.shopingmall.model;
 
+import java.io.Serializable;
+
 /**
  * Created by tanyq on 7/7/16.
  */
-public class User {
+public class User implements Serializable {
     private int userId;
     private String mobile;
     private String nick;

@@ -22,4 +22,6 @@
     <dimen name="text_size_lv1">17sp</dimen>
     <dimen name="text_size_lv2">17sp</dimen>
     <dimen name="text_size_lv3">15sp</dimen>
+
+    <dimen name="avatar_size">100dp</dimen>
 </resources>
