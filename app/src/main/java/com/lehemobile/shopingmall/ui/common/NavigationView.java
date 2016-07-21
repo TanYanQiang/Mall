@@ -12,8 +12,10 @@ import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.LoginEvent;
+import com.lehemobile.shopingmall.event.LogoutEvent;
 import com.lehemobile.shopingmall.model.User;
-import com.lehemobile.shopingmall.ui.user.ProfileActivity_;
+import com.lehemobile.shopingmall.ui.SettingActivity_;
+import com.lehemobile.shopingmall.ui.user.AccountActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.orhanobut.logger.Logger;
 
@@ -96,7 +98,7 @@ public class NavigationView extends FrameLayout {
     @Click(R.id.avatar)
     void goProfile(View view) {
         if (setSelected(view)) return;
-        ProfileActivity_.intent(getContext()).start();
+        AccountActivity_.intent(getContext()).start();
     }
 
 
@@ -131,11 +133,17 @@ public class NavigationView extends FrameLayout {
     @Click(R.id.nav_setting)
     void goSetting(View view) {
         if (setSelected(view)) return;
+        SettingActivity_.intent(getContext()).start();
     }
 
 
     public void onEventMainThread(LoginEvent event) {
         Logger.i("Login Success");
+        updateUI();
+    }
+
+    public void onEventMainThread(LogoutEvent event) {
+        Logger.i("Logout Success");
         updateUI();
     }
 }

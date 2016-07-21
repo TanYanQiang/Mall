@@ -38,12 +38,17 @@ public class ConfigManager {
     public static void saveUser(User user) {
         _user = user;
         KeyValueStoreInternal defaultBindVersionStore = getDefaultBindVersionStore();
-        defaultBindVersionStore.saveObject(getKeyByUser(USER), user);
+        defaultBindVersionStore.saveObject(USER, user);
+    }
+
+    public static void deleteCacheUser() {
+        _user = null;
+        getDefaultBindVersionStore().remove(USER);
     }
 
     public static User getUser() {
         if (_user == null) {
-            _user = getDefaultBindVersionStore().getObject(getKeyByUser(USER), User.class);
+            _user = getDefaultBindVersionStore().getObject(USER, User.class);
         }
         return _user;
     }

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.LoginEvent;
+import com.lehemobile.shopingmall.event.LogoutEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
@@ -39,4 +40,11 @@ public class MyApplication extends Application {
         ConfigManager.saveUser(user);
         EventBus.getDefault().post(new LoginEvent());
     }
+
+    public void onUserLogout() {
+        ConfigManager.setUserId(0);
+        ConfigManager.deleteCacheUser();
+        EventBus.getDefault().post(new LogoutEvent());
+    }
+
 }

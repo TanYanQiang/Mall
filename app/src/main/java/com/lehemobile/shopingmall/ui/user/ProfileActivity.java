@@ -1,93 +1,86 @@
 package com.lehemobile.shopingmall.ui.user;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.View;
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.ConfigManager;
-import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
-import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
-import com.lehemobile.shopingmall.ui.user.login.RegisterStep1Activity_;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.pickimage.PickImageHelper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import de.greenrobot.event.EventBus;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
- * Created by tanyq on 17/7/16.
+ * Created by  on 21/7/16.
  */
 @EActivity(R.layout.activity_profile)
-@OptionsMenu(R.menu.menu_profile)
 public class ProfileActivity extends BaseActivity {
-
-    @ViewById
-    View profileLayout;
-
-    @ViewById
-    View loginLayout;
-
     @ViewById
     ImageView avatar;
 
     @ViewById
     TextView nick;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-    }
+    @ViewById
+    TextView mobile;
+    private PickImageHelper pickImageHelper;
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    private void initPickImage() {
+        pickImageHelper = new PickImageHelper(this);
+        pickImageHelper.setCrop(true);
+        pickImageHelper.setPickImageCallback(new PickImageHelper.PickImageCallback() {
+            @Override
+            public void onPickImageSuccess(String imageFile) {
+                Logger.i("imageFile" + imageFile);
+            }
+
+            @Override
+            public void onPickImageError() {
+
+            }
+        });
+
     }
 
     @AfterViews
     void init() {
-        updateUI();
+
+        initPickImage();
+
+
+        User user = ConfigManager.getUser();
+        Glide.with(this).load(user.getAvatar()).bitmapTransform(new CropCircleTransformation(this)).into(avatar);
+        nick.setText(user.getNick());
+        mobile.setText(user.getMobile());
     }
 
-    private void updateUI() {
-        if (ConfigManager.isLogin()) {
-            loginLayout.setVisibility(View.GONE);
-            User user = ConfigManager.getUser();
-            Glide.with(this).load(user.getAvatar()).bitmapTransform(new CropCircleTransformation(this)).into(avatar);
-            nick.setText(user.getNick());
-            profileLayout.setVisibility(View.VISIBLE);
-        } else {
-            loginLayout.setVisibility(View.VISIBLE);
-            profileLayout.setVisibility(View.GONE);
-        }
+    @Click(R.id.avatarLayout)
+    void avatarLayout() {
+        pickImageHelper.showPickDialog();
     }
 
+    @Click(R.id.nickLayout)
+    void nickLayout() {
 
-    @Click(R.id.tv_register)
-    void doRegister() {
-        RegisterStep1Activity_.intent(this).start();
     }
 
-    @Click(R.id.tv_login)
-    void doLogin() {
-        LoginActivity_.intent(this).start();
+    @Click
+    void resetPasswordLayout() {
+
     }
 
-
-    public void onEventMainThread(LoginEvent event) {
-        Logger.i("Login Success");
-        updateUI();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        pickImageHelper.onActivityResult(requestCode, resultCode, data);
     }
 }
