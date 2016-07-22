@@ -9,5 +9,6 @@
     <string name="title_activity_Account">会员中心</string>
     <string name="title_activity_UpdatePassword">修改密码</string>
     <string name="title_activity_OrderList">我的订单</string>
+    <string name="title_activity_OrderPay">确认订单</string>
     <string name="title_activity_Settings">设置</string>
 </resources>

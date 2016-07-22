@@ -1,5 +1,6 @@
 package com.lehemobile.shopingmall.ui.order;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Order;
+import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.Click;
@@ -60,11 +62,13 @@ public class OrderListItemView extends LinearLayout {
         orderNumber.setText(getResources().getString(R.string.label_order_number, order.getOrderNumber()));
 
         goodsName.setText(order.getGoods().getName());
-        goodsPrice.setText("￥" + order.getGoods().getPrice());
-        count.setText("x" + order.getCount());
+        goodsPrice.setText(getResources().getString(R.string.label_order_price, order.getGoods().getPrice()));
+        count.setText(getResources().getString(R.string.label_order_count, order.getCount()));
+
         Glide.with(getContext()).load(order.getGoods().getThumbnail())
                 .bitmapTransform(new CropSquareTransformation(getContext()))
                 .into(orderThumb);
+
         orderCountPrice.setText(getResources().getString(R.string.label_order_count_price, order.getCount(), order.getTotalPrice()));
 
         orderStatus.setText(order.getStatusDesc());
@@ -108,7 +112,15 @@ public class OrderListItemView extends LinearLayout {
     void buttonLeft() {
         switch (order.getStatus()) {
             case Order.STATUS_WATING_PAY: //待付款
-                cancelOrder();
+                DialogUtils.alert((Activity) getContext(),
+                        "关闭订单", "确定要关闭该订单？",
+                        android.R.string.cancel, null,
+                        android.R.string.ok, new OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                cancelOrder();
+                            }
+                        });
                 break;
             case Order.STATUS_WATING_RECEIPT_GOODS: //待收货
                 showKuaidi();
@@ -123,7 +135,16 @@ public class OrderListItemView extends LinearLayout {
                 goPay();
                 break;
             case Order.STATUS_WATING_RECEIPT_GOODS: //待收货
-                confirmReceipt();
+
+                DialogUtils.alert((Activity) getContext(),
+                        "确认收货", "请您收到货后再点“确定”！",
+                        android.R.string.cancel, null,
+                        android.R.string.ok, new OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                confirmReceipt();
+                            }
+                        });
                 break;
             case Order.STATUS_COMPLETED:
                 applyForRefund();
@@ -134,6 +155,7 @@ public class OrderListItemView extends LinearLayout {
     private void cancelOrder() {
         //TODO 取消订单
         Logger.i("取消订单");
+
     }
 
     private void showKuaidi() {
@@ -143,6 +165,7 @@ public class OrderListItemView extends LinearLayout {
 
     private void goPay() {
         //TODO 去付款
+        OrderPayActivity_.intent(getContext()).order(order).start();
     }
 
     private void confirmReceipt() {

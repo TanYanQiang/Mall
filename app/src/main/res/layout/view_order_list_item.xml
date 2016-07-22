@@ -40,58 +40,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_vertical_margin">
-
-            <ImageView
-                android:id="@+id/orderThumb"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/ic_launcher" />
-
-            <LinearLayout
-                android:id="@+id/right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:gravity="end"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/goodsPrice"
-                    style="@style/TextStyle.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="￥180" />
-
-                <TextView
-                    android:id="@+id/count"
-                    style="@style/TextStyle.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    tools:text="x1" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/goodsName"
-                style="@style/TextStyle.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:layout_toLeftOf="@id/right"
-                android:layout_toRightOf="@id/orderThumb"
-                tools:text="气垫BB霜 保湿遮瑕美白粉底液替换套盒" />
-
-
-        </RelativeLayout>
+        <include layout="@layout/view_order_goods_info" />
 
         <TextView
             android:id="@+id/orderCountPrice"
