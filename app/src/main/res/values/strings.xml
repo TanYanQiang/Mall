@@ -13,4 +13,6 @@
     <string name="label_order_count_price">共%1$d件商品  实付:  ￥%2$g</string>
     <string name="label_order_count">x%1$d</string>
     <string name="label_order_price">￥%1$g</string>
+    <string name="label_order_kuaidi_number">快递编号:%1$s</string>
+
 </resources>

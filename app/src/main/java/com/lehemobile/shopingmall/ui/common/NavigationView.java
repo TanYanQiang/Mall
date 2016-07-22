@@ -16,7 +16,6 @@ import com.lehemobile.shopingmall.event.LogoutEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
 import com.lehemobile.shopingmall.ui.user.AccountActivity_;
-import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.AfterViews;

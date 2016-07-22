@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Order;
+import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
 
@@ -30,14 +31,10 @@ public class OrderListItemView extends LinearLayout {
     TextView orderNumber;
     @ViewById
     TextView orderStatus;
-    @ViewById
-    ImageView orderThumb;
-    @ViewById
-    TextView goodsPrice;
-    @ViewById
-    TextView goodsName;
-    @ViewById
-    TextView count;
+
+    @ViewById(R.id.orderGoodsInfo)
+    OrderGoodsInfo orderGoodsInfo;
+
     @ViewById
     TextView orderCountPrice;
 
@@ -61,13 +58,7 @@ public class OrderListItemView extends LinearLayout {
 
         orderNumber.setText(getResources().getString(R.string.label_order_number, order.getOrderNumber()));
 
-        goodsName.setText(order.getGoods().getName());
-        goodsPrice.setText(getResources().getString(R.string.label_order_price, order.getGoods().getPrice()));
-        count.setText(getResources().getString(R.string.label_order_count, order.getCount()));
-
-        Glide.with(getContext()).load(order.getGoods().getThumbnail())
-                .bitmapTransform(new CropSquareTransformation(getContext()))
-                .into(orderThumb);
+        orderGoodsInfo.bindData(order);
 
         orderCountPrice.setText(getResources().getString(R.string.label_order_count_price, order.getCount(), order.getTotalPrice()));
 
@@ -161,6 +152,7 @@ public class OrderListItemView extends LinearLayout {
     private void showKuaidi() {
         //TODO 查看物流
         Logger.i("查看物流");
+        OrderKuaidiActivity_.intent(getContext()).order(order).start();
     }
 
     private void goPay() {

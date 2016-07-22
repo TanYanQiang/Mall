@@ -13,6 +13,8 @@ import com.lehemobile.shopingmall.model.Order;
 import com.lehemobile.shopingmall.session.OrderPaySession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.order.pay.PaymentMode;
+import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo;
+import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo_;
 import com.lehemobile.shopingmall.ui.view.PayMethodItemView;
 import com.lehemobile.shopingmall.ui.view.PayMethodItemView_;
 import com.orhanobut.logger.Logger;
@@ -74,22 +76,10 @@ public class OrderPayActivity extends BaseActivity {
     }
 
     private void updateGoodsInfo() {
-        View view = getLayoutInflater().inflate(R.layout.view_order_goods_info, null);
-        ImageView orderThumb = (ImageView) view.findViewById(R.id.orderThumb);
-        TextView goodsName = (TextView) view.findViewById(R.id.goodsName);
-        TextView goodsPrice = (TextView) view.findViewById(R.id.goodsPrice);
-        TextView count = (TextView) view.findViewById(R.id.count);
-
-        goodsName.setText(order.getGoods().getName());
-        goodsPrice.setText(getResources().getString(R.string.label_order_price, order.getGoods().getPrice()));
-        count.setText(getResources().getString(R.string.label_order_count, order.getCount()));
-
-        Glide.with(this).load(order.getGoods().getThumbnail())
-                .bitmapTransform(new CropSquareTransformation(this))
-                .into(orderThumb);
-
+        OrderGoodsInfo orderGoodsInfo = OrderGoodsInfo_.build(this);
+        orderGoodsInfo.bindData(order);
         goodsInfo.removeAllViews();
-        goodsInfo.addView(view);
+        goodsInfo.addView(orderGoodsInfo);
     }
 
 
