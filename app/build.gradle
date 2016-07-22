@@ -52,6 +52,7 @@ dependencies {
     compile "com.android.support:design:$rootProject.ext.supportVersion"
     compile project(":core")
     compile project(":uikit")
+    compile project(":thirdpart:PullToRefresh")
 
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"

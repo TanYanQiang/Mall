@@ -1,1 +1,1 @@
-include ':app', ':core', ':uikit', ':ucrop'
+include ':app', ':core', ':uikit', ':ucrop',":thirdpart:PullToRefresh"

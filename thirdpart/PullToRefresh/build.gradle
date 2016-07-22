@@ -1,0 +1,18 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+dependencies {
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+}

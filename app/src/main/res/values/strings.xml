@@ -8,4 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="register_sms_code_tips">验证码短信已发送至%s</string>
+
+    <string name="label_order_number">订单号:%1$s</string>
+    <string name="label_order_count_price">共%1$d件商品  实付:  ￥%2$g</string>
 </resources>

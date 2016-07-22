@@ -14,6 +14,7 @@ import com.lehemobile.shopingmall.event.LogoutEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
+import com.lehemobile.shopingmall.ui.order.OrderListActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.ui.user.login.RegisterStep1Activity_;
 import com.orhanobut.logger.Logger;
@@ -79,7 +80,7 @@ public class AccountActivity extends BaseActivity {
     }
 
     @Click(R.id.avatar)
-    void editProfile(){
+    void editProfile() {
         ProfileActivity_.intent(this).start();
     }
 
@@ -97,6 +98,31 @@ public class AccountActivity extends BaseActivity {
     @OptionsItem(R.id.action_settings)
     void doSettings() {
         SettingActivity_.intent(this).start();
+    }
+
+
+    @Click({R.id.allOrder, R.id.watingPay, R.id.watingDeliver, R.id.watingReceipt, R.id.complete})
+    void goOrderList(View view) {
+        int type = 0;
+        switch (view.getId()) {
+            case R.id.watingPay:
+                type = 1;
+                break;
+            case R.id.watingDeliver:
+                type = 2;
+                break;
+            case R.id.watingReceipt:
+                type = 3;
+                break;
+            case R.id.complete:
+                type = 4;
+                break;
+            case R.id.allOrder:
+            default:
+                type = 0;
+                break;
+        }
+        OrderListActivity_.intent(this).type(type).start();
     }
 
 

@@ -24,6 +24,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.NoActionBar.FullScreen">
         <item name="android:windowFullscreen">true</item>
     </style>
@@ -105,4 +106,30 @@
         <item name="android:src">@mipmap/ic_launcher</item>
     </style>
 
+    <style name="ListViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@color/transparent</item>
+        <item name="android:cacheColorHint">@color/transparent</item>
+    </style>
+
+    <style name="ListViewStyle.HasDivider" parent="ListViewStyle">
+        <item name="android:divider">@color/line_color</item>
+        <item name="android:dividerHeight">0.5dip</item>
+    </style>
+
+    <style name="TextStyle">
+
+    </style>
+
+    <style name="TextStyle.Title">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/text_color_lv1</item>
+    </style>
+
+    <style name="TextStyle.Desc">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/text_color_lv2</item>
+    </style>
 </resources>

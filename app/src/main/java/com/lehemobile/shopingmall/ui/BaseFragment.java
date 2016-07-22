@@ -1,10 +1,10 @@
 package com.lehemobile.shopingmall.ui;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -73,6 +73,7 @@ public class BaseFragment extends Fragment {
         if (isActive()) return;
         DialogUtils.alert(getActivity(), message);
     }
+
     public String getInputText(EditText editText) {
         return editText.getText().toString().trim();
     }

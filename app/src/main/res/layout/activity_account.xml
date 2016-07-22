@@ -82,7 +82,91 @@
                 </LinearLayout>
             </FrameLayout>
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_horizontal"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/line_height_lv1"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="买买买"
+                    android:textColor="@color/text_color_lv1"
+                    android:textSize="@dimen/text_size_lv1" />
+
+                <TextView
+                    android:id="@+id/allOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="查看全部订单>"
+                    android:textColor="@color/text_color_lv2"
+                    android:textSize="@dimen/text_size_lv3" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_vertical"
+                android:gravity="center"
+                android:minHeight="@dimen/line_height_lv1"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
+                android:paddingTop="10dp"
+                android:showDividers="middle">
+
+                <TextView
+                    android:id="@+id/watingPay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_menu_gallery"
+                    android:gravity="center"
+                    android:text="待付款" />
+
+                <TextView
+                    android:id="@+id/watingDeliver"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_menu_gallery"
+                    android:gravity="center"
+                    android:text="待发货" />
+
+                <TextView
+                    android:id="@+id/watingReceipt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_menu_gallery"
+                    android:gravity="center"
+                    android:text="待收货" />
+
+                <TextView
+                    android:id="@+id/complete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_menu_gallery"
+                    android:gravity="center"
+                    android:text="已完成" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

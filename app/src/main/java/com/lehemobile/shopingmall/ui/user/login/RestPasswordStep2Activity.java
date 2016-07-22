@@ -40,7 +40,7 @@ public class RestPasswordStep2Activity extends BaseActivity {
         smsCodePasswordFragment = RequestSmsCodePasswordFragment_.builder().mobile(mobile).passwordLabelText("新密码")
                 .type(UserApi.TYPE_REGISTER).build();
 
-        getFragmentManager().beginTransaction().add(R.id.container, smsCodePasswordFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, smsCodePasswordFragment).commit();
     }
 
 
