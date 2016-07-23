@@ -113,6 +113,22 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
+
+        <activity
+            android:name=".ui.user.address.AddressListsActivity_"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_AddressList"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
+            android:name=".ui.user.address.AddAddressActivity_"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_AddAddress"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
         <activity
             android:name=".ui.SettingActivity_"
             android:configChanges="keyboardHidden|orientation|screenSize"

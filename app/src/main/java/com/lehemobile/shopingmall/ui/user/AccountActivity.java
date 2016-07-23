@@ -15,6 +15,7 @@ import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
 import com.lehemobile.shopingmall.ui.order.OrderListActivity_;
+import com.lehemobile.shopingmall.ui.user.address.AddressListsActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.ui.user.login.RegisterStep1Activity_;
 import com.orhanobut.logger.Logger;
@@ -79,8 +80,18 @@ public class AccountActivity extends BaseActivity {
         }
     }
 
+    private boolean isLogin() {
+
+        if (!ConfigManager.isLogin()) {
+            LoginActivity_.intent(this).start();
+            return false;
+        }
+        return true;
+    }
+
     @Click(R.id.avatar)
     void editProfile() {
+        if (!isLogin()) return;
         ProfileActivity_.intent(this).start();
     }
 
@@ -103,6 +114,7 @@ public class AccountActivity extends BaseActivity {
 
     @Click({R.id.allOrder, R.id.watingPay, R.id.watingDeliver, R.id.watingReceipt, R.id.complete})
     void goOrderList(View view) {
+        if (!isLogin()) return;
         int type = 0;
         switch (view.getId()) {
             case R.id.watingPay:
@@ -123,6 +135,17 @@ public class AccountActivity extends BaseActivity {
                 break;
         }
         OrderListActivity_.intent(this).type(type).start();
+    }
+
+    @Click
+    void favorite() {
+        if (!isLogin()) return;
+    }
+
+    @Click
+    void address() {
+        if (!isLogin()) return;
+        AddressListsActivity_.intent(this).start();
     }
 
 

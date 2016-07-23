@@ -16,15 +16,13 @@
         android:paddingRight="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
+        <ImageView
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text=">"
-            android:textColor="@color/text_color_lv2"
-            android:textSize="25sp" />
+            android:src="@mipmap/ic_arrow_right" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,15 +51,13 @@
         android:paddingRight="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
+        <ImageView
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text=">"
-            android:textColor="@color/text_color_lv2"
-            android:textSize="25sp" />
+            android:src="@mipmap/ic_arrow_right" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,15 +129,13 @@
         android:paddingRight="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
+        <ImageView
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text=">"
-            android:textColor="@color/text_color_lv2"
-            android:textSize="25sp" />
+            android:src="@mipmap/ic_arrow_right" />
 
         <TextView
             android:layout_width="wrap_content"

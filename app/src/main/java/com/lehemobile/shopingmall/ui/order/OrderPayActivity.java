@@ -1,13 +1,10 @@
 package com.lehemobile.shopingmall.ui.order;
 
-import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Order;
 import com.lehemobile.shopingmall.session.OrderPaySession;
@@ -27,8 +24,6 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
 
 /**
  * 支付订单
