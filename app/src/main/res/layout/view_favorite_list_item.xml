@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <ImageView
+        android:id="@+id/orderThumb"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_toRightOf="@id/orderThumb">
+
+
+        <TextView
+            android:id="@+id/goodsName"
+            style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="气垫BB霜 保湿遮瑕美白粉底液替换套盒" />
+
+
+        <Button
+            android:id="@+id/favoriteBtn"
+            style="@style/Button.RedEmptyCorners"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/goodsName"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="取消收藏" />
+
+        <TextView
+            android:id="@+id/goodsPrice"
+            style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/favoriteBtn"
+            android:layout_alignTop="@id/favoriteBtn"
+            android:gravity="center_vertical"
+            tools:text="￥180" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

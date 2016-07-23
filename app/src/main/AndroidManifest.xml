@@ -130,6 +130,14 @@
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
         <activity
+            android:name=".ui.user.favorite.FavoriteActivity_"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_Favorite"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <activity
             android:name=".ui.SettingActivity_"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"

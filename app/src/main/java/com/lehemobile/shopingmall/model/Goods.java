@@ -61,4 +61,20 @@ public class Goods implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Goods)) return false;
+
+        Goods goods = (Goods) o;
+
+        return id == goods.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

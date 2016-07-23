@@ -16,6 +16,7 @@ import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
 import com.lehemobile.shopingmall.ui.order.OrderListActivity_;
 import com.lehemobile.shopingmall.ui.user.address.AddressListsActivity_;
+import com.lehemobile.shopingmall.ui.user.favorite.FavoriteActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.ui.user.login.RegisterStep1Activity_;
 import com.orhanobut.logger.Logger;
@@ -140,6 +141,7 @@ public class AccountActivity extends BaseActivity {
     @Click
     void favorite() {
         if (!isLogin()) return;
+        FavoriteActivity_.intent(this).start();
     }
 
     @Click

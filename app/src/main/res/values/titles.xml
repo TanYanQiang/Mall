@@ -13,5 +13,6 @@
     <string name="title_activity_OrderKuaidi">物流详情</string>
     <string name="title_activity_AddressList">收货地址管理</string>
     <string name="title_activity_AddAddress">新增收货地址</string>
+    <string name="title_activity_Favorite">我的收藏</string>
     <string name="title_activity_Settings">设置</string>
 </resources>
