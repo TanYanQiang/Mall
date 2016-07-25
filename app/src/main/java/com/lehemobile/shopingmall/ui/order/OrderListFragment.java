@@ -56,7 +56,7 @@ public class OrderListFragment extends BaseFragment {
 
             @Override
             public void onItemClicked(int position, Order order) {
-
+                OrderDetailActivity_.intent(getContext()).order(order).start();
             }
         };
         pageListHelper.setEmptyView(tv_empty);

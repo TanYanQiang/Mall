@@ -36,21 +36,8 @@ public class IO {
 
     public static File getCacheDir(Context context, String uniqueName) {
 
-        //检测是否有SD卡读写权限
-        boolean permission = false;
-        DebugLog.i("context EXTERNAL PERMISSION:" + context);
-        if (context instanceof Activity) {
-            permission = PermissionHelper.checkPermission((Activity) context, context.getResources().getString(R.string.permission_storage), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE});
-        }
-        DebugLog.i("EXTERNAL PERMISSION:" + permission);
+        String cachePath = context.getCacheDir().getPath();
 
-        String cachePath;
-        if (permission && (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) |
-                !Environment.isExternalStorageRemovable())) {
-            cachePath = Environment.getExternalStorageDirectory().getPath();
-        } else {
-            cachePath = context.getCacheDir().getPath();
-        }
         File dir = new File(cachePath + File.separator + uniqueName);
         if (!exist(dir)) {
             dir.mkdirs();

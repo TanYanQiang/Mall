@@ -169,7 +169,6 @@ public class PickImageHelper {
         if (pickImageDialog == null) {
             generateDialog();
         }
-        if (!checkPermission()) return;
         pickImageDialog.show();
     }
 
@@ -240,8 +239,4 @@ public class PickImageHelper {
         }
     }
 
-    private boolean checkPermission() {
-        return PermissionHelper.checkPermission(getActivity(), PermissionHelper.PERMISSION_STORAGE,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE});
-    }
 }

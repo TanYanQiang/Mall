@@ -1,6 +1,7 @@
 package com.lehemobile.shopingmall.ui.user.favorite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.event.CancelFavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
+import com.lehemobile.shopingmall.ui.goods.GoodsDetailScrollingActivity;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
@@ -66,8 +69,11 @@ public class FavoriteActivity extends BaseActivity {
             }
 
             @Override
-            public void onItemClicked(int position, Goods order) {
-
+            public void onItemClicked(int position, Goods goods) {
+                //TODO 查看商品详情
+//                GoodsDetailActivity_.intent(FavoriteActivity.this).goodsId(goods.getId()).start();
+                Intent intent = new Intent(FavoriteActivity.this, GoodsDetailScrollingActivity.class);
+                startActivity(intent);
             }
         };
         pageListHelper.setEmptyView(tv_empty);

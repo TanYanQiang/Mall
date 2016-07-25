@@ -116,14 +116,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
             ImageView imageView = new ImageView(getActivity());
-//            imageView.setLayoutParams(new ViewGroup.LayoutParams(200, 500));
+
+            imageView.setAdjustViewBounds(true);
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             String imageUrl = "http://s.cn.bing.net/az/hprichbg/rb/TerracesSunrise_ZH-CN11993554223_1920x1080.jpg";
             if (position % 2 == 0) {
-                imageUrl = "http://s.cn.bing.net/az/hprichbg/rb/ReichstagDome_ZH-CN9358724121_1920x1080.jpg";
+                imageUrl = "http://a.vpimg4.com/upload/merchandise/pdc/411/873/1033652364713873411/2/8712400110020-6.jpg";
             }
             Glide.with(getActivity())
                     .load(imageUrl)
-                    .bitmapTransform((position % 2 == 0 ? new CropCircleTransformation(getActivity()) : new CropSquareTransformation(getActivity())))
+//                    .bitmapTransform((position % 2 == 0 ? new CropCircleTransformation(getActivity()) : new CropSquareTransformation(getActivity())))
                     .into(imageView);
             return imageView;
         }

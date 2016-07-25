@@ -92,5 +92,4 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.orhanobut:logger:1.14'
-
 }
