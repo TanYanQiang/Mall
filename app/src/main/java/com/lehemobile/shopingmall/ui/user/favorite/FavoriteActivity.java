@@ -71,9 +71,9 @@ public class FavoriteActivity extends BaseActivity {
             @Override
             public void onItemClicked(int position, Goods goods) {
                 //TODO 查看商品详情
-//                GoodsDetailActivity_.intent(FavoriteActivity.this).goodsId(goods.getId()).start();
-                Intent intent = new Intent(FavoriteActivity.this, GoodsDetailScrollingActivity.class);
-                startActivity(intent);
+                GoodsDetailActivity_.intent(FavoriteActivity.this).goodsId(goods.getId()).start();
+//                Intent intent = new Intent(FavoriteActivity.this, GoodsDetailScrollingActivity.class);
+//                startActivity(intent);
             }
         };
         pageListHelper.setEmptyView(tv_empty);

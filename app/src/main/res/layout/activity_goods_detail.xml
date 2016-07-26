@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,12 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:divider="@drawable/divider_horizontal"
         android:minHeight="@dimen/line_height_lv1"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/margin_8"
-        android:paddingTop="@dimen/margin_8"
-        android:showDividers="beginning">
+        android:paddingTop="@dimen/margin_8">
 
         <TextView
             android:id="@+id/favorite"
@@ -40,7 +40,7 @@
                 android:id="@+id/addShoppingCart"
                 style="@style/Button.RedEmptyCorners"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="加入购物车" />
 
@@ -48,9 +48,147 @@
                 android:id="@+id/Buy"
                 style="@style/Button.RedCorners"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="立即购买" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:id="@+id/action_divider"
+        style="@style/HorizontalLineStyle"
+        android:layout_above="@id/bottomLayout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/action_divider">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp">
+
+                <com.tgh.devkit.viewpager.InfiniteViewPager
+                    android:id="@+id/gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+
+                <com.tgh.devkit.viewpager.indicator.CirclePageIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_marginRight="@dimen/margin_8"
+                    app:CPI_NorDrawable="@mipmap/ic_indicator_nor"
+                    app:CPI_SelDrawable="@mipmap/ic_indicator_sel" />
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/activity_vertical_margin">
+
+                <TextView
+                    android:id="@+id/goodsName"
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    tools:text="肌透焕颜面膜让一切变得年轻肌透焕颜面膜让一切变得年轻" />
+
+                <TextView
+                    android:id="@+id/goodsPrice"
+                    style="@style/TextStyle.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/goodsName"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/orange"
+                    tools:text="$100" />
+
+                <TextView
+                    android:id="@+id/marketPrice"
+                    style="@style/TextStyle.Desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/goodsPrice"
+                    android:layout_marginTop="5dp"
+                    tools:text="市场价格:$100" />
+
+                <TextView
+                    android:id="@+id/tradingCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/marketPrice"
+                    tools:text="交易成功5888件" />
+            </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/white"
+                android:divider="@drawable/divider_vertical"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/line_height_lv1"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <RadioButton
+                    android:id="@+id/goodsDetail"
+                    style="@style/TextStyle.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="图文详情"
+                    android:textColor="@color/text_select_color" />
+
+                <RadioButton
+                    android:id="@+id/goodsInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="产品参数"
+                    android:textColor="@color/text_select_color" />
+
+                <RadioButton
+                    android:id="@+id/goodsComments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="用户评价"
+                    android:textColor="@color/text_select_color" />
+            </RadioGroup>
+
+            <View style="@style/HorizontalLineStyle" />
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/margin_8"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/margin_8" />
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
