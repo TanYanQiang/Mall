@@ -8,6 +8,8 @@ import com.android.volley.Response;
 
 import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.config.IPConfig;
+import com.lehemobile.shopingmall.model.UploadImage;
 import com.tgh.devkit.core.encrypt.HMAC;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.core.utils.Utils;
@@ -54,5 +56,26 @@ public class ApiUtils {
             params.put(args[i], args[i + 1]);
         }
         return params;
+    }
+
+    public static BaseMultiPartRequest<UploadImage> uploadImage(
+            String imageFilePath, int type,
+            final Response.Listener<UploadImage> listener, AppErrorListener errorListener) {
+        BaseMultiPartRequest<UploadImage> request =
+                new BaseMultiPartRequest<UploadImage>(
+                        IPConfig.getAPIBaseUrl() + "Public/upload_img",
+                        listener, errorListener) {
+                    @Override
+                    protected UploadImage treatResponse(JSONObject baseJson) throws Exception {
+                        JSONObject result = baseJson.getJSONObject("result");
+                        UploadImage uploadImage = new UploadImage();
+                        uploadImage.rawUrl = result.getString("upload_file");
+                        uploadImage.relativeUrl = result.getString("file_path");
+                        return uploadImage;
+                    }
+                };
+        request.addFile("file", imageFilePath);
+        request.addMultipartParam("file_type", "application/text", String.valueOf(type));
+        return request;
     }
 }
