@@ -9,10 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.event.CancelFavoriteEvent;
+import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 
@@ -70,11 +71,15 @@ public class FavoriteItemView extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 //TODO 取消收藏
-
-                EventBus.getDefault().post(new CancelFavoriteEvent(goods));
+                cancelFavoriteSuccess();
             }
         });
 
 
+    }
+
+    private void cancelFavoriteSuccess() {
+        Toast.makeText(getContext(), "取消成功", Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().post(new FavoriteEvent(false, goods));
     }
 }

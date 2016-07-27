@@ -1,9 +1,7 @@
 package com.lehemobile.shopingmall.ui.user.favorite;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +11,10 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.event.CancelFavoriteEvent;
+import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
-import com.lehemobile.shopingmall.ui.goods.GoodsDetailScrollingActivity;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
@@ -118,16 +115,16 @@ public class FavoriteActivity extends BaseActivity {
         }
     }
 
-    public void onEventMainThread(CancelFavoriteEvent event) {
-        Goods goods = event.getGoods();
-        if (pageListHelper == null) return;
 
+    public void onEventMainThread(FavoriteEvent event) {
+        if (pageListHelper == null) return;
         ArrayList<Goods> data = pageListHelper.getData();
-        boolean status = data.remove(goods);
-        if (status) {
-            showToast("取消成功");
-            pageListHelper.notifyDataSetChanged();
+        if (event.isFavorite()) {
+            data.add(event.getGoods());
+        } else {
+            boolean status = data.remove(event.getGoods());
         }
+        pageListHelper.notifyDataSetChanged();
     }
 
 }

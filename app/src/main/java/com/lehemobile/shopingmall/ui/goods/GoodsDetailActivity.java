@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -13,21 +14,27 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.viewpager.InfiniteViewPager;
 import com.tgh.devkit.viewpager.adapter.BasePagerAdapter;
 import com.tgh.devkit.viewpager.adapter.InfinitePagerAdapter;
 import com.tgh.devkit.viewpager.indicator.CirclePageIndicator;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by  on 24/7/16.
@@ -64,9 +71,36 @@ public class GoodsDetailActivity extends BaseActivity {
     @ViewById
     FrameLayout container;
 
+    @ViewById
+    TextView favorite;
+
     private GoodsDetailSession session;
     private GalleryAdapter galleryAdapter;
     private InfinitePagerAdapter infinitePagerAdapter;
+
+
+    private void loadData() {
+        //TODO 加载数据
+        session = new GoodsDetailSession();
+
+        Goods goods = new Goods();
+        goods.setId(goodsId);
+        goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 ");
+        goods.setPrice(100);
+        goods.setThumbnail("http://s.cn.bing.net/az/hprichbg/rb/Bittermelon_ZH-CN13629728807_1920x1080.jpg");
+        List<String> images = new ArrayList<>();
+        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-1_710x897_80.jpg");
+        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-2_710x897_80.jpg");
+        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-3_710x897_80.jpg");
+        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-4_710x897_80.jpg");
+        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-15_710x897_80.jpg");
+        goods.setImages(images);
+
+        goods.setDetail("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
+        session.setGoods(goods);
+        session.setFavorite(true);
+        updateUI();
+    }
 
     @AfterViews
     void init() {
@@ -111,34 +145,18 @@ public class GoodsDetailActivity extends BaseActivity {
     }
 
 
-    private void loadData() {
-        //TODO 加载数据
-        session = new GoodsDetailSession();
-
-        Goods goods = new Goods();
-        goods.setId(goodsId);
-        goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 ");
-        goods.setPrice(100);
-        goods.setThumbnail("http://s.cn.bing.net/az/hprichbg/rb/Bittermelon_ZH-CN13629728807_1920x1080.jpg");
-        List<String> images = new ArrayList<>();
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-1_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-2_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-3_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-4_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-15_710x897_80.jpg");
-        goods.setImages(images);
-
-        goods.setDetail("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
-        session.setGoods(goods);
-
-        updateUI();
-    }
-
     private void updateUI() {
 
         updateGalleryUI(session.getGoods().getImages());
         updateGoodsInfoUI();
         goodsDetail.setChecked(true);
+        updateFavoriteUI();
+    }
+
+    private void updateFavoriteUI() {
+        if (session == null) return;
+        favorite.setText(session.isFavorite() ? "取消收藏" : "收藏");
+        favorite.setCompoundDrawablesWithIntrinsicBounds(0, (session.isFavorite() ? R.drawable.ic_menu_send : R.drawable.ic_menu_manage), 0, 0);
     }
 
 
@@ -154,7 +172,8 @@ public class GoodsDetailActivity extends BaseActivity {
         goodsName.setText(goods.getName());
         goodsPrice.setText(getString(R.string.label_order_price, goods.getPrice()));
 
-        marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+        marketPrice.getPaint().setColor(getResources().getColor(R.color.text_color_lv2));
         marketPrice.setText(getString(R.string.label_goods_detail_marketPrice, goods.getPrice()));
     }
 
@@ -204,5 +223,22 @@ public class GoodsDetailActivity extends BaseActivity {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             return imageView;
         }
+    }
+
+    @Click(R.id.favorite)
+    void doFavorite() {
+        if (session == null) return;
+        //TODO 收藏或取消收藏
+        doFavoriteSuccess();
+    }
+
+    void doFavoriteSuccess() {
+        Logger.i("favorite :" + session.isFavorite());
+
+        session.setFavorite(!session.isFavorite());
+        showToast(session.isFavorite() ? "收藏成功" : "取消收藏成功");
+        Logger.i("2 favorite :" + session.isFavorite());
+        EventBus.getDefault().post(new FavoriteEvent(session.isFavorite(), session.getGoods()));
+        updateFavoriteUI();
     }
 }
