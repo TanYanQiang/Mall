@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
 
@@ -99,6 +100,7 @@ public class BaseActivity extends AppCompatActivity {
     public void initActionBar(Toolbar toolbar) {
         setSupportActionBar(toolbar);
         initActionBar();
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorActionBarTitle));
     }
 
     @Override

@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @AfterViews
     void init() {
-        setSupportActionBar(toolbar);
+        initActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(toggle);
