@@ -1,6 +1,7 @@
 package com.lehemobile.shopingmall.ui.goods;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Paint;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,7 +20,9 @@ import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.dialog.DialogBuilder;
 import com.tgh.devkit.viewpager.InfiniteViewPager;
 import com.tgh.devkit.viewpager.adapter.BasePagerAdapter;
 import com.tgh.devkit.viewpager.adapter.InfinitePagerAdapter;
@@ -155,7 +159,7 @@ public class GoodsDetailActivity extends BaseActivity {
 
     private void updateFavoriteUI() {
         if (session == null) return;
-        favorite.setText(session.isFavorite() ? "取消收藏" : "收藏");
+        favorite.setText(session.isFavorite() ? "已收藏" : "收藏");
         favorite.setCompoundDrawablesWithIntrinsicBounds(0, (session.isFavorite() ? R.drawable.ic_menu_send : R.drawable.ic_menu_manage), 0, 0);
     }
 
@@ -240,5 +244,24 @@ public class GoodsDetailActivity extends BaseActivity {
         Logger.i("2 favorite :" + session.isFavorite());
         EventBus.getDefault().post(new FavoriteEvent(session.isFavorite(), session.getGoods()));
         updateFavoriteUI();
+    }
+
+    @Click
+    void addShoppingCart() {
+        //TODO 点击到购物车
+    }
+
+    @Click
+    void buy() {
+        //购买
+        showBuySelectView();
+    }
+
+    private void showBuySelectView() {
+        BuySelectGoodsView selectGoodsView = BuySelectGoodsView_.build(this);
+        selectGoodsView.bindData(session);
+        Dialog dialog = new DialogBuilder(this).contentView(selectGoodsView).build();
+
+        dialog.show();
     }
 }

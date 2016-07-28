@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/divider_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/white"
+    android:showDividers="middle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin">
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <ImageView
+            android:id="@+id/goodsThumb"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/goodsName"
+            style="@style/TextStyle.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/close"
+            android:layout_toRightOf="@id/goodsThumb"
+            android:ellipsize="end"
+            android:lines="1"
+            tools:text="肌透焕颜面膜让一切变得肌透焕颜面膜让一切变得" />
+
+        <TextView
+            android:id="@+id/goodsPrice"
+            style="@style/TextStyle.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/goodsName"
+            android:layout_alignRight="@id/goodsName"
+            android:layout_below="@id/goodsName"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/orange"
+            tools:text="$128" />
+
+        <TextView
+            android:id="@+id/category"
+            style="@style/TextStyle.Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/goodsName"
+            android:layout_alignRight="@id/goodsName"
+            android:layout_below="@id/goodsPrice"
+            android:layout_marginTop="5dp"
+            tools:text="请选择规格、分类" />
+
+        <TextView
+            android:id="@+id/stock"
+            style="@style/TextStyle.Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/goodsName"
+            android:layout_alignRight="@id/goodsName"
+            android:layout_below="@id/category"
+            android:layout_marginTop="5dp"
+            tools:text="库存1212件" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/categoryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="分类:" />
+
+        <com.tgh.devkit.layout.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            app:horizontalSpacing="@dimen/activity_vertical_margin"
+            app:verticalSpacing="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+                android:text="美白" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+
+                android:text="美白" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+                android:text="美白" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+
+                android:text="美白" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+                android:text="美白" />
+
+
+        </com.tgh.devkit.layout.FlowLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/categoryLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="分类:" />
+
+        <com.tgh.devkit.layout.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            app:horizontalSpacing="@dimen/activity_vertical_margin"
+            app:verticalSpacing="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+
+                android:text="美白" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+                android:text="美白" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+
+                android:text="美白" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:minWidth="50dp"
+                android:text="美白" />
+
+        </com.tgh.devkit.layout.FlowLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/numberLayout"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:text="购买数量:" />
+
+            <com.lehemobile.shopingmall.ui.view.PlusReduceView_
+                android:id="@+id/goodsNumber"
+                android:layout_alignTop="@id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/label" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/okBtn"
+            style="@style/Button.RedCorners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/numberLayout"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@android:string/ok" />
+    </RelativeLayout>
+
+</LinearLayout>

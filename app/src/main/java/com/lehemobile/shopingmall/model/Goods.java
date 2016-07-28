@@ -13,6 +13,7 @@ public class Goods implements Serializable {
     private List<String> images; //banner图
     private String detail; //商品描述 使用图片
     private double price; //价格
+    private int stock;
 
     public int getId() {
         return id;
@@ -60,6 +61,14 @@ public class Goods implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     @Override

@@ -17,5 +17,6 @@
     <string name="title_activity_goods_detail_scrolling">GoodsDetailScrollingActivity</string>
     <string name="label_goods_detail_marketPrice">市场价格:￥%1$g</string>
     <string name="label_goods_detail_tradingCount">交易成功%1$d件</string>
+    <string name="label_goods_stock">库存:%1$d件</string>
 
 </resources>
