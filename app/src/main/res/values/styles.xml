@@ -90,9 +90,24 @@
 
     </style>
 
+
     <style name="TextStyle.Title">
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textColor">@color/text_color_lv1</item>
+    </style>
+
+    <style name="TextStyle.Title.Large">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/text_color_lv1</item>
+    </style>
+
+    <style name="TextStyle.Title.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/text_color_lv1</item>
+    </style>
+    <style name="TextStyle.Title.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/text_color_lv2</item>
     </style>
 
     <style name="TextStyle.Desc">

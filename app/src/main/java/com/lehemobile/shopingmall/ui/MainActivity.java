@@ -14,24 +14,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.viewpager.BaseViewPager;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.CropSquareTransformation;
 
 @EActivity(R.layout.activity_main)
+@OptionsMenu(R.menu.main)
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @ViewById
     Toolbar toolbar;
+
+    @ViewById
+    TextView cityTv;
 
     @ViewById(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -48,7 +58,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @AfterViews
     void init() {
+        cityTv = (TextView) toolbar.findViewById(R.id.cityTv);
+        cityTv.setText("北京");
         initActionBar(toolbar);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(toggle);
@@ -76,6 +89,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return false;
     }
 
+
+    @Click(R.id.cityTv)
+    void chooseCity() {
+        Logger.i("click choose City");
+    }
+
+    @OptionsItem(R.id.action_search)
+    void doSearch() {
+        Logger.i(" click search ");
+    }
+
+
     private class SectionPagerAdapter extends FragmentPagerAdapter {
 
 
@@ -90,12 +115,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public int getCount() {
-            return 10;
+            return 5;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "中文 " + position;
+            return "今日上新 " + position;
         }
     }
 
@@ -130,4 +155,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             return imageView;
         }
     }
+
 }
