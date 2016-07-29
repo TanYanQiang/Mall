@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -18,7 +17,6 @@
             style="@style/TextStyle.Title.Medium.Gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_vertical_margin"
             android:text="验证码短信已发送至18600950365" />
@@ -43,6 +41,7 @@
             <CheckBox
                 android:id="@+id/userVerify"
                 style="@style/TextStyle.Title.Medium"
+                android:background="@color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/ic_persion_verify_checkbox_btn"
