@@ -44,7 +44,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.user.login.RegisterStep1Activity_"
             android:configChanges="keyboardHidden|orientation|screenSize"

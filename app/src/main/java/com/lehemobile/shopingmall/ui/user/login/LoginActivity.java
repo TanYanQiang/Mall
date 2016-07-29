@@ -14,6 +14,7 @@ import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.AfterTextChange;
@@ -101,5 +102,18 @@ public class LoginActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         VolleyHelper.cancel(this);
+    }
+
+    @Click(R.id.thirdQQ)
+    void thridQQLogin(){
+        Logger.i("thridQQLogin");
+    }
+    @Click(R.id.thirdWeibo)
+    void thirdWeiboLogin(){
+        Logger.i("thirdWeiboLogin");
+    }
+    @Click(R.id.thirdWeixin)
+    void thirdWeixinLogin(){
+        Logger.i("thirdWeixinLogin");
     }
 }

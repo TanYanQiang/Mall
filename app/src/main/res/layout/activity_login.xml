@@ -1,49 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.tgh.devkit.view.ClearableEditText
-        android:id="@+id/inputMobile"
-        style="@style/ActionLine.EditText"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height_lv1"
-        android:layout_marginTop="20dp"
-        android:hint="手机号"
-        android:inputType="phone"
-        android:maxLength="11" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.tgh.devkit.view.ClearableEditText
-        android:id="@+id/inputPassword"
-        style="@style/ActionLine.EditText"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:paddingTop="5dp">
+
+            <TextView
+                style="@style/TextStyle.Title.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账号:" />
+
+            <com.tgh.devkit.view.ClearableEditText
+                android:id="@+id/inputMobile"
+                style="@style/ActionLine.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_lv1"
+                android:layout_margin="0dp"
+                android:background="@color/transparent"
+                android:hint="手机号"
+                android:inputType="phone"
+                android:maxLength="11" />
+        </LinearLayout>
+
+        <View style="@style/HorizontalLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:paddingTop="5dp">
+
+            <TextView
+                style="@style/TextStyle.Title.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密码:" />
+
+            <com.tgh.devkit.view.ClearableEditText
+                android:id="@+id/inputPassword"
+                style="@style/ActionLine.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_lv1"
+                android:layout_margin="0dp"
+                android:background="@color/transparent"
+                android:hint="登录密码"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/loginButton"
+            style="@style/Button.NormalCorners"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height_lv1"
+            android:layout_marginTop="30dp"
+            android:enabled="false"
+            android:text="登  录" />
+
+        <TextView
+            android:id="@+id/forgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="20dp"
+            android:gravity="right"
+            android:text="忘记密码 ?"
+            android:textColor="@color/text_color_lv3"
+            android:textSize="@dimen/text_size_medium" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height_lv1"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:hint="密码"
-        android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/loginButton"
-        style="@style/Button.NormalCorners"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height_lv1"
-        android:layout_marginTop="20dp"
-        android:enabled="false"
-        android:text="登  录" />
-
-    <TextView
-        android:id="@+id/forgetPassword"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="20dp"
-        android:gravity="right"
-        android:text="忘记密码"
-        android:textColor="@color/blue"
-        android:textSize="@dimen/text_size_lv3" />
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/label"
+                style="@style/TextStyle.Title.Medium.Gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:text="第三方登录" />
+
+            <View
+                style="@style/HorizontalLineStyle"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/label" />
+
+            <View
+                style="@style/HorizontalLineStyle"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/label" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:id="@+id/thirdQQ"
+                style="@style/TextStyle.Title.Medium.Gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/icon_qq"
+                android:gravity="center"
+                android:text="QQ" />
+
+            <TextView
+                android:id="@+id/thirdWeibo"
+                style="@style/TextStyle.Title.Medium.Gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/icon_weibo"
+                android:gravity="center"
+                android:text="微博" />
+
+            <TextView
+                android:id="@+id/thirdWeixin"
+                style="@style/TextStyle.Title.Medium.Gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/icon_weixin"
+                android:gravity="center"
+                android:text="微信" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

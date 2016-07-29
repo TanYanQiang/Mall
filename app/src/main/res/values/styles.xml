@@ -14,8 +14,8 @@
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:textColor">@color/text_color_lv1</item>
-        <item name="android:textColorHint">@color/text_color_lv3</item>
-        <item name="android:textSize">@dimen/text_size_lv2</item>
+        <item name="android:textColorHint">@color/text_color_lv4</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:singleLine">true</item>
     </style>
 
@@ -25,13 +25,13 @@
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:textColor">@color/text_color_lv1</item>
-        <item name="android:textColorHint">@color/text_color_lv3</item>
+        <item name="android:textColorHint">@color/text_color_lv4</item>
         <item name="android:textSize">@dimen/text_size_lv3</item>
         <item name="android:singleLine">true</item>
     </style>
 
     <style name="ActionLine.EditText" parent="ActionLine">
-        <item name="android:textColorHint">@color/text_color_lv3</item>
+        <item name="android:textColorHint">@color/text_color_lv4</item>
     </style>
 
 
@@ -120,6 +120,10 @@
     <style name="TextStyle.Title.Medium">
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:textColor">@color/text_color_lv1</item>
+    </style>
+
+    <style name="TextStyle.Title.Medium.Gray">
+        <item name="android:textColor">@color/text_color_lv3</item>
     </style>
 
     <style name="TextStyle.Title.Small">
