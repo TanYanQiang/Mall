@@ -11,6 +11,8 @@ public class User implements Serializable {
     private String nick;
     private int gender;
     private String avatar;
+    private String registerTime;
+    private String parentName;
 
     public int getUserId() {
         return userId;
@@ -50,5 +52,21 @@ public class User implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(String registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }

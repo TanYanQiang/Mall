@@ -33,6 +33,8 @@ public class UserApi {
             user.setAvatar(jobj.optString("user_avatar"));
             user.setGender(jobj.optInt("user_gender"));
             user.setMobile(jobj.optString("user_mobile"));
+            user.setRegisterTime(jobj.optString("user_register_time"));
+            user.setParentName(jobj.optString("user_parent_name"));
             return user;
         }
     };

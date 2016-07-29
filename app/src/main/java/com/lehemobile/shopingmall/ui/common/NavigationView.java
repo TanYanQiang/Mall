@@ -24,7 +24,6 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import de.greenrobot.event.EventBus;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by tanyq on 17/7/16.
@@ -81,7 +80,10 @@ public class NavigationView extends FrameLayout {
     private void updateUI() {
         if (ConfigManager.isLogin()) {
             User user = ConfigManager.getUser();
-            Glide.with(getContext()).load(user.getAvatar()).bitmapTransform(new CropCircleTransformation(getContext())).into(avatar);
+            Glide.with(getContext()).load(user.getAvatar())
+                    .placeholder(R.mipmap.avatar_default)
+                    .bitmapTransform(new com.lehemobile.shopingmall.ui.view.glide.CropCircleTransformation(getContext(), getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.avatar_borderColor)))
+                    .into(avatar);
         } else {
             Glide.with(getContext()).load("").placeholder(R.mipmap.ic_launcher).into(avatar);
         }

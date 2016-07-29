@@ -41,4 +41,6 @@
 
     <color name="btn_color_lv3_normal">#fa4535</color>
     <color name="btn_color_lv3_pressed">#c8190a</color>
+
+    <color name="avatar_borderColor">#AAFFFFFF</color>
 </resources>

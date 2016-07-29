@@ -4,8 +4,10 @@
   "result": {
     "user_id": 1,
     "user_nick": "强哥",
-    "user_avatar": "http://s.cn.bing.net/az/hprichbg/rb/DiamondHead_ZH-CN8551687099_1920x1080.jpg",
+    "user_avatar": "http://img0.imgtn.bdimg.com/it/u=1852183376,1499987086&fm=206&gp=0.jpg",
     "user_gender": 1,
-    "user_mobile": "18600950000"
+    "user_mobile": "18600950000",
+    "user_register_time": "2016-6-1",
+    "user_parent_name": "肖先生"
   }
 }
