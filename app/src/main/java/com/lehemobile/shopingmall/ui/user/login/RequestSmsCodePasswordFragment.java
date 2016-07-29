@@ -77,7 +77,7 @@ public class RequestSmsCodePasswordFragment extends BaseFragment {
     private void initNormalUI() {
         requestSmsCode.setEnabled(true);
         requestSmsCode.setText("重新获取验证码");
-        requestSmsCode.setTextColor(getResources().getColor(R.color.orange));
+//        requestSmsCode.setTextColor(getResources().getColor(R.color.orange));
     }
 
     private void initWaitingUI() {
@@ -87,7 +87,7 @@ public class RequestSmsCodePasswordFragment extends BaseFragment {
 
     private void updateCountingUI(int second) {
         requestSmsCode.setText(second + "秒后重新获取");
-        requestSmsCode.setTextColor(getResources().getColor(R.color.text_color_lv2));
+//        requestSmsCode.setTextColor(getResources().getColor(R.color.text_color_lv2));
     }
 
 
