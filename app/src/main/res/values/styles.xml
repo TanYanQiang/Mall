@@ -14,7 +14,7 @@
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:textColor">@color/text_color_lv1</item>
-        <item name="android:textColorHint">@color/text_color_lv2</item>
+        <item name="android:textColorHint">@color/text_color_lv3</item>
         <item name="android:textSize">@dimen/text_size_lv2</item>
         <item name="android:singleLine">true</item>
     </style>
@@ -25,13 +25,13 @@
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:textColor">@color/text_color_lv1</item>
-        <item name="android:textColorHint">@color/text_color_lv2</item>
+        <item name="android:textColorHint">@color/text_color_lv3</item>
         <item name="android:textSize">@dimen/text_size_lv3</item>
         <item name="android:singleLine">true</item>
     </style>
 
     <style name="ActionLine.EditText" parent="ActionLine">
-        <item name="android:textColorHint">@color/text_color_lv2</item>
+        <item name="android:textColorHint">@color/text_color_lv3</item>
     </style>
 
 
@@ -50,15 +50,26 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/line_height_lv2</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/text_size_lv2</item>
+        <item name="android:textSize">@dimen/text_size_large_18</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
     </style>
 
+
+    <style name="Button.NormalCorners" parent="Button">
+        <item name="android:background">@drawable/btn_lv1_corners</item>
+        <item name="android:textColor">@color/text_red_solid</item>
+    </style>
+
+    <style name="Button.OrangeCorners" parent="Button">
+        <item name="android:background">@drawable/btn_lv2_corners</item>
+        <item name="android:textColor">@color/text_red_solid</item>
+    </style>
+
     <style name="Button.RedCorners" parent="Button">
-        <item name="android:background">@drawable/btn_red_corners</item>
+        <item name="android:background">@drawable/btn_lv3_corners</item>
         <item name="android:textColor">@color/text_red_solid</item>
     </style>
 

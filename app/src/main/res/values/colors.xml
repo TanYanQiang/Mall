@@ -22,12 +22,23 @@
     <color name="text_color_light_lv1">#ffffff</color>
     <color name="text_color_light_lv2">#ccffffff</color>
 
-    <color name="alpha_orange">#e5be64</color>
-    <color name="orange">#e5be64</color>
-    <color name="btn_bg_red">#e5be64</color>
-    <color name="dark_red">#e5be64</color>
+    <color name="alpha_orange">#FFFAC506</color>
+    <color name="orange">#FFFAC506</color>
+    <color name="btn_bg_red">#FFFAC506</color>
+    <color name="dark_red">#FFFAC506</color>
     <color name="light_gray">#dedede</color>
     <color name="blue">#3098f9</color>
 
     <color name="tab_bg">#272a32</color>
+
+    <color name="btn_color_enabled">#999999</color>
+
+    <color name="btn_color_lv1_normal">#fac506</color>
+    <color name="btn_color_lv1_pressed">#ffb70b</color>
+
+    <color name="btn_color_lv2_normal">#fe9500</color>
+    <color name="btn_color_lv2_pressed">#f97b00</color>
+
+    <color name="btn_color_lv3_normal">#fa4535</color>
+    <color name="btn_color_lv3_pressed">#c8190a</color>
 </resources>

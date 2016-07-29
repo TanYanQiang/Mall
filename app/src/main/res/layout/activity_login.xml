@@ -26,7 +26,7 @@
 
     <Button
         android:id="@+id/loginButton"
-        style="@style/Button.RedCorners"
+        style="@style/Button.NormalCorners"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height_lv1"
         android:layout_marginTop="20dp"

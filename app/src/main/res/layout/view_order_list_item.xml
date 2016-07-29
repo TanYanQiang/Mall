@@ -77,7 +77,7 @@
 
             <Button
                 android:id="@+id/buttonRight"
-                style="@style/Button.RedCorners"
+                style="@style/Button.NormalCorners"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 tools:text="去付款" />
