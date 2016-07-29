@@ -18,5 +18,6 @@
     <string name="label_goods_detail_marketPrice">市场价格:￥%1$g</string>
     <string name="label_goods_detail_tradingCount">交易成功%1$d件</string>
     <string name="label_goods_stock">库存:%1$d件</string>
+    <string name="app_title_name">芮娜皇宫</string>
 
 </resources>

@@ -9,20 +9,22 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_vertical_margin"
-        android:text="我们将发送验证码到你的手机。"
-        android:textColor="@color/text_color_lv2"
-        android:textSize="@dimen/text_size_lv3" />
-
+        android:layout_gravity="center"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="60dp"
+        android:drawablePadding="12dp"
+        android:drawableTop="@mipmap/icon_logo"
+        android:gravity="center_horizontal"
+        android:text="@string/app_title_name"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_large_18"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@color/white"
         android:divider="@drawable/divider_horizontal"
         android:gravity="center_vertical"
@@ -32,46 +34,50 @@
         android:paddingRight="@dimen/activity_vertical_margin"
         android:showDividers="beginning|end">
 
-        <TextView
-            android:id="@+id/label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手机号"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
 
         <com.tgh.devkit.view.ClearableEditText
             android:id="@+id/inputMobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:hint="请填写手机号码"
+            android:drawableLeft="@mipmap/ic_mobile"
+            android:drawablePadding="@dimen/activity_vertical_margin"
+            android:hint="请输入手机号码"
             android:inputType="number"
             android:lines="1"
             android:maxLength="11"
-            android:paddingLeft="@dimen/activity_vertical_margin"
             android:textColor="@color/text_color_lv1"
             android:textColorHint="@color/text_color_lv3"
             android:textSize="@dimen/text_size_lv2" />
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/licence"
+        style="@style/TextStyle.Title.Medium.Gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:button="@drawable/ic_checkbox_btn"
+        android:paddingLeft="@dimen/margin_8"
+        android:text="我已阅读并同意条款" />
 
     <Button
         android:id="@+id/btnNext"
         style="@style/Button.NormalCorners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:text="下一步" />
 
     <TextView
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:gravity="right"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin"
         android:text="已有账号？登录"
-        android:textColor="@color/text_color_lv2"
-        android:textSize="@dimen/text_size_lv3" />
+        android:textColor="@color/text_color_lv4"
+        android:textSize="@dimen/text_size_medium" />
 </LinearLayout>

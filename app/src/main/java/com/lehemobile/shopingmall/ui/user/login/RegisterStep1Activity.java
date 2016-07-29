@@ -2,7 +2,9 @@ package com.lehemobile.shopingmall.ui.user.login;
 
 import android.text.Editable;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
@@ -13,13 +15,17 @@ import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
+import com.tgh.devkit.core.text.SpannableStringHelper;
+import com.tgh.devkit.core.text.TextHelper;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.core.utils.TextWatcherAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
+import org.w3c.dom.Text;
 
 import java.util.Map;
 
@@ -39,6 +45,12 @@ public class RegisterStep1Activity extends BaseActivity {
     @ViewById
     EditText inputMobile;
 
+    @ViewById
+    CheckBox licence;
+
+    @ViewById
+    TextView login;
+
     @AfterViews
     void init() {
         String mobile = ConfigManager.Device.getLastMobile();
@@ -50,6 +62,12 @@ public class RegisterStep1Activity extends BaseActivity {
                 onMobileChanged();
             }
         });
+
+        String info = "已有账号？直接登录";
+        new SpannableStringHelper(info)
+                .foregroundColor("直接登录", getResources().getColor(R.color.colorAccent))
+                .attachToTextView(login);
+
     }
 
     void onMobileChanged() {
@@ -64,6 +82,10 @@ public class RegisterStep1Activity extends BaseActivity {
         final String mobile = inputMobile.getText().toString().trim();
         if (!Validation.isMobileNO(mobile)) {
             showToast("请输入正确的手机格式");
+            return;
+        }
+        if (!licence.isChecked()) {
+            showToast("请选择同意条款");
             return;
         }
         //TODO  调用该接口获取验证码

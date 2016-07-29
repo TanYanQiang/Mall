@@ -29,7 +29,7 @@
                     android:id="@+id/appName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="芮娜皇宫"
+                    android:text="@string/app_title_name"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/text_size_large_18"
                     android:textStyle="bold" />
