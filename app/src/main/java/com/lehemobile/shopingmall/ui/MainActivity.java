@@ -100,6 +100,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Logger.i(" click search ");
     }
 
+    String[] titles = new String[]{"今日上线", "化妆", "护肤", "美体", "即将上线"};
 
     private class SectionPagerAdapter extends FragmentPagerAdapter {
 
@@ -115,12 +116,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public int getCount() {
-            return 5;
+            return titles.length;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "今日上新 " + position;
+            return titles[position];
         }
     }
 
@@ -141,7 +142,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
             ImageView imageView = new ImageView(getActivity());
-
             imageView.setAdjustViewBounds(true);
             imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             String imageUrl = "http://s.cn.bing.net/az/hprichbg/rb/TerracesSunrise_ZH-CN11993554223_1920x1080.jpg";

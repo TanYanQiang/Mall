@@ -38,7 +38,7 @@ public class SetupActivity extends BaseActivity {
         Glide.with(this).load(url)
                 .into(bg);
 
-        handler.sendEmptyMessageDelayed(WHAT_SETUP, 3000);
+        handler.sendEmptyMessageDelayed(WHAT_SETUP, 1500);
     }
 
     @Override

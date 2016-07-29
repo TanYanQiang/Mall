@@ -31,7 +31,10 @@
         </activity>
         <activity
             android:name=".ui.MainActivity_"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.user.login.LoginActivity_"
@@ -40,6 +43,7 @@
             android:label="@string/title_activity_Login"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".ui.user.login.RegisterStep1Activity_"
@@ -96,6 +100,7 @@
             android:exported="false"
             android:label="@string/title_activity_OrderList"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".ui.order.OrderDetailActivity_"

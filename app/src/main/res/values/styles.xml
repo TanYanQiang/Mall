@@ -1,6 +1,11 @@
 <resources>
 
 
+    <style name="MyTabLayoutTextAppearance">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/tab_text_color</item>
+    </style>
+
     <style name="ActionLine">
         <item name="android:background">@drawable/input_box</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
@@ -105,6 +110,7 @@
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:textColor">@color/text_color_lv1</item>
     </style>
+
     <style name="TextStyle.Title.Small">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/text_color_lv2</item>

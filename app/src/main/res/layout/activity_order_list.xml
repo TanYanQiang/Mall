@@ -9,10 +9,11 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#272c35"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="#ffffff"
-        app:tabTextColor="#666666" />
+        android:background="@color/tab_bg"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+        app:tabTextColor="@color/text_color_lv4"
+        app:tabSelectedTextColor="@color/white"
+        app:tabMode="fixed" />
 
     <com.tgh.devkit.viewpager.BaseViewPager
         android:id="@+id/viewPager"
