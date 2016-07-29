@@ -41,7 +41,8 @@ public class RequestSmsCodePasswordFragment extends BaseFragment {
     @ViewById
     EditText inputSmsCode;
     @ViewById
-    EditText inputPassword;
+    EditText inputPassword;  @ViewById
+    EditText inputPassword2;
     @ViewById
     TextView requestSmsCode;
 
@@ -123,6 +124,9 @@ public class RequestSmsCodePasswordFragment extends BaseFragment {
 
     public String getPassword() {
         return getInputText(inputPassword);
+    }
+    public String getPassword2() {
+        return getInputText(inputPassword2);
     }
 
     @Override

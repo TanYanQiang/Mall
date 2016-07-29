@@ -1,5 +1,10 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -14,6 +19,7 @@ import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -30,6 +36,19 @@ public class RegisterStep2Activity extends BaseActivity {
     @ViewById
     TextView mobileTips;
 
+    @ViewById
+    View userVerifyLayout;
+
+    @ViewById
+    EditText name;
+
+
+    @ViewById
+    EditText idCard;
+
+    @ViewById
+    CheckBox userVerify;
+
 
     private RequestSmsCodePasswordFragment smsCodePasswordFragment;
 
@@ -40,8 +59,14 @@ public class RegisterStep2Activity extends BaseActivity {
         smsCodePasswordFragment = RequestSmsCodePasswordFragment_.builder().mobile(mobile).type(UserApi.TYPE_REGISTER).build();
 
         getSupportFragmentManager().beginTransaction().add(R.id.container, smsCodePasswordFragment).commit();
+
+        userVerify.setChecked(true);
     }
 
+    @CheckedChange(R.id.userVerify)
+    void userVerifyChange(CompoundButton button, boolean isChecked) {
+        userVerifyLayout.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+    }
 
     @Click(R.id.btnRegister)
     void onRegister() {
@@ -57,6 +82,29 @@ public class RegisterStep2Activity extends BaseActivity {
         }
         if (!Validation.isPassword(password)) {
             showToast("密码应为6-20为，且包含数字和字母");
+            return;
+        }
+        String password2 = smsCodePasswordFragment.getPassword2();
+        if (Strings.isNullOrEmpty(password)) {
+            showToast("请输入验证密码");
+            return;
+        }
+        if (!TextUtils.equals(password, password2)) {
+            showToast("两次输入的密码不一致");
+            return;
+        }
+        String _name = getInputText(name);
+        if (Strings.isNullOrEmpty(_name)) {
+            showToast("个人验证姓名不能为空");
+            return;
+        }
+        String _idCard = getInputText(idCard);
+        if (Strings.isNullOrEmpty(_idCard)) {
+            showToast("身份证号码不能为空");
+            return;
+        }
+        if (!Validation.isIDcard(_idCard)) {
+            showToast("请输入正确的身份证号码");
             return;
         }
 

@@ -2,7 +2,7 @@
 <resources>
     <string name="title_activity_Login">登录</string>
     <string name="title_activity_RegisterStep1">注册</string>
-    <string name="title_activity_RegisterStep2">设置登录密码</string>
+    <string name="title_activity_RegisterStep2">注册</string>
     <string name="title_activity_RestPasswordStep1">忘记密码</string>
     <string name="title_activity_RestPasswordStep2">找回密码</string>
     <string name="title_activity_Profile">个人资料</string>
