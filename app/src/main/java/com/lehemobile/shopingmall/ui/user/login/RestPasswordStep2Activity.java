@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
+import android.text.TextUtils;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -24,46 +26,47 @@ import org.androidannotations.annotations.ViewById;
  */
 @EActivity(R.layout.activity_reset_password_step2)
 public class RestPasswordStep2Activity extends BaseActivity {
+
     @Extra
     String mobile;
 
     @ViewById
-    TextView mobileTips;
+    EditText newPassword;
+    @ViewById
+    EditText newPassword2;
 
 
-    private RequestSmsCodePasswordFragment smsCodePasswordFragment;
+    boolean validate() {
 
-    @AfterViews
-    void init() {
-        mobileTips.setText(getString(R.string.register_sms_code_tips, mobile));
-
-        smsCodePasswordFragment = RequestSmsCodePasswordFragment_.builder().mobile(mobile).passwordLabelText("新密码")
-                .type(UserApi.TYPE_REGISTER).build();
-
-        getSupportFragmentManager().beginTransaction().add(R.id.container, smsCodePasswordFragment).commit();
+        String info = newPassword.getText().toString().trim();
+        if (!Validation.isPassword(info)) {
+            showToast("密码应为6-20为，且包含数字和字母");
+            return false;
+        }
+        String password2 = getInputText(newPassword2);
+        if (!TextUtils.equals(info, password2)) {
+            showToast("两次输入的密码不一致");
+            return false;
+        }
+        return true;
     }
 
 
     @Click(R.id.btnComplete)
     void onRestPassword() {
-        String smsCode = smsCodePasswordFragment.getSmsCode();
-        if (Strings.isNullOrEmpty(smsCode)) {
-            showToast("请输入短信验证码");
-            return;
-        }
-        String password = smsCodePasswordFragment.getPassword();
+
+        String password = getInputText(newPassword);
         if (Strings.isNullOrEmpty(password)) {
             showToast("请输入密码");
             return;
         }
-        if (!Validation.isPassword(password)) {
-            showToast("密码应为6-20为，且包含数字和字母");
+        if (!validate()) {
             return;
         }
 
         //TODO 调用接口注册
         showLoading("正在提交信息...");
-        BaseRequest<User> request = UserApi.restPassword(mobile, smsCode, password, new Response.Listener<User>() {
+        BaseRequest<User> request = UserApi.restPassword(mobile, null, password, new Response.Listener<User>() {
             @Override
             public void onResponse(User response) {
                 dismissLoading();

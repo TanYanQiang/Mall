@@ -1,26 +1,18 @@
 package com.lehemobile.shopingmall.ui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
 import com.lehemobile.shopingmall.ui.main.MainGoodsFragment_;
-import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment;
 import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment_;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.viewpager.BaseViewPager;
@@ -30,11 +22,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
-
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.main)
