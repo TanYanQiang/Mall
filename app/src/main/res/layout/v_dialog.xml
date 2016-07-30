@@ -14,10 +14,10 @@
 
     <TextView
         android:id="@+id/tv_title"
+        style="@style/TextStyle.Title.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         tools:text="Title" />
 
     <Space
@@ -28,10 +28,10 @@
 
     <TextView
         android:id="@+id/tv_message"
+        style="@style/TextStyle.Desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:visibility="gone"
         tools:text="msg" />
 
@@ -58,34 +58,34 @@
 
         <TextView
             android:id="@+id/tv_left"
+            style="@style/TextStyle.Title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_dialog_btn_left"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="Cancel" />
 
         <TextView
             android:id="@+id/tv_center"
+            style="@style/TextStyle.Desc"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_dialog_btn_center"
             android:gravity="center"
-            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
             android:visibility="gone"
             tools:text="Send" />
 
         <TextView
             android:id="@+id/tv_right"
+            style="@style/TextStyle.Title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_dialog_btn_right"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="OK" />
     </LinearLayout>
 
