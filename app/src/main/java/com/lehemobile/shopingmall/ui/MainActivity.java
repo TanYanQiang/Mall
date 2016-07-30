@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
+import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment;
+import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment_;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.viewpager.BaseViewPager;
 
@@ -111,6 +113,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
+            switch (position){
+                case 0:
+                    return NewTodayGoodsFragment_.builder().build();
+            }
             return PlaceholderFragment.newInstance(position);
         }
 
