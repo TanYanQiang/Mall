@@ -99,8 +99,8 @@ public class AccountActivity extends BaseActivity {
 
         nick.setText(user.getNick());
         userId.setText(getString(R.string.label_account_userID, "" + user.getUserId()));
-        registerTime.setText(getString(R.string.label_account_userID, user.getRegisterTime()));
-        parentName.setText(getString(R.string.label_account_userID, user.getParentName()));
+        registerTime.setText(getString(R.string.label_account_user_registerTime, user.getRegisterTime()));
+        parentName.setText(getString(R.string.label_account_user_parent_name, user.getParentName()));
     }
 
     private boolean isLogin() {
@@ -145,7 +145,7 @@ public class AccountActivity extends BaseActivity {
     }
 
 
-    @Click({R.id.allOrder, R.id.watingPay, R.id.watingDeliver, R.id.watingReceipt, R.id.complete})
+    @Click({R.id.allOrder, R.id.watingPay, R.id.watingDeliver, R.id.watingReceipt, R.id.complete,R.id.comment})
     void goOrderList(View view) {
         if (!isLogin()) return;
         int type = 0;

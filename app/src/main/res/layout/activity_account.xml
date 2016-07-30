@@ -214,11 +214,8 @@
                 android:gravity="center"
                 android:minHeight="60dp"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp"
-
                 android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingRight="@dimen/activity_vertical_margin"
-                android:paddingTop="10dp">
+                android:paddingRight="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:id="@+id/watingPay"
@@ -321,11 +318,9 @@
                 android:gravity="center"
                 android:minHeight="60dp"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp"
 
                 android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingRight="@dimen/activity_vertical_margin"
-                android:paddingTop="10dp">
+                android:paddingRight="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:id="@+id/remuneration"
@@ -399,6 +394,7 @@
                     android:text="我的管家"
                     android:textColor="#06cea1"
                     android:textSize="@dimen/text_size_large" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -415,10 +411,8 @@
                 android:gravity="center"
                 android:minHeight="@dimen/line_height_lv1"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp"
                 android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingRight="@dimen/activity_vertical_margin"
-                android:paddingTop="10dp">
+                android:paddingRight="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:id="@+id/address"
@@ -427,8 +421,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawablePadding="5dp"
-                    android:gravity="center"
                     android:drawableTop="@mipmap/ic_account_address"
+                    android:gravity="center"
                     android:text="收货地址" />
 
                 <TextView
@@ -437,20 +431,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/ic_account_collection"
+                    android:gravity="center"
                     android:text="我的收藏" />
 
                 <TextView
                     android:id="@+id/region"
                     style="@style/TextStyle.Desc.Small"
                     android:layout_width="0dp"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/ic_account_region"
+                    android:gravity="center"
                     android:text="我的地域" />
 
                 <Space
@@ -485,6 +479,7 @@
                     android:text="活动中心"
                     android:textColor="#dc514a"
                     android:textSize="@dimen/text_size_large" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -501,10 +496,8 @@
                 android:gravity="center"
                 android:minHeight="@dimen/line_height_lv1"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp"
                 android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingRight="@dimen/activity_vertical_margin"
-                android:paddingTop="10dp">
+                android:paddingRight="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:id="@+id/ranking"
@@ -513,8 +506,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawablePadding="5dp"
-                    android:gravity="center"
                     android:drawableTop="@mipmap/ic_account_ranking"
+                    android:gravity="center"
                     android:text="积分排行" />
 
                 <TextView
@@ -523,20 +516,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/ic_account_notice"
+                    android:gravity="center"
                     android:text="消息通知" />
 
                 <TextView
                     android:id="@+id/heroList"
                     style="@style/TextStyle.Desc.Small"
                     android:layout_width="0dp"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/ic_account_herolist"
+                    android:gravity="center"
                     android:text="英雄榜" />
 
                 <Space
