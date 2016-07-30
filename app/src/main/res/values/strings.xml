@@ -23,4 +23,5 @@
     <string name="label_account_user_registerTime">注册时间:%s</string>
     <string name="label_account_user_parent_name">上级名字:%s</string>
 
+    <string name="permission_storage_msg">请允许芮娜皇宫APP访问您设备上的照片、媒体内容和文件权限，否则将会部导致分功能无法使用！</string>
 </resources>

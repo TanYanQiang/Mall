@@ -1,6 +1,9 @@
 package com.lehemobile.shopingmall.ui.user;
 
+import android.Manifest;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,7 +16,8 @@ import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
-import com.tgh.devkit.dialog.DialogBuilder;
+import com.tgh.devkit.core.utils.PermissionHelper;
+import com.tgh.devkit.core.utils.PermissionUtils;
 import com.tgh.devkit.pickimage.PickImageHelper;
 
 import org.androidannotations.annotations.AfterViews;
@@ -27,7 +31,8 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * Created by  on 21/7/16.
  */
 @EActivity(R.layout.activity_profile)
-public class ProfileActivity extends BaseActivity {
+public class ProfileActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
+    public static final int REQUEST_STORAGE_PERMISSION_CODE = 1;
     @ViewById
     ImageView avatar;
 
@@ -38,6 +43,16 @@ public class ProfileActivity extends BaseActivity {
     TextView mobile;
     private PickImageHelper pickImageHelper;
     private User user;
+
+    String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+    void showChooseImage() {
+        if (pickImageHelper == null) {
+            initPickImage();
+        }
+        pickImageHelper.showPickDialog();
+    }
+
 
     private void initPickImage() {
         pickImageHelper = new PickImageHelper(this);
@@ -83,7 +98,27 @@ public class ProfileActivity extends BaseActivity {
 
     @Click(R.id.avatarLayout)
     void avatarLayout() {
-        pickImageHelper.showPickDialog();
+
+        if (PermissionUtils.hasSelfPermissions(this, permission)) {
+            showChooseImage();
+        } else {
+            if (!PermissionUtils.shouldShowRequestPermissionRationale(this, permission)) {
+                showRationaleFormStorage(new PermissionHelper.PermissionRequest() {
+                    @Override
+                    public void proceed() {
+                        ActivityCompat.requestPermissions(ProfileActivity.this, permission, REQUEST_STORAGE_PERMISSION_CODE);
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+                return;
+            }
+            ActivityCompat.requestPermissions(this, permission, REQUEST_STORAGE_PERMISSION_CODE);
+        }
+
     }
 
     @Click(R.id.nickLayout)
@@ -115,4 +150,32 @@ public class ProfileActivity extends BaseActivity {
     private void uploadAvatar(String imagePath) {
         //TODO 上传图片
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_STORAGE_PERMISSION_CODE) {
+            if (PermissionUtils.verifyPermissions(grantResults)) {
+                showChooseImage();
+            } else {
+                DialogUtils.alert(this, getString(R.string.permission_storage_msg));
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    void showRationaleFormStorage(final PermissionHelper.PermissionRequest permissionRequest) {
+        DialogUtils.alert(this, null, getString(R.string.permission_storage_msg), android.R.string.cancel, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                permissionRequest.cancel();
+            }
+        }, android.R.string.ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                permissionRequest.proceed();
+            }
+        });
+    }
+
+
 }
