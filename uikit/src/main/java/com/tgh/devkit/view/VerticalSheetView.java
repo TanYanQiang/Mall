@@ -55,12 +55,12 @@ public class VerticalSheetView extends LinearLayout{
     private float mCornerRadius;
     private int mLineHeight;
     private int mBgColorNor = Color.WHITE;
-    private int mBgColorPressed = Color.parseColor("#EF6C00");
+    private int mBgColorPressed = Color.parseColor("#FFFAC506");
 
     private void init() {
         setOrientation(VERTICAL);
         initDefaultTextColor();
-        mTextSize = Utils.sp2px(getContext(), 14);
+        mTextSize = Utils.sp2px(getContext(), 15);
         mLineHeight = Utils.dp2px(getContext(), 50);
     }
 

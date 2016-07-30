@@ -11,6 +11,7 @@
         android:id="@+id/avatarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin"
@@ -25,18 +26,17 @@
             android:src="@mipmap/ic_arrow_right" />
 
         <TextView
+            style="@style/TextStyle.Title.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="头像"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:text="头像" />
 
         <ImageView
             android:id="@+id/avatar"
             style="@style/ProfileAvatar"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/margin_8"
             android:layout_toLeftOf="@id/arrow" />
 
 
@@ -46,6 +46,7 @@
         android:id="@+id/nickLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin"
@@ -60,22 +61,20 @@
             android:src="@mipmap/ic_arrow_right" />
 
         <TextView
+            style="@style/TextStyle.Title.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="昵称"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:text="昵称" />
 
         <TextView
             android:id="@+id/nick"
+            style="@style/TextStyle.Desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/margin_8"
             android:layout_toLeftOf="@id/arrow"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2"
             tools:text="太阳" />
 
     </RelativeLayout>
@@ -83,39 +82,36 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
+        <ImageView
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text=">"
-            android:textColor="@color/text_color_lv2"
-            android:textSize="25sp"
+            android:src="@mipmap/ic_arrow_right"
             android:visibility="invisible" />
 
         <TextView
+            style="@style/TextStyle.Title.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="账号"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:text="账号" />
 
         <TextView
             android:id="@+id/mobile"
+            style="@style/TextStyle.Desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/margin_8"
             android:layout_toLeftOf="@id/arrow"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2"
             tools:text="1890000000" />
 
     </RelativeLayout>
@@ -124,6 +120,7 @@
         android:id="@+id/resetPasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin"
@@ -138,12 +135,11 @@
             android:src="@mipmap/ic_arrow_right" />
 
         <TextView
+            style="@style/TextStyle.Title.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="修改密码"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:text="修改密码" />
 
     </RelativeLayout>
 </LinearLayout>

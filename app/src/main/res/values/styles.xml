@@ -133,7 +133,7 @@
     </style>
 
     <style name="TextStyle.Title.Medium.Gray">
-        <item name="android:textColor">@color/text_color_lv3</item>
+        <item name="android:textColor">@color/text_color_lv2</item>
     </style>
 
     <style name="TextStyle.Title.Small">
@@ -150,6 +150,7 @@
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:textColor">@color/text_color_lv2</item>
     </style>
+
     <style name="TextStyle.Desc.Small">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/text_color_lv2</item>
