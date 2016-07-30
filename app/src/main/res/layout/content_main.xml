@@ -8,8 +8,17 @@
     tools:context="com.lehemobile.shopingmall.ui.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+
     <com.tgh.devkit.viewpager.BaseViewPager
         android:id="@+id/viewPager"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
+
+    <com.lehemobile.shopingmall.ui.main.UserShoppingView_
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_vertical_margin" />
 </RelativeLayout>

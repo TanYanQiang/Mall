@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
+import com.lehemobile.shopingmall.ui.main.MainGoodsFragment_;
 import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment;
 import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment_;
 import com.orhanobut.logger.Logger;
@@ -113,11 +114,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    return NewTodayGoodsFragment_.builder().build();
+            if(position ==0){
+                return NewTodayGoodsFragment_.builder().build();
+            }else{
+                return MainGoodsFragment_.builder().build();
             }
-            return PlaceholderFragment.newInstance(position);
         }
 
         @Override
@@ -128,37 +129,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         @Override
         public CharSequence getPageTitle(int position) {
             return titles[position];
-        }
-    }
-
-    public static class PlaceholderFragment extends Fragment {
-        public static PlaceholderFragment newInstance(int position) {
-            PlaceholderFragment placeholderFragment = new PlaceholderFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("position", position);
-            placeholderFragment.setArguments(bundle);
-            return placeholderFragment;
-        }
-
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            int position = getArguments().getInt("position");
-
-
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setAdjustViewBounds(true);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            String imageUrl = "http://s.cn.bing.net/az/hprichbg/rb/TerracesSunrise_ZH-CN11993554223_1920x1080.jpg";
-            if (position % 2 == 0) {
-                imageUrl = "http://a.vpimg4.com/upload/merchandise/pdc/411/873/1033652364713873411/2/8712400110020-6.jpg";
-            }
-            Glide.with(getActivity())
-                    .load(imageUrl)
-//                    .bitmapTransform((position % 2 == 0 ? new CropCircleTransformation(getActivity()) : new CropSquareTransformation(getActivity())))
-                    .into(imageView);
-            return imageView;
         }
     }
 
