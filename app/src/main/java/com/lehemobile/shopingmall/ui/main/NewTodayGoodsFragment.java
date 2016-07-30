@@ -13,6 +13,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Goods;
+import com.lehemobile.shopingmall.session.NewTodayGoodsSession;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
 import com.lehemobile.shopingmall.ui.user.favorite.FavoriteItemView;
@@ -40,12 +41,14 @@ public class NewTodayGoodsFragment extends BaseFragment {
     PullToRefreshListView listView;
 
     private PageListHelper<Goods> pageListHelper;
+    private NewTodayGoodsSession todayGoodsSession;
+    private NewTodayGoodsHeaderView newTodayGoodsHeaderView;
 
 
     @AfterViews
     void init() {
 
-        NewTodayGoodsHeaderView newTodayGoodsHeaderView = NewTodayGoodsHeaderView_.build(getActivity());
+        newTodayGoodsHeaderView = NewTodayGoodsHeaderView_.build(getActivity());
         listView.getRefreshableView().addHeaderView(newTodayGoodsHeaderView);
 
 
@@ -74,7 +77,32 @@ public class NewTodayGoodsFragment extends BaseFragment {
     }
 
     private void load(int page, int pageCount) {
+
+        todayGoodsSession = new NewTodayGoodsSession();
+
+
         //TODO 调用接口加载数据
+        List<Goods> bannerData = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Goods goods = new Goods();
+            goods.setId(i + 1);
+            goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 " + i);
+            goods.setPrice(100 * i);
+            String thumbnail = "http://img20.360buyimg.com/da/jfs/t3037/169/247470885/188086/ba507386/579821b0Nab1cf0d7.jpg";
+            if (i % 5 == 0) {
+                thumbnail = "http://img12.360buyimg.com/da/jfs/t2590/105/3491337740/142976/48526944/57906678Nc515f1b0.jpg";
+            } else if (i % 2 == 0) {
+                thumbnail = "http://c.vpimg1.com/upcb/2016/07/29/104/34149634.jpg";
+            } else if (i % 3 == 0) {
+                thumbnail = "http://d.vpimg1.com/upcb/2016/07/29/94/04117816.jpg";
+            } else if (i % 4 == 0) {
+                thumbnail = "http://c.vpimg1.com/upcb/2016/07/29/190/32087675.jpg";
+            }
+            goods.setThumbnail(thumbnail);
+            bannerData.add(goods);
+        }
+        todayGoodsSession.setBannersData(bannerData);
+
         List<Goods> goodsList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Goods goods = new Goods();
@@ -94,8 +122,15 @@ public class NewTodayGoodsFragment extends BaseFragment {
             goods.setThumbnail(thumbnail);
             goodsList.add(goods);
         }
-        pageListHelper.onLoadSuccess(goodsList);
+        todayGoodsSession.setNewData(goodsList);
 
+        updateUI();
+    }
+
+    private void updateUI() {
+        pageListHelper.onLoadSuccess(todayGoodsSession.getNewData());
+
+        newTodayGoodsHeaderView.bindData(todayGoodsSession);
     }
 
     private class GoodsItemAdapter extends BaseListAdapter<Goods> {
