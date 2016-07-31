@@ -13,6 +13,7 @@ public class User implements Serializable {
     private String avatar;
     private String registerTime;
     private String parentName;
+    private String qrCode;
 
     public int getUserId() {
         return userId;
@@ -68,5 +69,13 @@ public class User implements Serializable {
 
     public void setParentName(String parentName) {
         this.parentName = parentName;
+    }
+
+    public String getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
 }

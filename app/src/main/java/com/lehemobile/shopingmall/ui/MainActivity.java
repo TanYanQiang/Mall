@@ -102,10 +102,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
-            if(position ==0){
+            if (position == 0) {
                 return NewTodayGoodsFragment_.builder().build();
-            }else{
-                return MainGoodsFragment_.builder().build();
+            } else {
+                return MainGoodsFragment_.builder().categoryId(position).build();
             }
         }
 
