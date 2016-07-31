@@ -96,7 +96,7 @@ public class UserQRCodeActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION_CODE) {
             if (PermissionUtils.verifyPermissions(grantResults)) {
-
+                startScanQRCode();
             } else {
                 DialogUtils.alert(this, getString(R.string.permission_camera_msg));
             }

@@ -79,9 +79,9 @@ public abstract class BaseRequest<T> extends Request<T> {
         }
     }
     private JSONObject foundMockResponse() {
-        if (!BuildConfig.DEBUG) {
+        /*if (!BuildConfig.DEBUG) {
             return null;
-        }
+        }*/
         try {
             URL url = new URL(getUrl());
             String path = url.getPath();
