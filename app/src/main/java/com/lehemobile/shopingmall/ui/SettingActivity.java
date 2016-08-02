@@ -6,9 +6,11 @@ import android.widget.TextView;
 
 import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.squareup.picasso.Picasso;
+import com.tgh.devkit.core.utils.IO;
 import com.tgh.devkit.core.utils.Utils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -17,6 +19,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+
+import java.io.File;
 
 /**
  * Created by tanyq on 21/7/16.
@@ -45,6 +49,8 @@ public class SettingActivity extends BaseActivity {
     @Background
     void clearCache() {
 //        Picasso
+        File cacheDir = IO.getCacheDir(this, AppConfig.IMAGE_CACHE_DIR);
+        IO.delete(cacheDir);
         showClearCacheToast();
     }
 

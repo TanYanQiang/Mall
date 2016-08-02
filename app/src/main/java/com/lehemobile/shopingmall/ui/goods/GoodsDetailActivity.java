@@ -97,6 +97,15 @@ public class GoodsDetailActivity extends BaseActivity {
         goods.setImages(images);
 
         goods.setDetail("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
+
+        List<String> detailImages = new ArrayList<>();
+        detailImages.add("http://a.vpimg2.com/upload/merchandise/pdcvis/2016/07/22/174/24d54a2d-2614-4741-9828-e0882683b793.jpg");
+        detailImages.add("http://a.vpimg2.com/upload/merchandise/pdcvis/2016/07/22/11/69fdb6c7-4025-4f6c-8116-0e265aca3336.jpg");
+        detailImages.add("http://shop.vipstatic.com/img/te/beauty_resource/bt_img_faq.jpg?12016072802");
+        detailImages.add("http://shop.vipstatic.com/img/te/beauty_resource/bt_img6.jpg?12016072802");
+        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/035/836/5935820670513836035/0/1804946-6_1440x8000_90.jpg");
+        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
+        goods.setDetailImages(detailImages);
         session.setGoods(goods);
         session.setFavorite(true);
         updateUI();

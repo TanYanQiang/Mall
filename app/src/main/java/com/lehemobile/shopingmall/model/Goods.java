@@ -12,6 +12,8 @@ public class Goods implements Serializable {
     private String thumbnail; //缩略图
     private List<String> images; //banner图
     private String detail; //商品描述 使用图片
+    private List<String> detailImages;
+
     private double price; //价格
     private int stock;
 
@@ -69,6 +71,14 @@ public class Goods implements Serializable {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public List<String> getDetailImages() {
+        return detailImages;
+    }
+
+    public void setDetailImages(List<String> detailImages) {
+        this.detailImages = detailImages;
     }
 
     @Override

@@ -55,7 +55,7 @@ public class CropCircleTransformation implements Transformation {
             boardPaint.setAntiAlias(true);
             boardPaint.setStrokeWidth(borderWidth);
             canvas.drawCircle(r, r, r, boardPaint);
-            Logger.i("--->border Width:"+borderWidth);
+            Logger.i("--->border Width:" + borderWidth);
         }
 
         canvas.drawCircle(r, r, r - borderWidth, paint);
@@ -67,6 +67,6 @@ public class CropCircleTransformation implements Transformation {
 
     @Override
     public String key() {
-        return "CropCircleTransformation()";
+        return "CropCircleTransformation(borderWidth=" + borderWidth + ",borderColor=" + borderColor + ")";
     }
 }
