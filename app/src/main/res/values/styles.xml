@@ -83,6 +83,11 @@
         <item name="android:textColor">@color/btn_grat_text</item>
     </style>
 
+    <style name="Button.GrayEmptyCorners2" parent="Button">
+        <item name="android:background">@drawable/btn_gray_empty_corners2</item>
+        <item name="android:textColor">@color/btn_gray_text_2</item>
+    </style>
+
     <style name="Button.WhiteEmpty" parent="Button">
         <item name="android:background">@drawable/btn_white_empty</item>
         <item name="android:textColor">@color/white</item>
