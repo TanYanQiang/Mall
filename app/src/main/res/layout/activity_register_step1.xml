@@ -1,84 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="60dp"
-        android:drawablePadding="12dp"
-        android:drawableTop="@mipmap/icon_logo"
-        android:gravity="center_horizontal"
-        android:text="@string/app_title_name"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_size_large_18"
-        android:textStyle="bold" />
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:divider="@drawable/divider_horizontal"
-        android:gravity="center_vertical"
-        android:minHeight="@dimen/line_height_lv1"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_vertical_margin"
-        android:showDividers="beginning|end">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="60dp"
+            android:drawablePadding="12dp"
+            android:drawableTop="@mipmap/icon_logo"
+            android:gravity="center_horizontal"
+            android:text="@string/app_title_name"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size_large_18"
+            android:textStyle="bold" />
 
-        <com.tgh.devkit.view.ClearableEditText
-            android:id="@+id/inputMobile"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
-            android:drawableLeft="@mipmap/ic_mobile"
-            android:drawablePadding="@dimen/activity_vertical_margin"
-            android:hint="请输入手机号码"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLength="11"
-            android:textColor="@color/text_color_lv1"
-            android:textColorHint="@color/text_color_lv3"
-            android:textSize="@dimen/text_size_lv2" />
+            android:divider="@drawable/divider_horizontal"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/line_height_lv1"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:showDividers="beginning|end">
+
+
+            <com.tgh.devkit.view.ClearableEditText
+                android:id="@+id/inputMobile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableLeft="@mipmap/ic_mobile"
+                android:drawablePadding="@dimen/activity_vertical_margin"
+                android:hint="请输入手机号码"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLength="11"
+                android:textColor="@color/text_color_lv1"
+                android:textColorHint="@color/text_color_lv3"
+                android:textSize="@dimen/text_size_lv2" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/licence"
+            style="@style/TextStyle.Title.Medium.Gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:background="@color/transparent"
+            android:button="@drawable/ic_checkbox_btn"
+            android:paddingLeft="@dimen/margin_8"
+            android:text="我已阅读并同意条款" />
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/Button.NormalCorners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="下一步" />
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="right"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:text="已有账号？登录"
+            android:textColor="@color/text_color_lv4"
+            android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
-
-    <CheckBox
-        android:id="@+id/licence"
-        style="@style/TextStyle.Title.Medium.Gray"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        android:button="@drawable/ic_checkbox_btn"
-        android:background="@color/transparent"
-        android:paddingLeft="@dimen/margin_8"
-        android:text="我已阅读并同意条款" />
-
-    <Button
-        android:id="@+id/btnNext"
-        style="@style/Button.NormalCorners"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="下一步" />
-
-    <TextView
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:gravity="right"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_vertical_margin"
-        android:text="已有账号？登录"
-        android:textColor="@color/text_color_lv4"
-        android:textSize="@dimen/text_size_medium" />
-</LinearLayout>
+</ScrollView>

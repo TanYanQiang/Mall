@@ -53,7 +53,7 @@
             android:exported="false"
             android:label="@string/title_activity_RegisterStep1"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.user.login.RegisterStep2Activity_"
             android:configChanges="keyboardHidden|orientation|screenSize"
