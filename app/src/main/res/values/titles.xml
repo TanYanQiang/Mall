@@ -19,4 +19,5 @@
     <string name="title_activity_Settings">设置</string>
     <string name="title_activity_ScanQRcode">扫描二维码</string>
     <string name="title_activity_UserQRcode">我的二维码</string>
+    <string name="title_activity_Team">我的小伙伴</string>
 </resources>

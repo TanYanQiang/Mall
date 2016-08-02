@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_8"
+    android:background="@color/white"
+    android:minHeight="@dimen/line_height_lv1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/groupName"
+        style="@style/TextStyle.Title.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:drawableLeft="@mipmap/ic_team_arrow_right"
+        android:drawablePadding="@dimen/activity_vertical_margin"
+        tools:text="总监" />
+
+    <TextView
+        android:id="@+id/groupCount"
+        style="@style/TextStyle.Desc.Small.Gray2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        tools:text="12" />
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

@@ -170,4 +170,8 @@
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/text_color_lv3</item>
     </style>
+    <style name="TextStyle.Desc.Small.Gray2">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/text_color_lv4</item>
+    </style>
 </resources>

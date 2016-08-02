@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.NewTodayGoodsSession;
 import com.lehemobile.shopingmall.ui.common.WebViewActivity;
@@ -169,7 +170,7 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
     @Click(R.id.jifenLayout)
     void gojiFen() {
         Logger.i("积分商城");
-        WebViewActivity.intent(getContext()).url("http://www.google.com").title("积分商城").start();
+        WebViewActivity.intent(getContext()).url(AppConfig.INTEGRAL_MALL_URL).title("积分商城").start();
     }
 
 
