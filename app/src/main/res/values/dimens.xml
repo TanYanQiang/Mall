@@ -27,6 +27,9 @@
 
     <dimen name="avatar_size">80dp</dimen>
     <dimen name="avatar_borderWidth">3dp</dimen>
+    <dimen name="goods_thumb_width">120dp</dimen>
+    <dimen name="goods_thumb_height">80dp</dimen>
+    <dimen name="goods_thumb_border_width">1.5dp</dimen>
 
     <dimen name="margin_15">15dp</dimen>
     <dimen name="margin_8">8dp</dimen>

@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/orderThumb"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/goods_thumb_width"
+        android:layout_height="@dimen/goods_thumb_height"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:src="@mipmap/ic_launcher" />

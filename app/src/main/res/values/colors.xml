@@ -43,6 +43,7 @@
     <color name="btn_color_lv3_pressed">#c8190a</color>
 
     <color name="avatar_borderColor">#AAFFFFFF</color>
+    <color name="goods_thumb_borderColor">#d4d4d4</color>
 
     <color name="ucrop_color_title">@color/colorActionBarTitle</color>
     <color name="ucrop_color_toolbar">@color/colorPrimary</color>

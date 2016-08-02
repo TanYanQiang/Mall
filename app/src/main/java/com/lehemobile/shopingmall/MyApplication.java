@@ -39,7 +39,6 @@ public class MyApplication extends Application {
     private void initPicasso() {
         Picasso picasso = new Picasso.Builder(this)
                 .loggingEnabled(BuildConfig.DEBUG)
-                .indicatorsEnabled(BuildConfig.DEBUG)
                 .build();
         Picasso.setSingletonInstance(picasso);
 

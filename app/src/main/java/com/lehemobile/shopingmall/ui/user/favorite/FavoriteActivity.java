@@ -90,7 +90,7 @@ public class FavoriteActivity extends BaseActivity {
             goods.setId(i + 1);
             goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 " + i);
             goods.setPrice(100 * i);
-            goods.setThumbnail("http://s.cn.bing.net/az/hprichbg/rb/Bittermelon_ZH-CN13629728807_1920x1080.jpg");
+            goods.setThumbnail("http://a.vpimg3.com/upload/merchandise/pdc/896/936/3319229259529936896/4/020714758462-110.jpg");
             goodsList.add(goods);
         }
         pageListHelper.onLoadSuccess(goodsList);
