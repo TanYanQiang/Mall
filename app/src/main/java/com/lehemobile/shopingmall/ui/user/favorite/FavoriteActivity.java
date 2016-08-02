@@ -90,7 +90,14 @@ public class FavoriteActivity extends BaseActivity {
             goods.setId(i + 1);
             goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 " + i);
             goods.setPrice(100 * i);
-            goods.setThumbnail("http://a.vpimg3.com/upload/merchandise/pdc/896/936/3319229259529936896/4/020714758462-110.jpg");
+            goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/28/175/03023995.jpg");
+            if (i % 3 == 0) {
+                goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/29/109/31408761.jpg");
+            } else if (i % 2 == 0) {
+                goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/19/32/16159711.jpg");
+            } else if (i % 5 == 0) {
+                goods.setThumbnail("http://img30.360buyimg.com/da/jfs/t2980/287/2188733782/207324/ce09cc13/579ff5d1Ndc188521.jpg");
+            }
             goodsList.add(goods);
         }
         pageListHelper.onLoadSuccess(goodsList);

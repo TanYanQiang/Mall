@@ -62,6 +62,7 @@ public class FavoriteItemView extends RelativeLayout {
 
         Picasso.with(getContext()).load(goods.getThumbnail())
                 .resizeDimen(R.dimen.goods_thumb_width, R.dimen.goods_thumb_height)
+                .centerCrop()
                 .transform(new RoundedCornersTransformation(getResources().getDimensionPixelOffset(R.dimen.corners_small),
                         0,
                         getResources().getDimensionPixelOffset(R.dimen.goods_thumb_border_width),
