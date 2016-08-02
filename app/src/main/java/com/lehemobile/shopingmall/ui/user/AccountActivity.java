@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.LoginEvent;
@@ -20,8 +19,9 @@ import com.lehemobile.shopingmall.ui.user.distribution.UserQRCodeActivity_;
 import com.lehemobile.shopingmall.ui.user.favorite.FavoriteActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.ui.user.login.RegisterStep1Activity_;
-import com.lehemobile.shopingmall.ui.view.glide.CropCircleTransformation;
+import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
 import com.orhanobut.logger.Logger;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -85,7 +85,7 @@ public class AccountActivity extends BaseActivity {
             updateUserInfo();
             profileLayout.setVisibility(View.VISIBLE);
         } else {
-            Glide.with(this).load("").placeholder(R.mipmap.avatar_default).bitmapTransform(new CropCircleTransformation(this)).into(avatar);
+            Picasso.with(this).load(R.mipmap.avatar_default).transform(new CropCircleTransformation()).into(avatar);
             loginLayout.setVisibility(View.VISIBLE);
             profileLayout.setVisibility(View.GONE);
         }
@@ -93,9 +93,9 @@ public class AccountActivity extends BaseActivity {
 
     private void updateUserInfo() {
         User user = ConfigManager.getUser();
-        Glide.with(this).load(user.getAvatar())
+        Picasso.with(this).load(user.getAvatar())
                 .placeholder(R.mipmap.avatar_default)
-                .bitmapTransform(new CropCircleTransformation(this, getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.avatar_borderColor)))
+                .transform(new CropCircleTransformation(getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.avatar_borderColor)))
                 .into(avatar);
 
         nick.setText(user.getNick());
@@ -147,7 +147,7 @@ public class AccountActivity extends BaseActivity {
     }
 
 
-    @Click({R.id.allOrder, R.id.watingPay, R.id.watingDeliver, R.id.watingReceipt, R.id.complete,R.id.comment})
+    @Click({R.id.allOrder, R.id.watingPay, R.id.watingDeliver, R.id.watingReceipt, R.id.complete, R.id.comment})
     void goOrderList(View view) {
         if (!isLogin()) return;
         int type = 0;
@@ -165,7 +165,7 @@ public class AccountActivity extends BaseActivity {
                 type = 4;
                 break;
             case R.id.comment:
-                type =5;
+                type = 5;
                 break;
             case R.id.allOrder:
             default:

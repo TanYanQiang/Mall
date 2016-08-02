@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Order;
 import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo;
@@ -18,8 +16,6 @@ import com.orhanobut.logger.Logger;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
 
 /**
  * Created by tanyq on 22/7/16.

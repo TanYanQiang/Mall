@@ -8,8 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
+import com.squareup.picasso.Picasso;
 
 public class GoodsDetailScrollingActivity extends AppCompatActivity {
 
@@ -30,9 +30,9 @@ public class GoodsDetailScrollingActivity extends AppCompatActivity {
             }
         });
 
-        Glide.with(this)
+        Picasso.with(this)
                 .load("http://a.appsimg.com/upload/merchandise/pdc/035/836/5935820670513836035/0/1804946-6_1440x8000_90.jpg")
-                .crossFade()
+
                 .into(imageView);
 
     }

@@ -7,9 +7,9 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Goods;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -40,6 +40,7 @@ public class GoodsItemView extends LinearLayout {
     }
 
     public void bindData(Goods goods){
-        Glide.with(getContext()).load(goods.getThumbnail()).into(imageView);
+//        Glide.with(getContext()).load(goods.getThumbnail()).into(imageView);
+        Picasso.with(getContext()).load(goods.getThumbnail()).into(imageView);
     }
 }

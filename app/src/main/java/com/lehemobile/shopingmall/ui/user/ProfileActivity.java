@@ -4,18 +4,20 @@ import android.Manifest;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
+import com.squareup.picasso.Picasso;
 import com.tgh.devkit.core.utils.PermissionHelper;
 import com.tgh.devkit.core.utils.PermissionUtils;
 import com.tgh.devkit.pickimage.PickImageHelper;
@@ -25,7 +27,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by  on 21/7/16.
@@ -88,7 +89,13 @@ public class ProfileActivity extends BaseActivity implements ActivityCompat.OnRe
 
 
     private void updateAvatar() {
-        Glide.with(this).load(user.getAvatar()).bitmapTransform(new CropCircleTransformation(this)).into(avatar);
+        if(TextUtils.isEmpty(user.getAvatar())){
+
+            Picasso.with(this).load(R.mipmap.avatar_default).transform(new CropCircleTransformation()).into(avatar);
+            return;
+        }
+        Picasso.with(this).load(user.getAvatar()).transform(new CropCircleTransformation()).into(avatar);
+
     }
 
     private void updateNick() {

@@ -11,18 +11,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.utils.DialogUtils;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import de.greenrobot.event.EventBus;
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 
 /**
  * Created by tanyq on 23/7/16.
@@ -60,8 +60,8 @@ public class FavoriteItemView extends RelativeLayout {
         goodsName.setText(goods.getName());
         goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPrice()));
 
-        Glide.with(getContext()).load(goods.getThumbnail())
-                .bitmapTransform(new CropSquareTransformation(getContext()))
+        Picasso.with(getContext()).load(goods.getThumbnail())
+                .transform(new CropSquareTransformation())
                 .into(orderThumb);
     }
 

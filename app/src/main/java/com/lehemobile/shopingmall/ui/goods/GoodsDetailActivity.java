@@ -6,22 +6,19 @@ import android.graphics.Paint;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
-import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
+import com.squareup.picasso.Picasso;
 import com.tgh.devkit.dialog.DialogBuilder;
 import com.tgh.devkit.viewpager.InfiniteViewPager;
 import com.tgh.devkit.viewpager.adapter.BasePagerAdapter;
@@ -33,7 +30,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,7 +214,7 @@ public class GoodsDetailActivity extends BaseActivity {
         @Override
         protected void bindData(View view, String item) {
             ImageView imageView = (ImageView) view;
-            Glide.with(context).load(item).into(imageView);
+            Picasso.with(context).load(item).into(imageView);
         }
 
         @Override

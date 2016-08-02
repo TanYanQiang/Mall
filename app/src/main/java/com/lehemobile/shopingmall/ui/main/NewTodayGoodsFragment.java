@@ -1,14 +1,10 @@
 package com.lehemobile.shopingmall.ui.main;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lehemobile.shopingmall.R;
@@ -16,14 +12,11 @@ import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.NewTodayGoodsSession;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
-import com.lehemobile.shopingmall.ui.user.favorite.FavoriteItemView;
-import com.lehemobile.shopingmall.ui.user.favorite.FavoriteItemView_;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 

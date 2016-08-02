@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.LoginEvent;
@@ -16,7 +15,9 @@ import com.lehemobile.shopingmall.event.LogoutEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
 import com.lehemobile.shopingmall.ui.user.AccountActivity_;
+import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
 import com.orhanobut.logger.Logger;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -80,12 +81,12 @@ public class NavigationView extends FrameLayout {
     private void updateUI() {
         if (ConfigManager.isLogin()) {
             User user = ConfigManager.getUser();
-            Glide.with(getContext()).load(user.getAvatar())
+            Picasso.with(getContext()).load(user.getAvatar())
                     .placeholder(R.mipmap.avatar_default)
-                    .bitmapTransform(new com.lehemobile.shopingmall.ui.view.glide.CropCircleTransformation(getContext(), getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.avatar_borderColor)))
+                    .transform(new CropCircleTransformation( getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.avatar_borderColor)))
                     .into(avatar);
         } else {
-            Glide.with(getContext()).load("").placeholder(R.mipmap.ic_launcher).into(avatar);
+            Picasso.with(getContext()).load(R.mipmap.avatar_default).into(avatar);
         }
     }
 

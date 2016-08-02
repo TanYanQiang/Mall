@@ -8,14 +8,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Order;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
+
 
 /**
  * Created by tanyq on 22/7/16.
@@ -56,8 +57,8 @@ public class OrderGoodsInfo extends RelativeLayout {
         goodsPrice.setText(getResources().getString(R.string.label_order_price, order.getGoods().getPrice()));
         count.setText(getResources().getString(R.string.label_order_count, order.getCount()));
 
-        Glide.with(getContext()).load(order.getGoods().getThumbnail())
-                .bitmapTransform(new CropSquareTransformation(getContext()))
+        Picasso.with(getContext()).load(order.getGoods().getThumbnail())
+                .transform(new CropSquareTransformation())
                 .into(orderThumb);
     }
 

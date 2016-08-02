@@ -4,14 +4,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Created by  on 17/7/16.
@@ -35,7 +33,7 @@ public class SetupActivity extends BaseActivity {
     @AfterViews
     void init() {
         String url = "http://s.cn.bing.net/az/hprichbg/rb/WatchmanPeak_ZH-CN11491247109_1920x1080.jpg";
-        Glide.with(this).load(url)
+        Picasso.with(this).load(url)
                 .into(bg);
 
         handler.sendEmptyMessageDelayed(WHAT_SETUP, 1500);

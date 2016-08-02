@@ -4,11 +4,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.utils.DialogUtils;
+import com.squareup.picasso.Picasso;
 import com.tgh.devkit.core.utils.Utils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -44,7 +44,7 @@ public class SettingActivity extends BaseActivity {
     @Click
     @Background
     void clearCache() {
-        Glide.get(this).clearDiskCache();
+//        Picasso
         showClearCacheToast();
     }
 

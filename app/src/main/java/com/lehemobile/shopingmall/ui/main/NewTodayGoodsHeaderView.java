@@ -14,15 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.NewTodayGoodsSession;
 import com.lehemobile.shopingmall.ui.common.WebViewActivity;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
 import com.orhanobut.logger.Logger;
-import com.tgh.devkit.core.primitives.Ints;
-import com.tgh.devkit.core.utils.DebugLog;
+import com.squareup.picasso.Picasso;
 import com.tgh.devkit.viewpager.InfiniteViewPager;
 import com.tgh.devkit.viewpager.adapter.BasePagerAdapter;
 import com.tgh.devkit.viewpager.adapter.InfinitePagerAdapter;
@@ -184,7 +182,7 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
         @Override
         protected void bindData(View view, Goods item) {
             ImageView imageView = (ImageView) view;
-            Glide.with(context).load(item.getThumbnail()).into(imageView);
+            Picasso.with(context).load(item.getThumbnail()).into(imageView);
         }
 
         @Override
