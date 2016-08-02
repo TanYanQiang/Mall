@@ -171,7 +171,7 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
     @Click(R.id.jifenLayout)
     void gojiFen() {
         Logger.i("积分商城");
-        WebViewActivity.intent(getContext()).url("http://www.baidu.com").title("积分商城").start();
+        WebViewActivity.intent(getContext()).url("http://www.google.com").title("积分商城").start();
     }
 
 
