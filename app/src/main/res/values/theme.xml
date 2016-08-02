@@ -12,7 +12,6 @@
         <item name="actionMenuTextAppearance">@style/MyActionBarMenu</item>
         <item name="actionMenuTextColor">@color/colorActionBarTitle</item>
         <item name="homeAsUpIndicator">@mipmap/ic_back</item>
-        <item name="android:windowContentOverlay">@drawable/divider_horizontal</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
@@ -49,8 +48,10 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar.FullScreen">
