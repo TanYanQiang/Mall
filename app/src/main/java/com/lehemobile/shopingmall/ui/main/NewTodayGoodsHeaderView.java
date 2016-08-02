@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.NewTodayGoodsSession;
+import com.lehemobile.shopingmall.ui.common.WebViewActivity;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.primitives.Ints;
@@ -170,6 +171,7 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
     @Click(R.id.jifenLayout)
     void gojiFen() {
         Logger.i("积分商城");
+        WebViewActivity.intent(getContext()).url("http://www.baidu.com").title("积分商城").start();
     }
 
 

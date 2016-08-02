@@ -27,7 +27,12 @@ public class DialogUtils {
         return alert(activity, st, sm, leftString, leftListener, rightString, rightListener);
 
     }
-
+    public static Dialog alert(
+            Activity activity,
+            String message,
+            @StringRes int centerRes, final View.OnClickListener centerListener){
+        return alert(activity,0,message,centerRes,centerListener);
+    }
     public static Dialog alert(Activity activity,
                                String title, View customeView,
                                @StringRes int leftString, final View.OnClickListener leftListener,

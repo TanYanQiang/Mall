@@ -187,9 +187,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.goods.GoodsDetailScrollingActivity"
-            android:label="@string/title_activity_goods_detail_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".ui.common.WebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:label="@string/app_title_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
     </application>
 
 </manifest>
