@@ -1,9 +1,11 @@
 package com.lehemobile.shopingmall.ui.user.address;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Address;
+import com.lehemobile.shopingmall.utils.DialogUtils;
+import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -27,11 +31,13 @@ public class AddressListItemView extends RelativeLayout {
         void onEidtClickListener(Address address);
 
         void onCheckSelectdListener(Address address);
+
+        void onDeleteClickListener(Address address);
     }
 
 
     @ViewById
-    CheckBox checkbox;
+    CheckBox isDefault;
 
     @ViewById
     TextView name;
@@ -39,8 +45,6 @@ public class AddressListItemView extends RelativeLayout {
     @ViewById
     TextView mobile;
 
-    @ViewById
-    TextView isDefault;
 
     @ViewById(R.id.address)
     TextView addressTv;
@@ -72,11 +76,21 @@ public class AddressListItemView extends RelativeLayout {
 
     @AfterViews
     void init() {
-        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        isDefault.setOnClickListener(new OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            public void onClick(View view) {
+                boolean checked = isDefault.isChecked();
+                if (!checked) {
+                    isDefault.setChecked(true);
+                    return;
+                }
+                isDefault.setChecked(checked);
                 if (onAddressListListener != null) {
-                    address.setDefault(b);
+                    address.setDefault(checked);
+                    Logger.i("address " + address.getId() + ", default:" + checked);
+                    //TODO 调用接口设置默认值
+
                     onAddressListListener.onCheckSelectdListener(address);
                 }
             }
@@ -86,8 +100,8 @@ public class AddressListItemView extends RelativeLayout {
     public void bindData(Address address) {
         this.address = address;
 
-        isDefault.setVisibility(address.isDefault() ? VISIBLE : GONE);
-        checkbox.setChecked(address.isDefault());
+
+        isDefault.setChecked(address.isDefault());
 
         name.setText(address.getName());
         mobile.setText(address.getMobile());
@@ -101,10 +115,26 @@ public class AddressListItemView extends RelativeLayout {
 
     }
 
-    @Click(R.id.edit)
+    @Click(R.id.editBtn)
     void onEdit() {
         if (onAddressListListener != null) {
             onAddressListListener.onEidtClickListener(address);
         }
+    }
+
+    @Click(R.id.deleteBtn)
+    void onDelete() {
+
+        DialogUtils.alert((Activity) getContext(), "", "确定要删除该地址?", android.R.string.cancel, null,
+                android.R.string.ok, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (onAddressListListener != null) {
+                            onAddressListListener.onDeleteClickListener(address);
+                        }
+                    }
+                });
+
+
     }
 }

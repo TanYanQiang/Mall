@@ -22,6 +22,7 @@ import com.orhanobut.logger.Logger;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.OptionsItem;
@@ -37,7 +38,6 @@ import java.util.List;
  * Created by   on 22/7/16.
  */
 @EActivity(R.layout.activity_address_list)
-@OptionsMenu(R.menu.menu_address)
 public class AddressListsActivity extends BaseActivity {
 
     public static final int REQUEST_ADD_CODE = 1;
@@ -72,40 +72,14 @@ public class AddressListsActivity extends BaseActivity {
         pageListHelper.initStart();
 
 
-        //注册长按删除
-        listView.getRefreshableView().setOnCreateContextMenuListener(this);
     }
 
-    @OptionsItem(R.id.action_add_address)
+    @Click(R.id.action_add_address)
     void addAddress() {
         Logger.i("新增收货地址");
         AddAddressActivity_.intent(this).startForResult(REQUEST_ADD_CODE);
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        menu.add(0, 1, 0, "删除");
-        super.onCreateContextMenu(menu, v, menuInfo);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        if (item.getItemId() == 1) {
-            //
-            final Address address = (Address) listView.getRefreshableView().getAdapter().getItem(menuInfo.position);
-            DialogUtils.alert(this, "删除收货地址", "确定要删除该地址?", android.R.string.cancel, null,
-                    android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            deleteAddress(address);
-                        }
-                    });
-
-
-        }
-        return super.onContextItemSelected(item);
-    }
 
     private void deleteAddress(Address address) {
         //TODO 删除
@@ -154,7 +128,17 @@ public class AddressListsActivity extends BaseActivity {
                 @Override
                 public void onCheckSelectdListener(Address address) {
                     Logger.i("check Selected:" + address.getFullAddress());
-//                    pageListHelper.notifyDataSetChanged();
+
+                    ArrayList<Address> data = pageListHelper.getData();
+                    for (Address ad : data) {
+                        ad.setDefault(ad.equals(address));
+                    }
+                    pageListHelper.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onDeleteClickListener(Address address) {
+                    deleteAddress(address);
                 }
             });
             view.bindData(item);

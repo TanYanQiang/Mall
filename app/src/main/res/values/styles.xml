@@ -45,7 +45,7 @@
     </style>
 
 
-    <style name="Button">
+    <style name="Button" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:gravity">center</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/line_height_lv2</item>
@@ -76,6 +76,11 @@
     <style name="Button.RedEmptyCorners" parent="Button">
         <item name="android:background">@drawable/btn_red_empty_corners</item>
         <item name="android:textColor">@color/text_red</item>
+    </style>
+
+    <style name="Button.GrayEmptyCorners" parent="Button">
+        <item name="android:background">@drawable/btn_gray_empty_corners</item>
+        <item name="android:textColor">@color/btn_grat_text</item>
     </style>
 
     <style name="Button.WhiteEmpty" parent="Button">
@@ -155,6 +160,7 @@
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/text_color_lv2</item>
     </style>
+
     <style name="TextStyle.Desc.Small.Gray">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/text_color_lv3</item>

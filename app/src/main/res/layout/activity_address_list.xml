@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
     android:orientation="vertical">
-
+    <Button
+        android:id="@+id/action_add_address"
+        style="@style/Button.NormalCorners"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_red_solid"
+        android:layout_margin="0dp"
+        android:layout_alignParentBottom="true"
+        android:text="新增收货地址" />
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listView"
         style="@style/ListViewStyle"
+        android:layout_above="@id/action_add_address"
         android:divider="@color/transparent"
-        android:dividerHeight="@dimen/activity_vertical_margin" />
+        android:dividerHeight="@dimen/margin_8" />
 
     <TextView
         android:id="@+id/tv_empty"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/line_height_lv1"
         android:layout_gravity="center"
         android:text="你还没有收货地址(⊙o⊙)哦！"
         android:textStyle="bold"
         android:visibility="gone" />
 
-</FrameLayout>
+
+</RelativeLayout>
