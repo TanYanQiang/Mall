@@ -40,7 +40,6 @@ public class MyApplication extends Application {
         Picasso picasso = new Picasso.Builder(this)
                 .loggingEnabled(BuildConfig.DEBUG)
                 .indicatorsEnabled(BuildConfig.DEBUG)
-//                .downloader(new OkHttpDownloader(IO.getCacheDir(this, AppConfig.IMAGE_CACHE_DIR)))
                 .build();
         Picasso.setSingletonInstance(picasso);
 
