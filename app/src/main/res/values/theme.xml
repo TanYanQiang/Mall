@@ -12,6 +12,7 @@
         <item name="actionMenuTextAppearance">@style/MyActionBarMenu</item>
         <item name="actionMenuTextColor">@color/colorActionBarTitle</item>
         <item name="homeAsUpIndicator">@mipmap/ic_back</item>
+        <item name="android:windowContentOverlay">@drawable/divider_horizontal</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

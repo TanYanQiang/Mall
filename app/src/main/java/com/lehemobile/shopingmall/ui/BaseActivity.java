@@ -95,6 +95,7 @@ public class BaseActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setElevation(2.0f);
     }
 
     public void initActionBar(Toolbar toolbar) {

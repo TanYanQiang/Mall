@@ -17,7 +17,7 @@
         style="@style/ListViewStyle"
         android:layout_above="@id/action_add_address"
         android:divider="@color/transparent"
-        android:dividerHeight="@dimen/margin_8" />
+        android:dividerHeight="0dp" />
 
     <TextView
         android:id="@+id/tv_empty"
