@@ -2,81 +2,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical">
+    android:divider="@drawable/divider_horizontal"
+    android:orientation="vertical"
+    android:showDividers="middle">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_box"
+        android:background="#f9f9f9"
         android:gravity="center_vertical"
+        android:minHeight="@dimen/line_height_lv1"
         android:orientation="horizontal"
-        android:padding="@dimen/margin_8"
-        android:paddingRight="@dimen/margin_8">
+        android:padding="@dimen/activity_vertical_margin">
 
         <TextView
             style="@style/TextStyle.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="收货人:" />
+            android:text="收货人" />
 
         <com.tgh.devkit.view.ClearableEditText
             android:id="@+id/name"
+            style="@style/ActionLine.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_8"
+            android:layout_marginLeft="24dp"
             android:background="@color/transparent"
             android:hint="请输入收货人姓名"
-            android:singleLine="true"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:padding="0dp"
+            android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_box"
+        android:background="#f9f9f9"
         android:gravity="center_vertical"
+        android:minHeight="@dimen/line_height_lv1"
         android:orientation="horizontal"
-        android:padding="@dimen/margin_8"
-        android:paddingRight="@dimen/margin_8">
+        android:padding="@dimen/activity_vertical_margin">
 
         <TextView
             style="@style/TextStyle.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="联系电话:" />
+            android:text="联系电话" />
 
         <com.tgh.devkit.view.ClearableEditText
             android:id="@+id/mobile"
+            style="@style/ActionLine.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_8"
             android:background="@color/transparent"
             android:hint="请输入收货人电话"
             android:inputType="number"
-            android:singleLine="true"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:padding="0dp"
+            android:singleLine="true" />
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/addressProvince"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_box"
+        android:background="#f9f9f9"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/line_height_lv1"
         android:orientation="horizontal"
-        android:padding="@dimen/margin_8"
-        android:paddingRight="@dimen/margin_8">
+        android:padding="@dimen/activity_vertical_margin">
 
         <TextView
             android:id="@+id/label"
@@ -84,11 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="所在区域:" />
+            android:text="所在区域" />
 
         <ImageView
             android:id="@+id/arrow"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -105,38 +97,37 @@
             android:layout_toLeftOf="@id/arrow"
             android:layout_toRightOf="@id/label"
             android:hint="请选择所在区域"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:padding="0dp"
+            android:textColor="@color/text_color_lv2"
+            android:textColorHint="@color/text_color_lv4"
+            android:textSize="@dimen/text_size_medium" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_box"
+        android:background="#f9f9f9"
         android:gravity="center_vertical"
+        android:minHeight="@dimen/line_height_lv1"
         android:orientation="horizontal"
-        android:padding="@dimen/margin_8"
-        android:paddingRight="@dimen/margin_8">
+        android:padding="@dimen/activity_vertical_margin">
 
         <TextView
             style="@style/TextStyle.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="详细地址:" />
+            android:text="详细地址" />
 
         <com.tgh.devkit.view.ClearableEditText
             android:id="@+id/fullAddress"
+            style="@style/ActionLine.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_8"
             android:background="@color/transparent"
             android:hint="请输入详细地址"
-            android:singleLine="true"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv2" />
+            android:padding="0dp"
+            android:singleLine="true" />
     </LinearLayout>
 
     <Button
@@ -144,6 +135,6 @@
         style="@style/Button.NormalCorners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="30dp"
         android:text="保存" />
 </LinearLayout>

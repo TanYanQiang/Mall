@@ -96,8 +96,7 @@ public class AddAddressActivity extends BaseActivity {
     }
 
     private void addAddress(Address address) {
-        //TODO 添加收货地址
-
+        //TODO 添加收货地
         onFinish(address);
     }
 
@@ -105,8 +104,6 @@ public class AddAddressActivity extends BaseActivity {
         //TODO 编辑收货地
 
         onFinish(address);
-
-
 
     }
 
