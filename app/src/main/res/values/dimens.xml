@@ -20,6 +20,7 @@
 
 
     <dimen name="line_height_lv1">52dp</dimen>
+    <dimen name="account_line_height">60dp</dimen>
     <dimen name="line_height_lv2">40dp</dimen>
     <dimen name="text_size_lv1">17sp</dimen>
     <dimen name="text_size_lv2">17sp</dimen>

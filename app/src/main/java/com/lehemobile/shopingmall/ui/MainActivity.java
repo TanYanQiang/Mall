@@ -2,7 +2,6 @@ package com.lehemobile.shopingmall.ui;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
 import com.lehemobile.shopingmall.ui.main.MainGoodsFragment_;
 import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment_;
@@ -31,9 +31,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @ViewById
     Toolbar toolbar;
-
     @ViewById
-    TextView cityTv;
+    TextView region;
 
     @ViewById(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -50,8 +49,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @AfterViews
     void init() {
-        cityTv = (TextView) toolbar.findViewById(R.id.cityTv);
-        cityTv.setText("北京");
+//        region = (TextView) toolbar.findViewById(R.id.region);
+        region.setText(ConfigManager.getRegion());
+        region.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseRegion();
+            }
+        });
         initActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,9 +87,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
-    @Click(R.id.cityTv)
-    void chooseCity() {
-        Logger.i("click choose City");
+    @Click(R.id.region)
+    void chooseRegion() {
+        Logger.i("click choose chooseRegion");
     }
 
     @OptionsItem(R.id.action_search)

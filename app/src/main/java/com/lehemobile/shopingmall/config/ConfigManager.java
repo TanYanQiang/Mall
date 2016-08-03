@@ -12,6 +12,7 @@ public class ConfigManager {
 
     public static final String USER_ID = "user_id";
     public static final String USER = "user";
+    public static final String REGION = "region";
 
     private static User _user;
 
@@ -51,6 +52,14 @@ public class ConfigManager {
             _user = getDefaultBindVersionStore().getObject(USER, User.class);
         }
         return _user;
+    }
+
+    public static String getRegion() {
+        return getDefaultBindVersionStore().getString(REGION, "上海");
+    }
+
+    public static void setRegion(String region) {
+        getDefaultBindVersionStore().save(REGION, region);
     }
 
     public static boolean isLogin() {

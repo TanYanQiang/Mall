@@ -212,7 +212,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:minHeight="60dp"
+                android:minHeight="@dimen/account_line_height"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_vertical_margin"
                 android:paddingRight="@dimen/activity_vertical_margin">
@@ -316,7 +316,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:minHeight="60dp"
+                android:minHeight="@dimen/account_line_height"
                 android:orientation="horizontal"
 
                 android:paddingLeft="@dimen/activity_vertical_margin"
@@ -409,7 +409,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:minHeight="@dimen/line_height_lv1"
+                android:minHeight="@dimen/account_line_height"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_vertical_margin"
                 android:paddingRight="@dimen/activity_vertical_margin">
@@ -494,7 +494,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:minHeight="@dimen/line_height_lv1"
+                android:minHeight="@dimen/account_line_height"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_vertical_margin"
                 android:paddingRight="@dimen/activity_vertical_margin">
@@ -508,7 +508,8 @@
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/ic_account_ranking"
                     android:gravity="center"
-                    android:text="积分排行"  android:visibility="gone"/>
+                    android:text="积分排行"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/notice"
@@ -536,7 +537,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-                        <Space
+
+                <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />

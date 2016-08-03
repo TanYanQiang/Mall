@@ -35,7 +35,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/cityTv"
+                    android:id="@+id/region"
                     style="@style/TextStyle.Title.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
