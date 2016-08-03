@@ -11,6 +11,7 @@ import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tgh.devkit.core.utils.IO;
 
 
@@ -28,7 +29,7 @@ public class MyApplication extends Application {
         instance = this;
         initPicasso();
         initLogger();
-
+        initBugly();
         Logger.i("MyApplication init");
     }
 
@@ -46,6 +47,11 @@ public class MyApplication extends Application {
 
     private void initLogger() {
         Logger.init("ShopingTAG").logLevel(BuildConfig.DEBUG ? LogLevel.FULL : LogLevel.NONE);
+    }
+
+    private void initBugly() {
+        CrashReport.UserStrategy userStrategy = new CrashReport.UserStrategy(this);
+        CrashReport.initCrashReport(this, BuildConfig.buglyAppId, BuildConfig.DEBUG);
     }
 
     public void onUserLogin(User user) {
