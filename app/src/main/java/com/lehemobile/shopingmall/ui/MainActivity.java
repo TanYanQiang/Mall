@@ -3,6 +3,7 @@ package com.lehemobile.shopingmall.ui;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -93,7 +94,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     String[] titles = new String[]{"今日上线", "化妆", "护肤", "美体", "即将上线"};
 
-    private class SectionPagerAdapter extends FragmentPagerAdapter {
+    private class SectionPagerAdapter extends FragmentStatePagerAdapter {
 
 
         public SectionPagerAdapter(FragmentManager fm) {

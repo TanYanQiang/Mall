@@ -3,6 +3,7 @@ package com.lehemobile.shopingmall.ui.order;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.ui.BaseActivity;
@@ -41,7 +42,7 @@ public class OrderListActivity extends BaseActivity {
         viewPager.setCurrentItem(type % tabs.length);
     }
 
-    private class SectionPagerAdapter extends FragmentPagerAdapter {
+    private class SectionPagerAdapter extends FragmentStatePagerAdapter {
 
 
         public SectionPagerAdapter(FragmentManager fm) {
