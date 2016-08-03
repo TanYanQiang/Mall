@@ -109,6 +109,8 @@ public class TeamUserListActivity extends BaseActivity {
 
     private void loadData() {
         showLoading(R.string.loading);
+
+        //// TODO: 调用接口加载我的小伙伴
         data = new ArrayList<>();
 
         TeamUserSession session1 = new TeamUserSession();
@@ -116,7 +118,7 @@ public class TeamUserListActivity extends BaseActivity {
         List<User> user1 = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             User user = new User();
-            user.setNick("小丸子"+i);
+            user.setNick("小丸子" + i);
             user.setAvatar("http://img5.imgtn.bdimg.com/it/u=1998714244,2538311333&fm=206&gp=0.jpg");
             user1.add(user);
         }
@@ -130,7 +132,7 @@ public class TeamUserListActivity extends BaseActivity {
         List<User> user2 = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             User user = new User();
-            user.setNick("流川枫"+i);
+            user.setNick("流川枫" + i);
             user.setAvatar("http://img3.imgtn.bdimg.com/it/u=3681911204,887928701&fm=206&gp=0.jpg");
             user2.add(user);
         }
@@ -143,7 +145,7 @@ public class TeamUserListActivity extends BaseActivity {
         List<User> user3 = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             User user = new User();
-            user.setNick("樱木花道"+i);
+            user.setNick("樱木花道" + i);
             user.setAvatar("http://img4.imgtn.bdimg.com/it/u=3821141571,2783513459&fm=206&gp=0.jpg");
             user3.add(user);
         }
@@ -157,7 +159,7 @@ public class TeamUserListActivity extends BaseActivity {
         List<User> user4 = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             User user = new User();
-            user.setNick("花伦"+i);
+            user.setNick("花伦" + i);
             user.setAvatar("http://img4.imgtn.bdimg.com/it/u=1685028048,2784143540&fm=21&gp=0.jpg");
             user4.add(user);
         }
