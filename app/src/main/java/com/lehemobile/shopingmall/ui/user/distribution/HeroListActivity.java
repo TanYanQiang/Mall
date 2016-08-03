@@ -117,10 +117,10 @@ public class HeroListActivity extends BaseActivity {
         List<User> users = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             User user = new User();
-            user.setNick("流川枫流川枫" + i);
+            user.setNick("樱木花道VS流川枫" + i);
             user.setAvatar("http://img3.imgtn.bdimg.com/it/u=3681911204,887928701&fm=206&gp=0.jpg");
             user.setRank(String.valueOf(i + 1));
-            user.setCommission(String.valueOf((i + 1) * 1000));
+            user.setCommission(String.valueOf((i + 1) * 10000));
             users.add(user);
         }
         pageListHelper.onLoadSuccess(users);
