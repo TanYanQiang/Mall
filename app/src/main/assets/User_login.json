@@ -8,6 +8,8 @@
     "user_gender": 1,
     "user_mobile": "18600950000",
     "user_register_time": "2016-6-1",
-    "user_parent_name": "肖先生"
+    "user_parent_name": "肖先生",
+    "user_rank": "60",
+    "user_commission": "6000"
   }
 }

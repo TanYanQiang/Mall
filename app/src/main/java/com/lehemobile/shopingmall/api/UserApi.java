@@ -35,6 +35,8 @@ public class UserApi {
             user.setMobile(jobj.optString("user_mobile"));
             user.setRegisterTime(jobj.optString("user_register_time"));
             user.setParentName(jobj.optString("user_parent_name"));
+            user.setRank(jobj.optString("user_rank"));
+            user.setCommission(jobj.optString("user_commission"));
             return user;
         }
     };

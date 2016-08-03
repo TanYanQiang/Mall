@@ -26,4 +26,7 @@
     <string name="permission_storage_msg">请允许芮娜皇宫APP访问您设备上的照片、媒体内容和文件权限，否则将会部导致分功能无法使用！</string>
     <string name="permission_camera_msg">请允许芮娜皇宫APP访问您照相机权限，否则将会部导致分功能无法使用！</string>
     <string name="loading">正在加载数据...</string>
+
+    <string name="label_my_rank">我的名次: %1$s</string>
+    <string name="label_my_commission">佣金总金额: %1$s</string>
 </resources>

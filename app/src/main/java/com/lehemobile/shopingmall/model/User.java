@@ -14,6 +14,8 @@ public class User implements Serializable {
     private String registerTime;
     private String parentName;
     private String qrCode;
+    private String rank; //排名
+    private String commission; //佣金
 
     public int getUserId() {
         return userId;
@@ -77,5 +79,21 @@ public class User implements Serializable {
 
     public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    public String getCommission() {
+        return commission;
+    }
+
+    public void setCommission(String commission) {
+        this.commission = commission;
     }
 }

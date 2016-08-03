@@ -10,7 +10,7 @@
 
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00ffffff</color>
-    <color name="line_color">#e5e5e5</color>
+    <color name="line_color">@color/divider_color</color>
 
     <color name="color_btn_pressed">#e5be64</color>
 
@@ -43,6 +43,7 @@
     <color name="btn_color_lv3_pressed">#c8190a</color>
 
     <color name="avatar_borderColor">#AAFFFFFF</color>
+    <color name="hero_avatar_borderColor">#AAFFFFFF</color>
     <color name="goods_thumb_borderColor">#d4d4d4</color>
     <color name="team_avatar_borderColor">#dadada</color>
 

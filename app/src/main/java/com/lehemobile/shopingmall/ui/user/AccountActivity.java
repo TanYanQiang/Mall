@@ -15,6 +15,7 @@ import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
 import com.lehemobile.shopingmall.ui.order.OrderListActivity_;
 import com.lehemobile.shopingmall.ui.user.address.AddressListsActivity_;
+import com.lehemobile.shopingmall.ui.user.distribution.HeroListActivity_;
 import com.lehemobile.shopingmall.ui.user.distribution.UserQRCodeActivity_;
 import com.lehemobile.shopingmall.ui.user.distribution.team.TeamUserListActivity_;
 import com.lehemobile.shopingmall.ui.user.favorite.FavoriteActivity_;
@@ -182,6 +183,7 @@ public class AccountActivity extends BaseActivity {
         TeamUserListActivity_.intent(this).start();
     }
 
+
     @Click
     void favorite() {
         if (!isLogin()) return;
@@ -194,7 +196,11 @@ public class AccountActivity extends BaseActivity {
         AddressListsActivity_.intent(this).start();
     }
 
-
+    @Click
+    void ranking(){
+        if (!isLogin()) return;
+        HeroListActivity_.intent(this).start();
+    }
 
     public void onEventMainThread(LoginEvent event) {
         Logger.i("Login Success");
