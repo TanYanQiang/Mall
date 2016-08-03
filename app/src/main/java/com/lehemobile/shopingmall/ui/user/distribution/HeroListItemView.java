@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,9 @@ public class HeroListItemView extends LinearLayout {
     @ViewById
     ImageView champion;
 
+    @ViewById
+    View divider;
+
     public HeroListItemView(Context context) {
         super(context);
     }
@@ -48,7 +52,8 @@ public class HeroListItemView extends LinearLayout {
     }
 
     public void bindData(User user) {
-
+        setBackgroundResource(R.color.white);
+        divider.setVisibility(VISIBLE);
         commission.setTextColor(getResources().getColor(R.color.text_color_lv2));
         nick.setTextColor(getResources().getColor(R.color.text_color_lv2));
         ranking.setTextColor(getResources().getColor(R.color.text_color_lv2));
