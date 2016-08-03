@@ -197,7 +197,7 @@ public class AccountActivity extends BaseActivity {
     }
 
     @Click
-    void ranking(){
+    void heroList(){
         if (!isLogin()) return;
         HeroListActivity_.intent(this).start();
     }

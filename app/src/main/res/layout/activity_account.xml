@@ -508,7 +508,7 @@
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/ic_account_ranking"
                     android:gravity="center"
-                    android:text="积分排行" />
+                    android:text="积分排行"  android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/notice"
@@ -536,6 +536,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
+                        <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
 
             </LinearLayout>
         </LinearLayout>
