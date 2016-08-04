@@ -85,14 +85,13 @@ public class Address implements Serializable {
     }
 
     public String getRegion() {
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(province.getName());
-        stringBuffer.append(city.getName());
-        stringBuffer.append(district.getName());
-        return stringBuffer.toString();
+        return province.getName() +
+                city.getName() +
+                district.getName();
     }
-    public String getFullAddress(){
-        return getRegion()+getDetailedAddress();
+
+    public String getFullAddress() {
+        return getRegion() + getDetailedAddress();
     }
 
     @Override
