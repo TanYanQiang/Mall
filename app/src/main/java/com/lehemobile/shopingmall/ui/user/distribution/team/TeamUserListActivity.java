@@ -35,7 +35,7 @@ public class TeamUserListActivity extends BaseActivity {
     @ViewById
     EditText searchEdit;
 
-    private List<TeamUserSession> data;
+    private List<TeamUserSession> teamUserSessions;
     private TeamUserAdapter teamUserAdapter;
 
 
@@ -67,11 +67,11 @@ public class TeamUserListActivity extends BaseActivity {
     }
 
     private void doSearch() {
-        if (data == null || data.isEmpty()) return;
+        if (teamUserSessions == null || teamUserSessions.isEmpty()) return;
 
         String keyword = getInputText(searchEdit);
         if (TextUtils.isEmpty(keyword)) {
-            teamUserAdapter.setData(data);
+            teamUserAdapter.setData(teamUserSessions);
         } else {
             List<TeamUserSession> searchData = searchByName(keyword);
             teamUserAdapter.setData(searchData);
@@ -83,13 +83,12 @@ public class TeamUserListActivity extends BaseActivity {
 
         List<TeamUserSession> result = new ArrayList<>();
         if (teamUserAdapter != null) {
-            List<TeamUserSession> sourceData = data;
-            for (int i = 0; i < sourceData.size(); i++) {
-                TeamUserSession session = sourceData.get(i);
+
+            for (int i = 0; i < teamUserSessions.size(); i++) {
+                TeamUserSession session = teamUserSessions.get(i);
                 List<User> users = session.getUsers();
 
                 List<User> searchUser = new ArrayList<>();
-
                 for (int j = 0; j < users.size(); j++) {
                     User user = users.get(j);
                     String nick = user.getNick();
@@ -98,9 +97,12 @@ public class TeamUserListActivity extends BaseActivity {
                         searchUser.add(user);
                     }
                 }
+
                 if (!searchUser.isEmpty()) {
-                    session.setUsers(searchUser);
-                    result.add(session);
+                    TeamUserSession resultSession = new TeamUserSession();
+                    resultSession.setGroupName(session.getGroupName());
+                    resultSession.setUsers(searchUser);
+                    result.add(resultSession);
                 }
             }
         }
@@ -111,7 +113,7 @@ public class TeamUserListActivity extends BaseActivity {
         showLoading(R.string.loading);
 
         //// TODO: 调用接口加载我的小伙伴
-        data = new ArrayList<>();
+        teamUserSessions = new ArrayList<>();
 
         TeamUserSession session1 = new TeamUserSession();
         session1.setGroupName("总监");
@@ -124,7 +126,7 @@ public class TeamUserListActivity extends BaseActivity {
         }
         session1.setUsers(user1);
 
-        data.add(session1);
+        teamUserSessions.add(session1);
 
 
         TeamUserSession session2 = new TeamUserSession();
@@ -138,7 +140,7 @@ public class TeamUserListActivity extends BaseActivity {
         }
         session2.setUsers(user2);
 
-        data.add(session2);
+        teamUserSessions.add(session2);
 
         TeamUserSession session3 = new TeamUserSession();
         session3.setGroupName("主管");
@@ -151,7 +153,7 @@ public class TeamUserListActivity extends BaseActivity {
         }
         session3.setUsers(user3);
 
-        data.add(session3);
+        teamUserSessions.add(session3);
 
 
         TeamUserSession session4 = new TeamUserSession();
@@ -165,14 +167,14 @@ public class TeamUserListActivity extends BaseActivity {
         }
         session4.setUsers(user4);
 
-        data.add(session4);
+        teamUserSessions.add(session4);
 
         updateUI();
     }
 
     private void updateUI() {
         dismissLoading();
-        teamUserAdapter = new TeamUserAdapter(this, data);
+        teamUserAdapter = new TeamUserAdapter(this, teamUserSessions);
         listView.setAdapter(teamUserAdapter);
         listView.expandGroup(0);
         listView.setGroupIndicator(null);

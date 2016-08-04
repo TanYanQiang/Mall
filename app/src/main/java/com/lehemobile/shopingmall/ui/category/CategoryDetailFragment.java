@@ -58,7 +58,7 @@ public class CategoryDetailFragment extends BaseFragment {
             CategoryDetail categoryDetail = new CategoryDetail();
             categoryDetail.setId(i);
             categoryDetail.setName(categoryId + "美容" + i);
-            categoryDetail.setImageUrl("http://a.vpimg4.com/upload/category/2016/06/14/111/aabfc582-3b25-4f8a-9951-bbc516b8fe90.jpg");
+            categoryDetail.setImageUrl("http://a.vpimg3.com/upload/merchandise/pdcvis/2016/07/21/40/b9ee3af9-b518-4f9f-8ea7-c04163189051.jpg");
             details.add(categoryDetail);
         }
         session.setDetails(details);
