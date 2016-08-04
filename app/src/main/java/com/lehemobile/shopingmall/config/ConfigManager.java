@@ -1,6 +1,7 @@
 package com.lehemobile.shopingmall.config;
 
 import com.lehemobile.shopingmall.MyApplication;
+import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.model.User;
 import com.tgh.devkit.core.config.KeyValueStore;
 import com.tgh.devkit.core.config.KeyValueStoreInternal;
@@ -54,12 +55,12 @@ public class ConfigManager {
         return _user;
     }
 
-    public static String getRegion() {
-        return getDefaultBindVersionStore().getString(REGION, "上海");
+    public static Region getRegion() {
+        return getDefaultBindVersionStore().getObject(REGION, Region.class);
     }
 
-    public static void setRegion(String region) {
-        getDefaultBindVersionStore().save(REGION, region);
+    public static void setRegion(Region region) {
+        getDefaultBindVersionStore().saveObject(REGION, region);
     }
 
     public static boolean isLogin() {

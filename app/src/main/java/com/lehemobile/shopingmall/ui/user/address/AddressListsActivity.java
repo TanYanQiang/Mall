@@ -2,11 +2,8 @@ package com.lehemobile.shopingmall.ui.user.address;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -15,8 +12,10 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.model.Address;
+import com.lehemobile.shopingmall.model.City;
+import com.lehemobile.shopingmall.model.District;
+import com.lehemobile.shopingmall.model.Province;
 import com.lehemobile.shopingmall.ui.BaseActivity;
-import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
@@ -25,8 +24,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
-import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -83,7 +80,7 @@ public class AddressListsActivity extends BaseActivity {
 
     private void deleteAddress(Address address) {
         //TODO 删除
-        Logger.i("删除:" + address.getFullAddress());
+        Logger.i("删除:" + address.getDetailedAddress());
 
         //
         pageListHelper.getData().remove(address);
@@ -98,10 +95,16 @@ public class AddressListsActivity extends BaseActivity {
             address.setId(i + 1);
             address.setName("谭燕强");
             address.setMobile("186****036" + i);
-            address.setProvince("北京市");
-            address.setCity("北京市");
-            address.setArea("朝阳区");
-            address.setFullAddress("安定路39号长新大厦1105");
+            Province province = new Province();
+            province.setName("北京市");
+            address.setProvince(province);
+            City city = new City();
+            city.setName("北京市");
+            address.setCity(city);
+            District district = new District();
+            district.setName("朝阳区");
+            address.setDistrict(district);
+            address.setDetailedAddress("安定路39号长新大厦1105");
             address.setDefault(i == 0);
             addressList.add(address);
         }
@@ -127,7 +130,7 @@ public class AddressListsActivity extends BaseActivity {
 
                 @Override
                 public void onCheckSelectdListener(Address address) {
-                    Logger.i("check Selected:" + address.getFullAddress());
+                    Logger.i("check Selected:" + address.getDetailedAddress());
 
                     ArrayList<Address> data = pageListHelper.getData();
                     for (Address ad : data) {

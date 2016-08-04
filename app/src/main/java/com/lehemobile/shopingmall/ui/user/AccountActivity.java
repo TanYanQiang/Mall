@@ -15,6 +15,8 @@ import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
 import com.lehemobile.shopingmall.ui.order.OrderListActivity_;
 import com.lehemobile.shopingmall.ui.user.address.AddressListsActivity_;
+import com.lehemobile.shopingmall.ui.user.address.ChooseRegionActivity;
+import com.lehemobile.shopingmall.ui.user.address.ChooseRegionActivity_;
 import com.lehemobile.shopingmall.ui.user.distribution.HeroListActivity_;
 import com.lehemobile.shopingmall.ui.user.distribution.UserQRCodeActivity_;
 import com.lehemobile.shopingmall.ui.user.distribution.team.TeamUserListActivity_;
@@ -178,7 +180,7 @@ public class AccountActivity extends BaseActivity {
     }
 
     @Click
-    void team(){
+    void team() {
         if (!isLogin()) return;
         TeamUserListActivity_.intent(this).start();
     }
@@ -197,7 +199,13 @@ public class AccountActivity extends BaseActivity {
     }
 
     @Click
-    void heroList(){
+    void region() {
+        if (!isLogin()) return;
+        ChooseRegionActivity_.intent(this).type(ChooseRegionActivity.TYPE_CHOOSE_REGION).start();
+    }
+
+    @Click
+    void heroList() {
         if (!isLogin()) return;
         HeroListActivity_.intent(this).start();
     }

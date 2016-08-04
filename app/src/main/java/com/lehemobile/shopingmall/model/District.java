@@ -1,9 +1,11 @@
 package com.lehemobile.shopingmall.model;
 
+import java.io.Serializable;
+
 /**
  * Created by tanyq on 23/7/16.
  */
-public class Area {
+public class District implements Serializable {
     private int id;
     private String name;
 

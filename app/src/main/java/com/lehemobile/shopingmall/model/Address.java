@@ -10,16 +10,11 @@ public class Address implements Serializable {
     private int id;
     private String name;
     private String mobile;
-    private String province; //省
-    private int provinceId;
 
-    private String city; //市
-    private int cityId;
-
-    private String area; //区
-    private String areaId;
-
-    private String fullAddress; //详细地址
+    private Province province;
+    private City city;
+    private District district;
+    private String detailedAddress;
 
     private boolean isDefault = false;
 
@@ -39,36 +34,13 @@ public class Address implements Serializable {
         this.mobile = mobile;
     }
 
-    public String getProvince() {
-        return province;
+
+    public String getDetailedAddress() {
+        return detailedAddress;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getFullAddress() {
-        return fullAddress;
-    }
-
-    public void setFullAddress(String fullAddress) {
-        this.fullAddress = fullAddress;
+    public void setDetailedAddress(String detailedAddress) {
+        this.detailedAddress = detailedAddress;
     }
 
     public boolean isDefault() {
@@ -79,29 +51,6 @@ public class Address implements Serializable {
         isDefault = aDefault;
     }
 
-    public int getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(int provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
-
-    public String getAreaId() {
-        return areaId;
-    }
-
-    public void setAreaId(String areaId) {
-        this.areaId = areaId;
-    }
 
     public int getId() {
         return id;
@@ -109,6 +58,41 @@ public class Address implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public String getRegion() {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(province.getName());
+        stringBuffer.append(city.getName());
+        stringBuffer.append(district.getName());
+        return stringBuffer.toString();
+    }
+    public String getFullAddress(){
+        return getRegion()+getDetailedAddress();
     }
 
     @Override

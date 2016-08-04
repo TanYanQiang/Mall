@@ -7,6 +7,9 @@ import android.widget.TextView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.model.Address;
+import com.lehemobile.shopingmall.model.City;
+import com.lehemobile.shopingmall.model.District;
+import com.lehemobile.shopingmall.model.Province;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.tgh.devkit.core.utils.Strings;
 
@@ -14,6 +17,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 
 /**
@@ -22,6 +26,7 @@ import org.androidannotations.annotations.ViewById;
  */
 @EActivity(R.layout.activity_add_address)
 public class AddAddressActivity extends BaseActivity {
+    public static final int REQUEST_CHOOSE_REGION_CODE = 1;
     @Extra
     Address address;
 
@@ -29,8 +34,8 @@ public class AddAddressActivity extends BaseActivity {
     EditText nameEdit;
     @ViewById(R.id.mobile)
     EditText mobileEdit;
-    @ViewById(R.id.fullAddress)
-    EditText fullAddressEdit;
+    @ViewById(R.id.detailedAddress)
+    EditText detailedAddress;
 
     @ViewById
     TextView addressInfo;
@@ -46,13 +51,17 @@ public class AddAddressActivity extends BaseActivity {
         if (address == null) return;
         nameEdit.setText(address.getName());
         mobileEdit.setText(address.getMobile());
-        fullAddressEdit.setText(address.getFullAddress());
-        addressInfo.setText(address.getProvince() + address.getCity() + address.getArea());
+        detailedAddress.setText(address.getDetailedAddress());
+        updateRegion();
+    }
+
+    private void updateRegion() {
+        addressInfo.setText(address.getRegion());
     }
 
     @Click(R.id.addressProvince)
     void chooseProvince() { //选择省市区
-
+        ChooseRegionActivity_.intent(this).startForResult(REQUEST_CHOOSE_REGION_CODE);
     }
 
     @Click(R.id.saveBtn)
@@ -60,7 +69,7 @@ public class AddAddressActivity extends BaseActivity {
 
         String name = getInputText(nameEdit);
         String mobile = getInputText(mobileEdit);
-        String fullAddress = getInputText(fullAddressEdit);
+        String fullAddress = getInputText(detailedAddress);
 
         if (Strings.isNullOrEmpty(name)) {
             showToast("请输入收件人姓名");
@@ -87,7 +96,7 @@ public class AddAddressActivity extends BaseActivity {
         }
         address.setName(name);
         address.setMobile(mobile);
-        address.setFullAddress(fullAddress);
+        address.setDetailedAddress(fullAddress);
         if (address.getId() == 0) {
             addAddress(address);
         } else {
@@ -114,4 +123,20 @@ public class AddAddressActivity extends BaseActivity {
         finish();
     }
 
+    @OnActivityResult(REQUEST_CHOOSE_REGION_CODE)
+    void onChooseRegionResult(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Province province = (Province) data.getSerializableExtra("province");
+            City city = (City) data.getSerializableExtra("city");
+            District district = (District) data.getSerializableExtra("district");
+            if (address == null) {
+                address = new Address();
+            }
+            address.setProvince(province);
+            address.setCity(city);
+            address.setDistrict(district);
+            updateRegion();
+        }
+
+    }
 }

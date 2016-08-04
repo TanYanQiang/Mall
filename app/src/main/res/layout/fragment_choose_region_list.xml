@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#cac9cf"
+        android:paddingBottom="@dimen/margin_8"
+        android:paddingTop="@dimen/margin_8"
+        android:visibility="gone">
+
+        <com.tgh.devkit.view.ClearableEditText
+            android:id="@+id/searchEdit"
+            style="@style/ActionLine.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableLeft="@mipmap/ic_team_search"
+            android:drawablePadding="5dp"
+            android:hint="输入省"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        style="@style/ListViewStyle.HasDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

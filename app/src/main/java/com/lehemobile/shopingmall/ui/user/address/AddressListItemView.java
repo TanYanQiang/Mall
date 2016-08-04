@@ -7,7 +7,6 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -106,12 +105,7 @@ public class AddressListItemView extends RelativeLayout {
         name.setText(address.getName());
         mobile.setText(address.getMobile());
 
-        String stringBuffer = address.getProvince() +
-                address.getCity() +
-                address.getArea() +
-                address.getFullAddress();
-
-        addressTv.setText(stringBuffer);
+        addressTv.setText(address.getFullAddress());
 
     }
 

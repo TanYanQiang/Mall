@@ -81,9 +81,9 @@ public class TeamUserListActivity extends BaseActivity {
 
     private List<TeamUserSession> searchByName(String keyword) {
 
-        List<TeamUserSession> data = new ArrayList<>();
+        List<TeamUserSession> result = new ArrayList<>();
         if (teamUserAdapter != null) {
-            List<TeamUserSession> sourceData = teamUserAdapter.getData();
+            List<TeamUserSession> sourceData = data;
             for (int i = 0; i < sourceData.size(); i++) {
                 TeamUserSession session = sourceData.get(i);
                 List<User> users = session.getUsers();
@@ -100,11 +100,11 @@ public class TeamUserListActivity extends BaseActivity {
                 }
                 if (!searchUser.isEmpty()) {
                     session.setUsers(searchUser);
-                    data.add(session);
+                    result.add(session);
                 }
             }
         }
-        return data;
+        return result;
     }
 
     private void loadData() {

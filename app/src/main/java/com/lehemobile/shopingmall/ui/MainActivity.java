@@ -1,5 +1,6 @@
 package com.lehemobile.shopingmall.ui;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -11,16 +12,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
 import com.lehemobile.shopingmall.ui.main.MainGoodsFragment_;
 import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment_;
+import com.lehemobile.shopingmall.ui.user.address.ChooseRegionActivity;
+import com.lehemobile.shopingmall.ui.user.address.ChooseRegionActivity_;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.viewpager.BaseViewPager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
@@ -29,6 +35,7 @@ import org.androidannotations.annotations.ViewById;
 @OptionsMenu(R.menu.main)
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final int REQUEST_CHOOSE_REGION_CODE = 1;
     @ViewById
     Toolbar toolbar;
     @ViewById
@@ -49,16 +56,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @AfterViews
     void init() {
-//        region = (TextView) toolbar.findViewById(R.id.region);
-        region.setText(ConfigManager.getRegion());
-        region.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseRegion();
-            }
-        });
-        initActionBar(toolbar);
 
+        initActionBar(toolbar);
+        updateRegionUI();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(toggle);
@@ -67,6 +67,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void updateRegionUI() {
+        Region region = ConfigManager.getRegion();
+        String regionName = "北京";
+        if (region != null) {
+            regionName = region.getName();
+        }
+        this.region.setText(regionName);
     }
 
 
@@ -90,6 +99,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Click(R.id.region)
     void chooseRegion() {
         Logger.i("click choose chooseRegion");
+        ChooseRegionActivity_.intent(this)
+                .type(ChooseRegionActivity.TYPE_CHOOSE_REGION)
+                .startForResult(REQUEST_CHOOSE_REGION_CODE);
     }
 
     @OptionsItem(R.id.action_search)
@@ -126,4 +138,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    @OnActivityResult(REQUEST_CHOOSE_REGION_CODE)
+    void chooseRegionResult(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            updateRegionUI();
+        }
+    }
 }
