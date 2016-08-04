@@ -52,7 +52,6 @@ public class ChooseProvinceFragment extends BaseFragment {
 
     @AfterViews
     void init() {
-        getActivity().setTitle("选择省");
         searchLayout.setVisibility(View.VISIBLE);
         loadData();
     }

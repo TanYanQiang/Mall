@@ -54,7 +54,6 @@ public class ChooseRegionFragment extends BaseFragment {
 
     @AfterViews
     void init() {
-        getActivity().setTitle("选择收货地区");
         searchLayout.setVisibility(View.GONE);
         loadData();
     }

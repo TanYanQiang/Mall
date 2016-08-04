@@ -67,7 +67,6 @@ public class ChooseDistrictFragment extends BaseFragment {
 
     @AfterViews
     void init() {
-        getActivity().setTitle("选择区");
         searchLayout.setVisibility(View.GONE);
         loadData();
     }

@@ -57,7 +57,6 @@ public class ChooseCityFragment extends BaseFragment {
 
     @AfterViews
     void init() {
-        getActivity().setTitle("选择市");
         searchLayout.setVisibility(View.GONE);
         loadData();
     }

@@ -1,6 +1,8 @@
 package com.lehemobile.shopingmall.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.event.ChooseRegionEvent;
 import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
 import com.lehemobile.shopingmall.ui.main.MainGoodsFragment_;
@@ -30,6 +33,8 @@ import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
+
+import de.greenrobot.event.EventBus;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.main)
@@ -53,6 +58,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @ViewById
     BaseViewPager viewPager;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @AfterViews
     void init() {
@@ -101,7 +118,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Logger.i("click choose chooseRegion");
         ChooseRegionActivity_.intent(this)
                 .type(ChooseRegionActivity.TYPE_CHOOSE_REGION)
-                .startForResult(REQUEST_CHOOSE_REGION_CODE);
+                .start();
     }
 
     @OptionsItem(R.id.action_search)
@@ -138,10 +155,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
-    @OnActivityResult(REQUEST_CHOOSE_REGION_CODE)
-    void chooseRegionResult(int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            updateRegionUI();
-        }
+
+    public void onEventMainThread(ChooseRegionEvent event) {
+        updateRegionUI();
     }
+
 }

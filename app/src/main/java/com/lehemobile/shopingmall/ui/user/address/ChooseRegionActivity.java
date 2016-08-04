@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.event.ChooseRegionEvent;
 import com.lehemobile.shopingmall.model.City;
 import com.lehemobile.shopingmall.model.District;
 import com.lehemobile.shopingmall.model.Province;
@@ -18,6 +19,8 @@ import com.orhanobut.logger.Logger;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 选择省、市、区、县
@@ -38,8 +41,10 @@ public class ChooseRegionActivity extends BaseActivity {
     @AfterViews
     void init() {
         if (type == TYPE_CHOOSE_PROVINCE) {
+            setTitle("选择地区");
             showChooseProvince();
         } else {
+            setTitle("选择收货地区");
             showChooseRegion();
         }
     }
@@ -63,9 +68,7 @@ public class ChooseRegionActivity extends BaseActivity {
             public void onChooseRegion(Region region) {
                 //保存
                 ConfigManager.setRegion(region);
-                Intent intent = new Intent();
-                intent.putExtra(AppConfig.Extra, region);
-                setResult(RESULT_OK, intent);
+                EventBus.getDefault().post(new ChooseRegionEvent());
                 finish();
             }
         });
