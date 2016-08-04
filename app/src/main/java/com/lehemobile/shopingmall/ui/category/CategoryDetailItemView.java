@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.model.CategoryDetail;
+import com.lehemobile.shopingmall.model.Category;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -43,9 +43,9 @@ public class CategoryDetailItemView extends LinearLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void updateUI(CategoryDetail detail) {
-        title.setText(detail.getName());
-        Picasso.with(getContext()).load(detail.getImageUrl()).placeholder(R.mipmap.test_category_detail_item).into(image);
+    public void updateUI(Category detail) {
+        title.setText(detail.getCategoryName());
+        Picasso.with(getContext()).load(detail.getCategoryImage()).placeholder(R.mipmap.test_category_detail_item).into(image);
     }
 
 }

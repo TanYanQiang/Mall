@@ -9,7 +9,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.model.CategoryDetail;
+import com.lehemobile.shopingmall.model.Category;
 import com.lehemobile.shopingmall.model.CategoryDetailSession;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.orhanobut.logger.Logger;
@@ -53,13 +53,13 @@ public class CategoryDetailFragment extends BaseFragment {
         //// TODO: 4/8/16  加载数据
         CategoryDetailSession session = new CategoryDetailSession();
         session.setTips("为你推荐");
-        List<CategoryDetail> details = new ArrayList<>();
+        List<Category> details = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            CategoryDetail categoryDetail = new CategoryDetail();
-            categoryDetail.setId(i);
-            categoryDetail.setName(categoryId + "美容" + i);
-            categoryDetail.setImageUrl("http://a.vpimg3.com/upload/merchandise/pdcvis/2016/07/21/40/b9ee3af9-b518-4f9f-8ea7-c04163189051.jpg");
-            details.add(categoryDetail);
+            Category category = new Category();
+            category.setCategoryId(i);
+            category.setCategoryName(categoryId + "美容" + i);
+            category.setCategoryImage("http://a.vpimg3.com/upload/merchandise/pdcvis/2016/07/21/40/b9ee3af9-b518-4f9f-8ea7-c04163189051.jpg");
+            details.add(category);
         }
         session.setDetails(details);
 
@@ -72,7 +72,7 @@ public class CategoryDetailFragment extends BaseFragment {
         label.setText(tips);
     }
 
-    private void updateUI(List<CategoryDetail> details) {
+    private void updateUI(List<Category> details) {
         progressBar.setVisibility(View.GONE);
         final CategoryDetailAdapter adapter = new CategoryDetailAdapter(getContext(), details);
         gridView.setAdapter(adapter);
@@ -80,22 +80,23 @@ public class CategoryDetailFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Object item = adapterView.getAdapter().getItem(i);
-                if (item instanceof CategoryDetail) {
+                if (item instanceof Category) {
                     //TODO 查看类别下面的商品列表
-                    Logger.i("查看类别下面的商品列表:" + ((CategoryDetail) item).getName());
+                    Logger.i("查看类别下面的商品列表:" + ((Category) item).getCategoryName());
+                    CategoryGoodsListActivity_.intent(getContext()).category((Category) item).start();
                 }
             }
         });
     }
 
-    private class CategoryDetailAdapter extends BaseListAdapter<CategoryDetail> {
+    private class CategoryDetailAdapter extends BaseListAdapter<Category> {
 
-        public CategoryDetailAdapter(Context context, Collection<? extends CategoryDetail> data) {
+        public CategoryDetailAdapter(Context context, Collection<? extends Category> data) {
             super(context, data);
         }
 
         @Override
-        public void bindData(int position, View convertView, CategoryDetail item) {
+        public void bindData(int position, View convertView, Category item) {
             CategoryDetailItemView view = (CategoryDetailItemView) convertView;
             view.updateUI(item);
         }

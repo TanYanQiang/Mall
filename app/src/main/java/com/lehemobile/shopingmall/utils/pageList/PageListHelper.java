@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.tgh.devkit.list.adapter.BaseListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public abstract class PageListHelper<T> {
 
     private PageListSession<T> session;
     private View v_empty;
+    private BaseListAdapter<T> adapter;
 
     public PageListHelper(PullToRefreshAdapterViewBase pageListView) {
         this.pageListView = pageListView;
@@ -63,7 +65,7 @@ public abstract class PageListHelper<T> {
         pageListView.onRefreshComplete();
 
         session.onLoaded(result);
-        notifyDataSetChanged();
+        notifyDataSetChanged(result);
 
         if (session.isLast()) {
             if (initMode == PullToRefreshBase.Mode.BOTH) {
@@ -92,22 +94,34 @@ public abstract class PageListHelper<T> {
         return session.getData();
     }
 
-    public void notifyDataSetChanged() {
-        BaseAdapter adapter = newAdapter(session.getData());
-        View view = pageListView.getRefreshableView();
-        if (view instanceof ListView) {
-            ListView listView = (ListView) view;
-            int position = listView.getFirstVisiblePosition();
+    public BaseListAdapter<T> getAdapter() {
+        return adapter;
+    }
+
+
+    public void notifyDataSetChanged(List<T> result) {
+        if(adapter == null){
+            adapter = newAdapter(result);
             pageListView.setAdapter(adapter);
-            listView.setSelection(position);
-        } else {
-            pageListView.setAdapter(adapter);
+        }else{
+            adapter.addAll(result);
         }
+        adapter.notifyDataSetChanged();
+//
+//        View view = pageListView.getRefreshableView();
+//        if (view instanceof ListView) {
+//            ListView listView = (ListView) view;
+//            int position = listView.getFirstVisiblePosition();
+//            pageListView.setAdapter(adapter);
+//            listView.setSelection(position);
+//        } else {
+//            pageListView.setAdapter(adapter);
+//        }
     }
 
     public abstract void loadData(int page, int pageCount);
 
-    public abstract BaseAdapter newAdapter(List<T> data);
+    public abstract BaseListAdapter<T> newAdapter(List<T> data);
 
     public abstract void onItemClicked(int position, T t);
 

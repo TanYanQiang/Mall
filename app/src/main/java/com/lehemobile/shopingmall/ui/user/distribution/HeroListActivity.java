@@ -99,7 +99,7 @@ public class HeroListActivity extends BaseActivity {
             }
 
             @Override
-            public BaseAdapter newAdapter(List<User> data) {
+            public BaseListAdapter<User> newAdapter(List<User> data) {
                 return new UserAdapter(HeroListActivity.this, data);
             }
 

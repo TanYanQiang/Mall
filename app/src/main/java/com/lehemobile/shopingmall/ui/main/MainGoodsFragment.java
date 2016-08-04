@@ -51,7 +51,7 @@ public class MainGoodsFragment extends BaseFragment {
             }
 
             @Override
-            public BaseAdapter newAdapter(List<Goods> data) {
+            public BaseListAdapter<Goods> newAdapter(List<Goods> data) {
                 return new GoodsItemAdapter(getActivity(), data);
             }
 

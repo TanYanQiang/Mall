@@ -55,7 +55,7 @@ public class AddressListsActivity extends BaseActivity {
             }
 
             @Override
-            public BaseAdapter newAdapter(List<Address> data) {
+            public BaseListAdapter<Address> newAdapter(List<Address> data) {
                 return new AddressAdapter(AddressListsActivity.this, data);
             }
 
@@ -84,7 +84,8 @@ public class AddressListsActivity extends BaseActivity {
 
         //
         pageListHelper.getData().remove(address);
-        pageListHelper.notifyDataSetChanged();
+        pageListHelper.getAdapter().notifyDataSetChanged();
+
     }
 
     private void load(int page, int pageCount) {
@@ -136,7 +137,7 @@ public class AddressListsActivity extends BaseActivity {
                     for (Address ad : data) {
                         ad.setDefault(ad.equals(address));
                     }
-                    pageListHelper.notifyDataSetChanged();
+                    pageListHelper.getAdapter().notifyDataSetChanged();
                 }
 
                 @Override
@@ -158,7 +159,7 @@ public class AddressListsActivity extends BaseActivity {
         if (resultCode != RESULT_OK) return;
         Address address = (Address) data.getSerializableExtra(AppConfig.Extra);
         pageListHelper.getData().add(address);
-        pageListHelper.notifyDataSetChanged();
+        pageListHelper.getAdapter().notifyDataSetChanged();
     }
 
     @OnActivityResult(REQUEST_EDIT_CODE)
@@ -170,7 +171,7 @@ public class AddressListsActivity extends BaseActivity {
         Logger.i("edit indexOf:" + indexOf);
         if (indexOf >= 0 && indexOf < pageListHelper.getData().size()) {
             lists.set(indexOf, address);
-            pageListHelper.notifyDataSetChanged();
+            pageListHelper.getAdapter().notifyDataSetChanged();
         }
     }
 }

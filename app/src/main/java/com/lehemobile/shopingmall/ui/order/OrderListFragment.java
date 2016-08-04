@@ -50,7 +50,7 @@ public class OrderListFragment extends BaseFragment {
             }
 
             @Override
-            public BaseAdapter newAdapter(List<Order> data) {
+            public BaseListAdapter<Order> newAdapter(List<Order> data) {
                 return new OrderAdapter(getActivity(), data);
             }
 

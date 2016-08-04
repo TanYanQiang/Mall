@@ -49,7 +49,7 @@ public class GoodsDetailCommentListFragment extends BaseFragment {
             }
 
             @Override
-            public BaseAdapter newAdapter(List<Comment> data) {
+            public BaseListAdapter<Comment> newAdapter(List<Comment> data) {
                 return new CommentAdapter(getActivity(), data);
             }
 

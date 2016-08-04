@@ -8,6 +8,8 @@ import java.io.Serializable;
 public class Category implements Serializable {
     private int categoryId;
     private String categoryName;
+    private String categoryImage;
+    private int parentCategoryId;
 
     public int getCategoryId() {
         return categoryId;
@@ -23,5 +25,21 @@ public class Category implements Serializable {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getCategoryImage() {
+        return categoryImage;
+    }
+
+    public void setCategoryImage(String categoryImage) {
+        this.categoryImage = categoryImage;
+    }
+
+    public int getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(int parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
     }
 }

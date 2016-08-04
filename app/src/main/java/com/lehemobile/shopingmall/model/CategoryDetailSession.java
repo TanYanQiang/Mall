@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class CategoryDetailSession {
     private String tips;
-    private List<CategoryDetail> details;
+    private List<Category> details;
 
     public String getTips() {
         return tips;
@@ -17,11 +17,11 @@ public class CategoryDetailSession {
         this.tips = tips;
     }
 
-    public List<CategoryDetail> getDetails() {
+    public List<Category> getDetails() {
         return details;
     }
 
-    public void setDetails(List<CategoryDetail> details) {
+    public void setDetails(List<Category> details) {
         this.details = details;
     }
 }

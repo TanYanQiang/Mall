@@ -17,6 +17,9 @@ public class Goods implements Serializable {
     private double price; //价格
     private int stock;
 
+    private boolean favorite;
+    private int favoriteCount;
+
     public int getId() {
         return id;
     }
@@ -79,6 +82,22 @@ public class Goods implements Serializable {
 
     public void setDetailImages(List<String> detailImages) {
         this.detailImages = detailImages;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public int getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public void setFavoriteCount(int favoriteCount) {
+        this.favoriteCount = favoriteCount;
     }
 
     @Override
