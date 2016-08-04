@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/category_item_bg"
+    android:button="@null"
+    android:gravity="center"
+    android:minHeight="@dimen/line_height_lv1"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/margin_8"
+    android:paddingRight="@dimen/margin_8"
+    android:text="推荐分类"
+    android:textColor="@color/text_category_item_color" />

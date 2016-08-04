@@ -15,6 +15,7 @@ import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.event.LogoutEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.SettingActivity_;
+import com.lehemobile.shopingmall.ui.category.CategoryActivity_;
 import com.lehemobile.shopingmall.ui.user.AccountActivity_;
 import com.lehemobile.shopingmall.ui.user.distribution.team.TeamUserListActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
@@ -116,7 +117,7 @@ public class NavigationView extends FrameLayout {
     @Click(R.id.nav_category)
     void goCategory(View view) {
         if (setSelected(view)) return;
-
+        CategoryActivity_.intent(getContext()).start();
     }
 
     @Click(R.id.nav_integral)
