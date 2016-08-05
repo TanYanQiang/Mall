@@ -331,7 +331,7 @@
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/ic_account_remuneration"
                     android:gravity="center"
-                    android:text="推广佣金" />
+                    android:text="销售提成" />
 
                 <TextView
                     android:id="@+id/team"
