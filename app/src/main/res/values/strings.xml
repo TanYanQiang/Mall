@@ -29,4 +29,5 @@
 
     <string name="label_my_rank">我的名次: %1$s</string>
     <string name="label_my_commission">奖金总金额: %1$s</string>
+    <string name="label_kuaidi_number">运单编号: %1$s</string>
 </resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Space
+        android:id="@+id/topSpace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topSpace"
+        android:layout_marginLeft="30dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_color_lv4"
+        android:textSize="@dimen/text_size_medium"
+        tools:text="商家通知快递公司揽件" />
+
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/title"
+        android:layout_below="@id/title"
+        android:layout_marginBottom="22dp"
+        android:layout_marginTop="@dimen/margin_8"
+        android:textColor="@color/text_color_lv4"
+        android:textSize="@dimen/text_size_small"
+        tools:text="2016-08-01 12:00:59" />
+
+    <View
+        android:id="@+id/line"
+        style="@style/HorizontalLineStyle"
+        android:layout_alignLeft="@id/title"
+        android:layout_below="@id/time" />
+
+    <FrameLayout
+        android:id="@+id/imageLayout"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@id/title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@id/title">
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_kuaidi_item_2" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/topLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/imageLayout"
+        android:layout_alignLeft="@id/imageLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@id/imageLayout">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/bottomLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/line"
+        android:layout_alignLeft="@id/imageLayout"
+        android:layout_alignRight="@id/imageLayout"
+        android:layout_below="@id/imageLayout">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent" />
+    </FrameLayout>
+</RelativeLayout>
