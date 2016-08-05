@@ -60,7 +60,7 @@ public class OrderGoodsInfo extends RelativeLayout {
         count.setText(getResources().getString(R.string.label_order_count, goods.getBuyCount()));
 
         Picasso.with(getContext()).load(goods.getThumbnail())
-                .resizeDimen(R.dimen.goods_thumb_width, R.dimen.goods_thumb_height)
+                .resizeDimen(R.dimen.order_goods_thumb_width, R.dimen.order_goods_thumb_height)
                 .centerCrop()
                 .transform(new RoundedCornersTransformation(getResources().getDimensionPixelOffset(R.dimen.corners_small),
                         0,
