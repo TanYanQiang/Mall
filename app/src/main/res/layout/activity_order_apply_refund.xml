@@ -35,11 +35,11 @@
             android:id="@+id/refundReason"
             style="@style/TextStyle.Title.Medium.Gray"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:drawableRight="@mipmap/ic_personal_verify_arrow_down"
-            android:paddingBottom="@dimen/margin_8"
-            android:paddingTop="@dimen/margin_8"
+            android:gravity="center_vertical"
+
             tools:text="168元" />
     </LinearLayout>
 
