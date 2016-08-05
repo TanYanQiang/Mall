@@ -27,11 +27,11 @@
 
         <TextView
             android:id="@+id/goodsName"
-            style="@style/TextStyle.Title.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:ellipsize="end"
+            android:textColor="@color/text_color_lv1"
+            android:textSize="15sp"
             tools:text="气垫BB霜 保湿遮瑕美白粉底液替换套盒" />
 
         <TextView

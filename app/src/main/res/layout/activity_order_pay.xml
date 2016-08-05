@@ -33,10 +33,10 @@
             android:id="@+id/goodsInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:divider="@drawable/divider_horizontal"
+            android:background="#f5f5f5"
+            android:divider="@drawable/order_goods_info_divider_horizontal"
             android:orientation="vertical"
-            android:showDividers="beginning|middle|end" />
+            android:showDividers="middle" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -98,8 +98,8 @@
             style="@style/Button.NormalCorners"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="30dp"
             android:text="去付款" />
     </LinearLayout>
 </ScrollView>

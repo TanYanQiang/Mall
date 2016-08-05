@@ -19,6 +19,7 @@ import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
+import com.tgh.devkit.core.text.SpannableStringHelper;
 import com.tgh.devkit.dialog.DialogBuilder;
 import com.tgh.devkit.viewpager.InfiniteViewPager;
 import com.tgh.devkit.viewpager.adapter.BasePagerAdapter;
@@ -165,7 +166,7 @@ public class GoodsDetailActivity extends BaseActivity {
     private void updateFavoriteUI() {
         if (session == null) return;
         favorite.setText(session.isFavorite() ? "已收藏" : "收藏");
-        favorite.setCompoundDrawablesWithIntrinsicBounds(0, (session.isFavorite() ? R.drawable.ic_menu_send : R.drawable.ic_menu_manage), 0, 0);
+        favorite.setCompoundDrawablesWithIntrinsicBounds(0, (session.isFavorite() ? R.mipmap.ic_collection : R.mipmap.ic_collection_normal), 0, 0);
     }
 
 
@@ -179,11 +180,15 @@ public class GoodsDetailActivity extends BaseActivity {
     private void updateGoodsInfoUI() {
         Goods goods = session.getGoods();
         goodsName.setText(goods.getName());
-        goodsPrice.setText(getString(R.string.label_order_price, goods.getPriceString()));
+        String info = "￥" + goods.getPriceString();
+        new SpannableStringHelper(info).relativeSize(goods.getPriceString(), 1.3f).attachToTextView(goodsPrice);
 
+        marketPrice.getPaint().setColor(getResources().getColor(R.color.text_color_lv3));
         marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
-        marketPrice.getPaint().setColor(getResources().getColor(R.color.text_color_lv2));
+
         marketPrice.setText(getString(R.string.label_goods_detail_marketPrice, goods.getPriceString()));
+
+        tradingCount.setText(getString(R.string.label_goods_trading_count, goods.getTradingCount()));
     }
 
 

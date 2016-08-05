@@ -41,8 +41,8 @@
                 style="@style/Button.NormalEmptyCorners"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
                 android:layout_marginRight="@dimen/margin_8"
+                android:layout_weight="1"
                 android:text="加入购物车" />
 
             <Button
@@ -73,7 +73,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="280dp">
+                android:layout_height="317dp">
 
                 <com.tgh.devkit.viewpager.InfiniteViewPager
                     android:id="@+id/gallery"
@@ -85,12 +85,13 @@
                     android:id="@+id/indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|bottom"
+                    android:layout_gravity="center_horizontal|bottom"
                     android:layout_marginBottom="@dimen/margin_8"
-                    android:layout_marginRight="@dimen/margin_8"
-                    app:CPI_NorDrawable="@mipmap/ic_indicator_nor"
-                    app:CPI_SelDrawable="@mipmap/ic_indicator_sel" />
+                    app:CPI_NorDrawable="@drawable/galley_indicator_normal"
+                    app:CPI_SelDrawable="@drawable/galley_indicator_select" />
             </FrameLayout>
+
+            <View style="@style/HorizontalLineStyle" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -104,22 +105,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:singleLine="true"
+                    android:maxLines="2"
                     tools:text="肌透焕颜面膜让一切变得年轻肌透焕颜面膜让一切变得年轻" />
 
                 <TextView
                     android:id="@+id/goodsPrice"
-                    style="@style/TextStyle.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/goodsName"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
                     tools:text="$100" />
 
                 <TextView
                     android:id="@+id/marketPrice"
-                    style="@style/TextStyle.Desc"
+                    style="@style/TextStyle.Desc.Small.Gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/goodsPrice"
@@ -128,6 +129,7 @@
 
                 <TextView
                     android:id="@+id/tradingCount"
+                    style="@style/TextStyle.Desc.Small.Gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

@@ -22,9 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="@dimen/margin_8"
-            android:layout_marginRight="@dimen/margin_8"
-            app:CPI_NorDrawable="@mipmap/ic_indicator_nor"
-            app:CPI_SelDrawable="@mipmap/ic_indicator_sel" />
+            app:CPI_NorDrawable="@drawable/galley_indicator_normal"
+            app:CPI_SelDrawable="@drawable/galley_indicator_select" />
     </FrameLayout>
 
     <LinearLayout

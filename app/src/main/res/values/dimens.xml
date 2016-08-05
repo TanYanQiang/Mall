@@ -31,7 +31,7 @@
     <dimen name="hero_avatar_borderWidth">4dp</dimen>
     <dimen name="goods_thumb_width">90dp</dimen>
     <dimen name="goods_thumb_height">90dp</dimen>
-    <dimen name="goods_thumb_border_width">1.5dp</dimen>
+    <dimen name="goods_thumb_border_width">0.5dp</dimen>
     <dimen name="order_goods_thumb_width">73dp</dimen>
     <dimen name="order_goods_thumb_height">73dp</dimen>
 

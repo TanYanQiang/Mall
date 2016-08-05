@@ -24,6 +24,8 @@ public class Goods implements Serializable {
 
     private int buyCount; //购买数量
 
+    private int tradingCount; //销售量
+
     public int getId() {
         return id;
     }
@@ -114,6 +116,14 @@ public class Goods implements Serializable {
 
     public void setBuyCount(int buyCount) {
         this.buyCount = buyCount;
+    }
+
+    public int getTradingCount() {
+        return tradingCount;
+    }
+
+    public void setTradingCount(int tradingCount) {
+        this.tradingCount = tradingCount;
     }
 
     @Override
