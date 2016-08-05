@@ -22,6 +22,8 @@ public class Goods implements Serializable {
     private boolean favorite;
     private int favoriteCount;
 
+    private int buyCount; //购买数量
+
     public int getId() {
         return id;
     }
@@ -104,6 +106,14 @@ public class Goods implements Serializable {
 
     public void setFavoriteCount(int favoriteCount) {
         this.favoriteCount = favoriteCount;
+    }
+
+    public int getBuyCount() {
+        return buyCount;
+    }
+
+    public void setBuyCount(int buyCount) {
+        this.buyCount = buyCount;
     }
 
     @Override

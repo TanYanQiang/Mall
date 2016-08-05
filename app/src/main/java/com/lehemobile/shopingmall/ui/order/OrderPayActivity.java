@@ -6,6 +6,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.model.Order;
 import com.lehemobile.shopingmall.session.OrderPaySession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
@@ -56,7 +57,8 @@ public class OrderPayActivity extends BaseActivity {
         if (order == null) return;
         orderNumber.setText(getString(R.string.label_order_number, order.getOrderNumber()));
         orderPrice.setText(getString(R.string.label_order_price, order.getTotalPrice()));
-        updateGoodsInfo();
+
+        updateGoods(order.getGoodsList());
 
     }
 
@@ -70,11 +72,14 @@ public class OrderPayActivity extends BaseActivity {
         Logger.i(orderPaySession.getCurrentPaymentMode().getTitle());
     }
 
-    private void updateGoodsInfo() {
-        OrderGoodsInfo orderGoodsInfo = OrderGoodsInfo_.build(this);
-        orderGoodsInfo.bindData(order);
+
+    private void updateGoods(List<Goods> goodsList) {
         goodsInfo.removeAllViews();
-        goodsInfo.addView(orderGoodsInfo);
+        for (int i = 0; i < goodsList.size(); i++) {
+            OrderGoodsInfo view = OrderGoodsInfo_.build(this);
+            view.bindData(goodsList.get(i));
+            goodsInfo.addView(view);
+        }
     }
 
 
@@ -85,7 +90,7 @@ public class OrderPayActivity extends BaseActivity {
         payMethodGroup.removeAllViews();
         List<PaymentMode> paymentModes = new ArrayList<>();
         PaymentMode aliPay = new PaymentMode();
-        aliPay.setTitle("支付宝");
+        aliPay.setTitle("支付宝支付");
         aliPay.setType(PaymentMode.TYPE_ALIPAY);
         paymentModes.add(aliPay);
 

@@ -68,29 +68,47 @@ public class OrderListFragment extends BaseFragment {
         //TODO 调用接口加载数据
         List<Order> orders = new ArrayList<>();
         //模拟数据
+        List<Goods> goodsList = new ArrayList<>();
+
+
+        List<Goods> goodsList2 = new ArrayList<>();
 
         Goods goods = new Goods();
         goods.setId(1);
         goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒");
         goods.setPrice(100);
         goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/28/175/03023995.jpg");
+        goods.setBuyCount(1);
+        goodsList.add(goods);
+        Goods goods2 = new Goods();
+        goods2.setId(2);
+        goods2.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒");
+        goods2.setPrice(200);
+        goods2.setBuyCount(3);
+        goods2.setThumbnail("http://c.vpimg1.com/upcb/2016/07/19/32/16159711.jpg");
+        goodsList.add(goods2);
+
+        goodsList2.add(goods);
+
         for (int i = 0; i < 30; i++) {
+
             //待付款订单
             if (type == 0 || type == 1) {
+
                 Order order1 = new Order();
-                order1.setGoods(goods);
+                order1.setGoodsList(i ==1 ? goodsList : goodsList2);
                 order1.setId(10);
                 order1.setOrderNumber("SH201606231042136362");
                 order1.setStatus(Order.STATUS_WATING_PAY);
                 order1.setStatusDesc("待付款");
-                order1.setCount(1);
+                order1.setCount(2);
                 order1.setTotalPrice(100);
                 orders.add(order1);
             }
             //待发货
             if (type == 0 || type == 2) {
                 Order order1 = new Order();
-                order1.setGoods(goods);
+                order1.setGoodsList(i ==2 ? goodsList : goodsList2);
                 order1.setId(11);
                 order1.setOrderNumber("SH201606231042136362");
                 order1.setStatus(Order.STATUS_WATING_DELIVER_GOODS);
@@ -101,8 +119,9 @@ public class OrderListFragment extends BaseFragment {
             }
             //待收货
             if (type == 0 || type == 3) {
+
                 Order order1 = new Order();
-                order1.setGoods(goods);
+                order1.setGoodsList(i ==1 ? goodsList : goodsList2);
                 order1.setId(13);
                 order1.setOrderNumber("SH201606231042136362");
                 order1.setStatus(Order.STATUS_WATING_RECEIPT_GOODS);
@@ -114,7 +133,7 @@ public class OrderListFragment extends BaseFragment {
             //待收货
             if (type == 0 || type == 4) {
                 Order order1 = new Order();
-                order1.setGoods(goods);
+                order1.setGoodsList(i ==1 ? goodsList : goodsList2);
                 order1.setId(13);
                 order1.setOrderNumber("SH201606231042136362");
                 order1.setStatus(Order.STATUS_COMPLETED);

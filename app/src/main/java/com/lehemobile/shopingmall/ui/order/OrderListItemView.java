@@ -9,8 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.model.Order;
 import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo;
+import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo_;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.text.SpannableStringHelper;
@@ -20,6 +22,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 /**
  * Created by tanyq on 22/7/16.
@@ -32,8 +36,8 @@ public class OrderListItemView extends LinearLayout {
     @ViewById
     TextView orderStatus;
 
-    @ViewById(R.id.orderGoodsInfo)
-    OrderGoodsInfo orderGoodsInfo;
+    @ViewById(R.id.goodsContainer)
+    LinearLayout goodsContainer;
 
     @ViewById
     TextView orderCountPrice;
@@ -58,7 +62,7 @@ public class OrderListItemView extends LinearLayout {
 
         orderNumber.setText(getResources().getString(R.string.label_order_number, order.getOrderNumber()));
 
-        orderGoodsInfo.bindData(order);
+        updateGoods(order.getGoodsList());
 
         String price = Strings.doubleTrans(order.getTotalPrice());
         String info = getResources().getString(R.string.label_order_count_price, order.getCount(), price);
@@ -71,6 +75,15 @@ public class OrderListItemView extends LinearLayout {
         orderStatus.setText(order.getStatusDesc());
 
         updateOrderAction();
+    }
+
+    private void updateGoods(List<Goods> goodsList) {
+        goodsContainer.removeAllViews();
+        for (int i = 0; i < goodsList.size(); i++) {
+            OrderGoodsInfo view = OrderGoodsInfo_.build(getContext());
+            view.bindData(goodsList.get(i));
+            goodsContainer.addView(view);
+        }
     }
 
     private void updateOrderAction() {

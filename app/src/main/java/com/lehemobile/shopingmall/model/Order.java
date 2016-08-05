@@ -1,6 +1,7 @@
 package com.lehemobile.shopingmall.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by  on 21/7/16.
@@ -26,7 +27,7 @@ public class Order implements Serializable {
     private int count; //商品数量
     private double totalPrice; //总价格
 
-    private Goods goods; //商品
+    private List<Goods> goodsList;
 
     public int getId() {
         return id;
@@ -76,11 +77,11 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public Goods getGoods() {
-        return goods;
+    public List<Goods> getGoodsList() {
+        return goodsList;
     }
 
-    public void setGoods(Goods goods) {
-        this.goods = goods;
+    public void setGoodsList(List<Goods> goodsList) {
+        this.goodsList = goodsList;
     }
 }

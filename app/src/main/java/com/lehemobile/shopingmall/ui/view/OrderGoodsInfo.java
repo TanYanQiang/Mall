@@ -53,11 +53,11 @@ public class OrderGoodsInfo extends RelativeLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void bindData(Order order) {
-        Goods goods = order.getGoods();
+    public void bindData(Goods goods) {
+
         goodsName.setText(goods.getName());
         goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
-        count.setText(getResources().getString(R.string.label_order_count, order.getCount()));
+        count.setText(getResources().getString(R.string.label_order_count, goods.getBuyCount()));
 
         Picasso.with(getContext()).load(goods.getThumbnail())
                 .resizeDimen(R.dimen.goods_thumb_width, R.dimen.goods_thumb_height)

@@ -13,6 +13,8 @@ import com.lehemobile.shopingmall.model.Kuaidi;
 import com.lehemobile.shopingmall.model.KuaidiItem;
 import com.lehemobile.shopingmall.model.Order;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo;
+import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo_;
 import com.lehemobile.shopingmall.ui.view.Picasso.RoundedCornersTransformation;
 import com.squareup.picasso.Picasso;
 import com.tgh.devkit.core.text.SpannableStringHelper;
@@ -44,12 +46,9 @@ public class OrderKuaidiActivity extends BaseActivity {
     @ViewById
     TextView orderNumber;
 
-    @ViewById
-    ImageView orderThumb;
-    @ViewById
-    TextView goodsPrice;
-    @ViewById
-    TextView goodsName;
+    @ViewById(R.id.goodsContainer)
+    LinearLayout goodsContainer;
+
     @ViewById
     TextView orderCountPrice;
 
@@ -84,8 +83,15 @@ public class OrderKuaidiActivity extends BaseActivity {
     @AfterViews
     void init() {
         if (order == null) return;
-
+        String price = Strings.doubleTrans(order.getTotalPrice());
+        String info = getResources().getString(R.string.label_order_count_price, order.getCount(), price);
+        new SpannableStringHelper(info)
+                .relativeSize("￥" + price, 1.3f)
+                .foregroundColor("￥" + price, getResources().getColor(R.color.text_color_lv1))
+                .attachToTextView(orderCountPrice);
         updateOrderInfo(order);
+
+
         loadData();
 
     }
@@ -93,27 +99,16 @@ public class OrderKuaidiActivity extends BaseActivity {
     private void updateOrderInfo(Order order) {
 
         orderNumber.setText(getString(R.string.label_order_number, order.getOrderNumber()));
-
-        Goods goods = order.getGoods();
-        goodsName.setText(goods.getName());
-
-        String price = Strings.doubleTrans(order.getTotalPrice());
-        String info = getResources().getString(R.string.label_order_count_price, order.getCount(), price);
-        new SpannableStringHelper(info)
-                .relativeSize("￥" + price, 1.3f)
-                .foregroundColor("￥" + price, getResources().getColor(R.color.text_color_lv1))
-                .attachToTextView(orderCountPrice);
-
-        Picasso.with(this).load(goods.getThumbnail())
-                .resizeDimen(R.dimen.goods_thumb_width, R.dimen.goods_thumb_height)
-                .centerCrop()
-                .transform(new RoundedCornersTransformation(getResources().getDimensionPixelOffset(R.dimen.corners_small),
-                        0,
-                        getResources().getDimensionPixelOffset(R.dimen.goods_thumb_border_width),
-                        getResources().getColor(R.color.goods_thumb_borderColor)))
-                .into(orderThumb);
+        updateGoods(order.getGoodsList());
     }
-
+    private void updateGoods(List<Goods> goodsList) {
+        goodsContainer.removeAllViews();
+        for (int i = 0; i < goodsList.size(); i++) {
+            OrderGoodsInfo view = OrderGoodsInfo_.build(this);
+            view.bindData(goodsList.get(i));
+            goodsContainer.addView(view);
+        }
+    }
     private void updateKuaidiInfo(Kuaidi kuaidi) {
         dismissLoading();
         kuaidiNumber.setText(getString(R.string.label_kuaidi_number,kuaidi.getNumber()));

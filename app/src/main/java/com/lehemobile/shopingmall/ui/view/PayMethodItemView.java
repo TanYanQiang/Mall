@@ -27,7 +27,7 @@ public class PayMethodItemView extends RadioButton {
     @ColorRes(R.color.text_color_lv1)
     int textColor;
 
-    @DimensionPixelSizeRes(R.dimen.margin_15)
+    @DimensionPixelSizeRes(R.dimen.activity_horizontal_margin)
     int margin15;
     @DimensionPixelSizeRes(R.dimen.margin_8)
     int margin8;
@@ -50,8 +50,9 @@ public class PayMethodItemView extends RadioButton {
 
 
         RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(margin15,0,margin15,0);
         setLayoutParams(params);
-
+        setBackgroundResource(R.color.transparent);
         setButtonDrawable(R.color.transparent);
         setTextColor(textColor);
         setTextSize(16);

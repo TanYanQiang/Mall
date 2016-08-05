@@ -1,101 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:minHeight="45dp"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_vertical_margin">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/orderNumber"
-            style="@style/TextStyle.Desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            tools:text="订单号:SH201606231042136362" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/goodsInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:divider="@drawable/divider_horizontal"
-        android:orientation="vertical"
-        android:showDividers="beginning|middle|end" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@color/white"
-        android:minHeight="@dimen/line_height_lv1"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_vertical_margin">
-
-        <TextView
-            style="@style/TextStyle.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:text="支付金额:" />
-
-        <TextView
-            android:id="@+id/orderPrice"
-            style="@style/TextStyle.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:textColor="@color/orange"
-            tools:text="$100" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@color/white"
-        android:divider="@drawable/divider_horizontal"
-
-        android:orientation="vertical"
-        android:showDividers="middle">
-
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="支付方式:"
-            android:textColor="@color/text_color_lv2"
-            android:textSize="@dimen/text_size_lv2" />
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:minHeight="45dp"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin">
 
-        <RadioGroup
-            android:id="@+id/payMethodGroup"
+            <TextView
+                android:id="@+id/orderNumber"
+                style="@style/TextStyle.Desc.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                tools:text="订单号:SH201606231042136362" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/goodsInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:divider="@drawable/divider_horizontal"
+            android:orientation="vertical"
+            android:showDividers="beginning|middle|end" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:minHeight="@dimen/line_height_lv1"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin">
+
+            <TextView
+                style="@style/TextStyle.Desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:text="支付金额:" />
+
+            <TextView
+                android:id="@+id/orderPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_large_18"
+                tools:text="￥100" />
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@color/white"
             android:divider="@drawable/divider_horizontal"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_vertical_margin"
-            android:showDividers="middle" />
-    </LinearLayout>
+            android:showDividers="middle">
 
-    <Button
-        android:id="@+id/payBtn"
-        style="@style/Button.NormalCorners"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="支 付" />
-</LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:gravity="center_vertical"
+                android:minHeight="52dp"
+                android:text="支付方式:"
+                android:textColor="@color/text_color_lv1"
+                android:textSize="@dimen/text_size_large" />
+
+            <RadioGroup
+                android:id="@+id/payMethodGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_horizontal"
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/payBtn"
+            style="@style/Button.NormalCorners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:text="去付款" />
+    </LinearLayout>
+</ScrollView>
