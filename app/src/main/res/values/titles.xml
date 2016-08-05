@@ -22,4 +22,5 @@
     <string name="title_activity_Team">我的小伙伴</string>
     <string name="title_activity_Heroes">英雄榜</string>
     <string name="title_activity_Category">全部分类</string>
+    <string name="title_activity_AppleRefund">申请退款</string>
 </resources>

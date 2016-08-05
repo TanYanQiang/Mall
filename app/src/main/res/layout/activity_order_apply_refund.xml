@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="#eef0f3"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:text="退款流程：提交申请>处理申请>退款完成"
+        android:textColor="@color/text_color_lv3"
+        android:textSize="@dimen/text_size_medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:minHeight="52dp"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin">
+
+        <TextView
+            style="@style/TextStyle.Title.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退款原因:" />
+
+        <TextView
+            android:id="@+id/refundReason"
+            style="@style/TextStyle.Title.Medium.Gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:drawableRight="@mipmap/ic_personal_verify_arrow_down"
+            android:paddingBottom="@dimen/margin_8"
+            android:paddingTop="@dimen/margin_8"
+            tools:text="168元" />
+    </LinearLayout>
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:minHeight="52dp"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin">
+
+        <TextView
+            style="@style/TextStyle.Title.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退款金额:" />
+
+        <TextView
+            android:id="@+id/refundPrice"
+            style="@style/TextStyle.Title.Medium.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            tools:text="168元" />
+    </LinearLayout>
+
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <TextView
+            style="@style/TextStyle.Title.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退款说明:" />
+
+        <com.tgh.devkit.view.ClearableEditText
+            android:id="@+id/refundDesc"
+            style="@style/ActionLine.EditText.Multi"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginRight="0dp"
+            android:background="@color/transparent"
+            android:gravity="top"
+            android:hint="请描述您的问题"
+            android:padding="0dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        style="@style/Button.NormalCorners"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="提交申请" />
+</LinearLayout>

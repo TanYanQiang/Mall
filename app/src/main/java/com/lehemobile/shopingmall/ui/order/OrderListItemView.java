@@ -2,6 +2,7 @@ package com.lehemobile.shopingmall.ui.order;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -179,7 +180,12 @@ public class OrderListItemView extends LinearLayout {
         //TODO 确认收货
     }
 
+    public OrderListItemView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
     private void applyForRefund() {
         //TODO 申请退款
+        OrderAppleRefundActivity_.intent(getContext()).order(order).start();
     }
 }

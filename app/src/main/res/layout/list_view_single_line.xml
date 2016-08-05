@@ -12,9 +12,9 @@
         style="@style/TextStyle.Title.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
         android:gravity="center_vertical"
         android:minHeight="@dimen/line_height_lv1"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
         tools:text="北京市" />
 </LinearLayout>
