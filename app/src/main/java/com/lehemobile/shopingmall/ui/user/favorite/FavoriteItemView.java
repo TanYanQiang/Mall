@@ -58,7 +58,7 @@ public class FavoriteItemView extends RelativeLayout {
     public void bindData(Goods goods) {
         this.goods = goods;
         goodsName.setText(goods.getName());
-        goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPrice()));
+        goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
 
         Picasso.with(getContext()).load(goods.getThumbnail())
                 .resizeDimen(R.dimen.goods_thumb_width, R.dimen.goods_thumb_height)

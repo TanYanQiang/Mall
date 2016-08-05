@@ -179,11 +179,11 @@ public class GoodsDetailActivity extends BaseActivity {
     private void updateGoodsInfoUI() {
         Goods goods = session.getGoods();
         goodsName.setText(goods.getName());
-        goodsPrice.setText(getString(R.string.label_order_price, goods.getPrice()));
+        goodsPrice.setText(getString(R.string.label_order_price, goods.getPriceString()));
 
         marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
         marketPrice.getPaint().setColor(getResources().getColor(R.color.text_color_lv2));
-        marketPrice.setText(getString(R.string.label_goods_detail_marketPrice, goods.getPrice()));
+        marketPrice.setText(getString(R.string.label_goods_detail_marketPrice, goods.getPriceString()));
     }
 
 

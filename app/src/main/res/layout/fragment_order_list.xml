@@ -2,14 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
     android:orientation="vertical">
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/rlv_orders"
         style="@style/ListViewStyle"
         android:divider="@color/transparent"
-        android:dividerHeight="@dimen/activity_vertical_margin" />
+        android:dividerHeight="10dp" />
 
     <TextView
         android:id="@+id/tv_empty"

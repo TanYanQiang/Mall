@@ -12,10 +12,13 @@ import com.lehemobile.shopingmall.model.Order;
 import com.lehemobile.shopingmall.ui.view.OrderGoodsInfo;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.core.text.SpannableStringHelper;
+import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.w3c.dom.Text;
 
 /**
  * Created by tanyq on 22/7/16.
@@ -38,9 +41,9 @@ public class OrderListItemView extends LinearLayout {
     View orderAction;
 
     @ViewById
-    Button buttonLeft;
+    TextView buttonLeft;
     @ViewById
-    Button buttonRight;
+    TextView buttonRight;
 
     private Order order;
 
@@ -56,7 +59,13 @@ public class OrderListItemView extends LinearLayout {
 
         orderGoodsInfo.bindData(order);
 
-        orderCountPrice.setText(getResources().getString(R.string.label_order_count_price, order.getCount(), order.getTotalPrice()));
+        String price = Strings.doubleTrans(order.getTotalPrice());
+        String info = getResources().getString(R.string.label_order_count_price, order.getCount(), price);
+        new SpannableStringHelper(info)
+                .relativeSize("￥" + price, 1.3f)
+                .foregroundColor("￥" + price, getResources().getColor(R.color.text_color_lv1))
+                .attachToTextView(orderCountPrice);
+
 
         orderStatus.setText(order.getStatusDesc());
 
@@ -68,18 +77,26 @@ public class OrderListItemView extends LinearLayout {
         switch (order.getStatus()) {
             case Order.STATUS_WATING_PAY: //待付款
                 orderAction.setVisibility(VISIBLE);
+                buttonLeft.setText("关闭订单");
+                buttonLeft.setTextAppearance(getContext(), R.style.Button_GrayEmptyCorners_Cancel);
+                buttonLeft.setBackgroundResource(R.drawable.btn_gray_empty_corners_cancel);
 
-                buttonLeft.setText("取消订单");
                 buttonLeft.setVisibility(VISIBLE);
-                buttonRight.setText("待付款");
+                buttonRight.setText("去付款");
                 buttonRight.setVisibility(VISIBLE);
+                buttonRight.setTextAppearance(getContext(), R.style.Button_NormalEmptyCorners2);
+                buttonRight.setBackgroundResource(R.drawable.btn_normal_empty_corners2);
                 break;
             case Order.STATUS_WATING_RECEIPT_GOODS: //待收货
                 orderAction.setVisibility(VISIBLE);
                 buttonLeft.setText("查看物流");
                 buttonLeft.setVisibility(VISIBLE);
+                buttonLeft.setTextAppearance(getContext(), R.style.Button_GrayEmptyCorners_Cancel);
+                buttonLeft.setBackgroundResource(R.drawable.btn_gray_empty_corners_cancel);
                 buttonRight.setText("确认收货");
                 buttonRight.setVisibility(VISIBLE);
+                buttonRight.setTextAppearance(getContext(), R.style.Button_NormalEmptyCorners);
+                buttonRight.setBackgroundResource(R.drawable.btn_normal_empty_corners);
                 break;
             case Order.STATUS_COMPLETED: //待收货
                 orderAction.setVisibility(VISIBLE);
@@ -87,6 +104,8 @@ public class OrderListItemView extends LinearLayout {
 
                 buttonRight.setText("申请退款");
                 buttonRight.setVisibility(VISIBLE);
+                buttonRight.setTextAppearance(getContext(), R.style.Button_GrayEmptyCorners_Cancel);
+                buttonRight.setBackgroundResource(R.drawable.btn_gray_empty_corners_cancel);
                 break;
             default:
                 orderAction.setVisibility(GONE);

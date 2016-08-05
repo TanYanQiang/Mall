@@ -9,7 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.model.Order;
+import com.lehemobile.shopingmall.ui.view.Picasso.RoundedCornersTransformation;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -52,13 +54,18 @@ public class OrderGoodsInfo extends RelativeLayout {
     }
 
     public void bindData(Order order) {
-
-        goodsName.setText(order.getGoods().getName());
-        goodsPrice.setText(getResources().getString(R.string.label_order_price, order.getGoods().getPrice()));
+        Goods goods = order.getGoods();
+        goodsName.setText(goods.getName());
+        goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
         count.setText(getResources().getString(R.string.label_order_count, order.getCount()));
 
-        Picasso.with(getContext()).load(order.getGoods().getThumbnail())
-                .transform(new CropSquareTransformation())
+        Picasso.with(getContext()).load(goods.getThumbnail())
+                .resizeDimen(R.dimen.goods_thumb_width, R.dimen.goods_thumb_height)
+                .centerCrop()
+                .transform(new RoundedCornersTransformation(getResources().getDimensionPixelOffset(R.dimen.corners_small),
+                        0,
+                        getResources().getDimensionPixelOffset(R.dimen.goods_thumb_border_width),
+                        getResources().getColor(R.color.goods_thumb_borderColor)))
                 .into(orderThumb);
     }
 

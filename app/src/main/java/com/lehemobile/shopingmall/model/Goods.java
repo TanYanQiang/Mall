@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.model;
 
+import com.tgh.devkit.core.utils.Strings;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -62,6 +64,10 @@ public class Goods implements Serializable {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getPriceString() {
+        return Strings.doubleTrans(price);
     }
 
     public void setPrice(double price) {

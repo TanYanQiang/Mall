@@ -52,7 +52,7 @@ public class GoodsGridItemView extends LinearLayout {
 
     public void updateUI(Goods goods) {
         Picasso.with(getContext()).load(goods.getThumbnail()).into(thumbImage);
-        goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPrice()));
+        goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
         goodsName.setText(goods.getName());
 
         favorite.setText(String.valueOf(goods.getFavoriteCount()));

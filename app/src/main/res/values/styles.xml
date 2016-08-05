@@ -73,10 +73,16 @@
         <item name="android:textColor">@color/text_red_solid</item>
     </style>
 
-    <style name="Button.RedEmptyCorners" parent="Button">
-        <item name="android:background">@drawable/btn_red_empty_corners</item>
-        <item name="android:textColor">@color/text_red</item>
+    <style name="Button.NormalEmptyCorners" parent="Button">
+        <item name="android:background">@drawable/btn_normal_empty_corners</item>
+        <item name="android:textColor">@color/text_normal_empty_btn</item>
     </style>
+
+    <style name="Button.NormalEmptyCorners2" parent="Button">
+        <item name="android:background">@drawable/btn_normal_empty_corners2</item>
+        <item name="android:textColor">@color/text_normal_empty_btn2</item>
+    </style>
+
 
     <style name="Button.GrayEmptyCorners" parent="Button">
         <item name="android:background">@drawable/btn_gray_empty_corners</item>
@@ -86,6 +92,11 @@
     <style name="Button.GrayEmptyCorners2" parent="Button">
         <item name="android:background">@drawable/btn_gray_empty_corners2</item>
         <item name="android:textColor">@color/btn_gray_text_2</item>
+    </style>
+
+    <style name="Button.GrayEmptyCorners.Cancel" parent="Button">
+        <item name="android:background">@drawable/btn_gray_empty_corners_cancel</item>
+        <item name="android:textColor">@color/btn_gray_text_cancel</item>
     </style>
 
     <style name="Button.WhiteEmpty" parent="Button">
@@ -125,6 +136,11 @@
     <style name="TextStyle.Title.Large">
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textColor">@color/text_color_lv1</item>
+    </style>
+
+    <style name="TextStyle.Title.Large.Gray">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/text_color_lv2</item>
     </style>
 
     <style name="TextStyle.Title.Large.Solid">
@@ -170,6 +186,7 @@
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/text_color_lv3</item>
     </style>
+
     <style name="TextStyle.Desc.Small.Gray2">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/text_color_lv4</item>

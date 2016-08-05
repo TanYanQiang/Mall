@@ -73,7 +73,7 @@ public class OrderListFragment extends BaseFragment {
         goods.setId(1);
         goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒");
         goods.setPrice(100);
-        goods.setThumbnail("http://s.cn.bing.net/az/hprichbg/rb/Bittermelon_ZH-CN13629728807_1920x1080.jpg");
+        goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/28/175/03023995.jpg");
         for (int i = 0; i < 30; i++) {
             //待付款订单
             if (type == 0 || type == 1) {

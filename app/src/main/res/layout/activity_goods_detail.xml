@@ -38,7 +38,7 @@
 
             <Button
                 android:id="@+id/addShoppingCart"
-                style="@style/Button.RedEmptyCorners"
+                style="@style/Button.NormalEmptyCorners"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
