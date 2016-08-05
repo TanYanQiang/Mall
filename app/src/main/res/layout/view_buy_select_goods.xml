@@ -28,8 +28,8 @@
 
         <ImageView
             android:id="@+id/goodsThumb"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="@dimen/order_goods_thumb_width"
+            android:layout_height="@dimen/order_goods_thumb_height" />
 
         <TextView
             android:id="@+id/goodsName"

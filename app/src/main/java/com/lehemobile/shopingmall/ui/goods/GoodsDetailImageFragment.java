@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.ui.goods;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +31,8 @@ public class GoodsDetailImageFragment extends BaseFragment {
     Goods goods;
     @ViewById
     LinearLayout container;
+    @ViewById
+    RecyclerView recyclerView;
 
 
     @AfterViews
@@ -41,6 +45,18 @@ public class GoodsDetailImageFragment extends BaseFragment {
             imageView.bindData(imageUrl);
             container.addView(imageView);
         }
+
+    }
+
+    private void showRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+        List<String> detailImages = goods.getDetailImages();
+        if (detailImages == null || detailImages.isEmpty()) return;
+        GoodsDetailImageAdapter adapter = new GoodsDetailImageAdapter(getContext(), goods.getDetailImages());
+        recyclerView.setAdapter(adapter);
     }
 
 }

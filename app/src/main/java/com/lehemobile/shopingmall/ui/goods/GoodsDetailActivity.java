@@ -89,27 +89,22 @@ public class GoodsDetailActivity extends BaseActivity {
 
         Goods goods = new Goods();
         goods.setId(goodsId);
-        goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 ");
+        goods.setName("Watbalan水博兰水润保湿平衡面膜10片/27g ，肌肤水润平衡动力源，镇定肌肤，强化水分，超微颗粒深入肌底，长效补充水分");
         goods.setPrice(100);
-        goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/19/32/16159711.jpg");
+        goods.setThumbnail("http://a.vpimg2.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110.jpg");
         goods.setTradingCount(200);
         List<String> images = new ArrayList<>();
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-1_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-2_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-3_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-4_710x897_80.jpg");
-        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-15_710x897_80.jpg");
+        images.add("http://a.vpimg2.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110.jpg");
+//        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-2_710x897_80.jpg");
         goods.setImages(images);
 
         goods.setDetail("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
 
         List<String> detailImages = new ArrayList<>();
-        detailImages.add("http://a.vpimg2.com/upload/merchandise/pdcvis/2016/07/22/174/24d54a2d-2614-4741-9828-e0882683b793.jpg");
-        detailImages.add("http://a.vpimg2.com/upload/merchandise/pdcvis/2016/07/22/11/69fdb6c7-4025-4f6c-8116-0e265aca3336.jpg");
-        detailImages.add("http://shop.vipstatic.com/img/te/beauty_resource/bt_img_faq.jpg?12016072802");
-        detailImages.add("http://shop.vipstatic.com/img/te/beauty_resource/bt_img6.jpg?12016072802");
-        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/035/836/5935820670513836035/0/1804946-6_1440x8000_90.jpg");
-        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
+//        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/884/474/1097265726116474884/9/8809261550468-110_1_1440x8000_90.jpg");
+//        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/884/474/1097265726116474884/9/8809261550468-110_2_1440x8000_90.jpg");
+//        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/884/474/1097265726116474884/9/8809261550468-110_4_1440x8000_90.jpg");
+        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110_2_1440x8000_90.jpg");
         goods.setDetailImages(detailImages);
         session.setGoods(goods);
         session.setFavorite(false);
@@ -117,9 +112,9 @@ public class GoodsDetailActivity extends BaseActivity {
         for (int i = 0; i < 10; i++) {
             Goods reGoods = new Goods();
             reGoods.setId(goodsId);
-            reGoods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 ");
+            reGoods.setName("Watbalan水博兰水润保湿平衡面膜10片/27g ，肌肤水润平衡动力源，镇定肌肤，强化水分，超微颗粒深入肌底，长效补充水分");
             reGoods.setPrice(100 * i);
-            reGoods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/19/32/16159711.jpg");
+            reGoods.setThumbnail("http://a.vpimg2.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110.jpg");
 
             recommendGoods.add(reGoods);
         }

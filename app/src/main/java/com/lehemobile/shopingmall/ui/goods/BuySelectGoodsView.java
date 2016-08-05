@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
+import com.lehemobile.shopingmall.ui.view.Picasso.PicassoHelper;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.Click;
@@ -59,7 +60,7 @@ public class BuySelectGoodsView extends LinearLayout {
     public void bindData(GoodsDetailSession session) {
         this.session = session;
         Goods goods = session.getGoods();
-        Picasso.with(getContext()).load(goods.getThumbnail()).fit().centerCrop().into(goodsThumb);
+        PicassoHelper.showGoodsThumb(getContext(),goods.getThumbnail(),goodsThumb);
         goodsName.setText(goods.getName());
         goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
         stock.setText(getResources().getString(R.string.label_goods_stock, goods.getStock()));
