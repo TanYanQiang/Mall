@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
+        android:gravity="center_vertical"
         android:minHeight="@dimen/line_height_lv1"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/margin_8"
@@ -19,14 +20,14 @@
 
         <TextView
             android:id="@+id/favorite"
-            style="@style/TextStyle.Desc"
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:drawableTop="@drawable/ic_menu_send"
-            android:paddingLeft="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_vertical_margin"
-            android:text="收藏" />
+            android:drawableTop="@mipmap/ic_collection_normal"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="收藏"
+            android:textColor="@color/text_color_lv2"
+            android:textSize="@dimen/text_size_tiny" />
 
         <View style="@style/VerticalLineStyle" />
 
@@ -137,49 +138,47 @@
                     tools:text="交易成功5888件" />
             </RelativeLayout>
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
+            <LinearLayout
+                android:id="@+id/recommendLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginTop="9dp"
                 android:background="@color/white"
-                android:divider="@drawable/divider_vertical"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/line_height_lv1"
-                android:orientation="horizontal"
+                android:divider="@drawable/divider_horizontal"
+                android:orientation="vertical"
                 android:showDividers="middle">
 
-                <RadioButton
-                    android:id="@+id/goodsDetail"
-                    style="@style/TextStyle.Title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="图文详情"
-                    android:textColor="@color/text_select_color" />
+                <TextView
+                    style="@style/TextStyle.Title.Medium.Gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:gravity="center_vertical"
+                    android:text="推荐搭配" />
 
-                <RadioButton
-                    android:id="@+id/goodsInfo"
-                    android:layout_width="0dp"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recommendList"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="产品参数"
-                    android:textColor="@color/text_select_color" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/goodsComments"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="用户评价"
-                    android:textColor="@color/text_select_color" />
-            </RadioGroup>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                app:tabBackground="@color/white"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+                app:tabTextColor="@color/text_color_lv2" />
 
             <View style="@style/HorizontalLineStyle" />
 

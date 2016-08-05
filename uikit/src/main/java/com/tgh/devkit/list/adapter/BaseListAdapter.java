@@ -56,6 +56,10 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
+    public void setData(Collection<? extends T> collection){
+        this.data = (List<T>) collection;
+        notifyDataSetChanged();
+    }
 
     public void addAll(Collection<? extends T> collection) {
         synchronized (Lock) {

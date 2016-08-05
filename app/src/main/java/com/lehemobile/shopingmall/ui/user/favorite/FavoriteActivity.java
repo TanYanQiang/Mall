@@ -131,7 +131,7 @@ public class FavoriteActivity extends BaseActivity {
         } else {
             boolean status = data.remove(event.getGoods());
         }
-        pageListHelper.getAdapter().notifyDataSetChanged();
+        pageListHelper.getAdapter().setData(data);
     }
 
 }

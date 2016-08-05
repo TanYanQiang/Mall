@@ -59,7 +59,7 @@ public class BuySelectGoodsView extends LinearLayout {
     public void bindData(GoodsDetailSession session) {
         this.session = session;
         Goods goods = session.getGoods();
-        Picasso.with(getContext()).load(goods.getThumbnail()).centerCrop().into(goodsThumb);
+        Picasso.with(getContext()).load(goods.getThumbnail()).fit().centerCrop().into(goodsThumb);
         goodsName.setText(goods.getName());
         goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
         stock.setText(getResources().getString(R.string.label_goods_stock, goods.getStock()));

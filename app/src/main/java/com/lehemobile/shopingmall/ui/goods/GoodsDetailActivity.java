@@ -3,7 +3,10 @@ package com.lehemobile.shopingmall.ui.goods;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Paint;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -61,13 +64,13 @@ public class GoodsDetailActivity extends BaseActivity {
     TextView tradingCount;
 
     @ViewById
-    RadioGroup radioGroup;
+    View recommendLayout;
     @ViewById
-    RadioButton goodsDetail;
+    RecyclerView recommendList;
+
+
     @ViewById
-    RadioButton goodsInfo;
-    @ViewById
-    RadioButton goodsComments;
+    TabLayout tabs;
 
     @ViewById
     FrameLayout container;
@@ -88,7 +91,8 @@ public class GoodsDetailActivity extends BaseActivity {
         goods.setId(goodsId);
         goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 ");
         goods.setPrice(100);
-        goods.setThumbnail("http://s.cn.bing.net/az/hprichbg/rb/Bittermelon_ZH-CN13629728807_1920x1080.jpg");
+        goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/19/32/16159711.jpg");
+        goods.setTradingCount(200);
         List<String> images = new ArrayList<>();
         images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-1_710x897_80.jpg");
         images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-2_710x897_80.jpg");
@@ -108,30 +112,66 @@ public class GoodsDetailActivity extends BaseActivity {
         detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
         goods.setDetailImages(detailImages);
         session.setGoods(goods);
-        session.setFavorite(true);
+        session.setFavorite(false);
+        List<Goods> recommendGoods = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Goods reGoods = new Goods();
+            reGoods.setId(goodsId);
+            reGoods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 ");
+            reGoods.setPrice(100 * i);
+            reGoods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/19/32/16159711.jpg");
+
+            recommendGoods.add(reGoods);
+        }
+
+        session.setRecommendGoods(recommendGoods);
+
         updateUI();
     }
 
     @AfterViews
     void init() {
+
+
+        initTabLayout();
+
         initGalleryUI();
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        initRecommendList();
+
+        loadData();
+    }
+
+    private void initTabLayout() {
+        tabs.addTab(tabs.newTab().setText("图片详情").setTag(1));
+        tabs.addTab(tabs.newTab().setText("产品参数").setTag(2));
+        tabs.addTab(tabs.newTab().setText("用户评价").setTag(3));
+        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (radioGroup.getCheckedRadioButtonId()) {
-                    case R.id.goodsDetail:
+            public void onTabSelected(TabLayout.Tab tab) {
+                int index = (int) tab.getTag();
+                switch (index) {
+                    case 1:
                         updateDetailUI();
                         break;
-                    case R.id.goodsInfo:
+                    case 2:
                         updateGoodsDetailInfoUI();
                         break;
-                    case R.id.goodsComments:
+                    case 3:
                         updateGoodsCommentsUI();
                         break;
                 }
             }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
         });
-        loadData();
     }
 
     private void initGalleryUI() {
@@ -154,13 +194,21 @@ public class GoodsDetailActivity extends BaseActivity {
         });
     }
 
+    private void initRecommendList() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recommendList.setLayoutManager(layoutManager);
+    }
+
 
     private void updateUI() {
 
         updateGalleryUI(session.getGoods().getImages());
         updateGoodsInfoUI();
-        goodsDetail.setChecked(true);
+        updateDetailUI();
         updateFavoriteUI();
+
+        updateRecommendGoodsUI(session.getRecommendGoods());
     }
 
     private void updateFavoriteUI() {
@@ -238,6 +286,17 @@ public class GoodsDetailActivity extends BaseActivity {
             return imageView;
         }
     }
+    private void updateRecommendGoodsUI(List<Goods> recommendGoods) {
+        if(recommendGoods == null || recommendGoods.isEmpty()){
+            recommendLayout.setVisibility(View.GONE);
+        }else{
+            recommendLayout.setVisibility(View.VISIBLE);
+            RecommendGoodsAdapter adapter = new RecommendGoodsAdapter(this, recommendGoods);
+            recommendList.setAdapter(adapter);
+        }
+    }
+
+
 
     @Click(R.id.favorite)
     void doFavorite() {
@@ -274,4 +333,5 @@ public class GoodsDetailActivity extends BaseActivity {
 
         dialog.show();
     }
+
 }
