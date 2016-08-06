@@ -158,8 +158,9 @@ public class AddressListsActivity extends BaseActivity {
     void onAddResult(int resultCode, Intent data) {
         if (resultCode != RESULT_OK) return;
         Address address = (Address) data.getSerializableExtra(AppConfig.Extra);
-        pageListHelper.getData().add(address);
-        pageListHelper.getAdapter().notifyDataSetChanged();
+        ArrayList<Address> lists = pageListHelper.getData();
+        lists.add(address);
+        pageListHelper.getAdapter().setData(lists);
     }
 
     @OnActivityResult(REQUEST_EDIT_CODE)
@@ -171,7 +172,7 @@ public class AddressListsActivity extends BaseActivity {
         Logger.i("edit indexOf:" + indexOf);
         if (indexOf >= 0 && indexOf < pageListHelper.getData().size()) {
             lists.set(indexOf, address);
-            pageListHelper.getAdapter().notifyDataSetChanged();
+            pageListHelper.getAdapter().setData(lists);
         }
     }
 }
