@@ -24,6 +24,7 @@ import com.lehemobile.shopingmall.ui.user.favorite.FavoriteActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.ui.user.login.RegisterStep1Activity_;
 import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
+import com.lehemobile.shopingmall.ui.view.Picasso.PicassoHelper;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 
@@ -97,10 +98,8 @@ public class AccountActivity extends BaseActivity {
 
     private void updateUserInfo() {
         User user = ConfigManager.getUser();
-        Picasso.with(this).load(user.getAvatar())
-                .placeholder(R.mipmap.avatar_default)
-                .transform(new CropCircleTransformation(getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.avatar_borderColor)))
-                .into(avatar);
+
+        PicassoHelper.showCircleImage(user.getAvatar(), avatar, R.dimen.avatar_borderWidth, R.color.avatar_borderColor);
 
         nick.setText(user.getNick());
         userId.setText(getString(R.string.label_account_userID, "" + user.getUserId()));

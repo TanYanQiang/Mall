@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
+import com.lehemobile.shopingmall.ui.view.Picasso.PicassoHelper;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -49,11 +50,7 @@ public class TeamUserView extends LinearLayout {
     public void bindData(User user) {
 
         name.setText(user.getNick());
-
-        if (TextUtils.isEmpty(user.getAvatar())) return;
-        Picasso.with(getContext()).load(user.getAvatar())
-                .transform(new CropCircleTransformation(getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.team_avatar_borderColor)))
-                .into(avatar);
+        PicassoHelper.showCircleImage(user.getAvatar(), avatar, R.dimen.avatar_borderWidth, R.color.team_avatar_borderColor);
     }
 
 }

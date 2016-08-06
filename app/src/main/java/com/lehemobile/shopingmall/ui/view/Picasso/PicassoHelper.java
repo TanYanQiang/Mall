@@ -1,8 +1,12 @@
 package com.lehemobile.shopingmall.ui.view.Picasso;
 
 import android.content.Context;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
+import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
+import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
 import com.squareup.picasso.Picasso;
 
@@ -12,7 +16,7 @@ import com.squareup.picasso.Picasso;
 public class PicassoHelper {
     public static void showGoodsThumb(Context context, String imageUrl, ImageView imageView) {
         Picasso.with(context).load(imageUrl)
-                .resizeDimen(R.dimen.order_goods_thumb_width, R.dimen.order_goods_thumb_height)
+                .fit()
                 .centerCrop()
                 .transform(new RoundedCornersTransformation(context.getResources().getDimensionPixelOffset(R.dimen.corners_small),
                         0,
@@ -20,4 +24,28 @@ public class PicassoHelper {
                         context.getResources().getColor(R.color.goods_thumb_borderColor)))
                 .into(imageView);
     }
+
+    public static void showAvatarCircleImage(String imageUrl, ImageView imageView) {
+
+        showCircleImage(imageUrl, imageView, R.dimen.avatar_borderWidth, R.color.avatar_borderColor);
+    }
+
+    public static void showCircleImage(String imageUrl, ImageView imageView) {
+        Picasso.with(MyApplication.getInstance()).load(imageUrl).transform(new CropCircleTransformation()).into(imageView);
+    }
+
+    public static void showCircleImage(String imageUrl, ImageView imageView, @DimenRes int borderWidth, @ColorRes int borderColor) {
+        showCircleImage(imageUrl, imageView, R.mipmap.avatar_default, borderWidth, borderColor);
+    }
+
+    public static void showCircleImage(String imageUrl, ImageView imageView, @DrawableRes int placeholder, @DimenRes int borderWidth, @ColorRes int borderColor) {
+        MyApplication context = MyApplication.getInstance();
+        Picasso.with(context)
+                .load(imageUrl)
+                .placeholder(placeholder)
+                .transform(new CropCircleTransformation(context.getResources().getDimension(borderWidth),
+                        context.getResources().getColor(borderColor)))
+                .into(imageView);
+    }
+
 }

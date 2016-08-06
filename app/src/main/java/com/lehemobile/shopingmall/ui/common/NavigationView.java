@@ -20,6 +20,7 @@ import com.lehemobile.shopingmall.ui.user.AccountActivity_;
 import com.lehemobile.shopingmall.ui.user.distribution.team.TeamUserListActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
+import com.lehemobile.shopingmall.ui.view.Picasso.PicassoHelper;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 
@@ -85,10 +86,7 @@ public class NavigationView extends FrameLayout {
     private void updateUI() {
         if (ConfigManager.isLogin()) {
             User user = ConfigManager.getUser();
-            Picasso.with(getContext()).load(user.getAvatar())
-                    .placeholder(R.mipmap.avatar_default)
-                    .transform(new CropCircleTransformation(getResources().getDimension(R.dimen.avatar_borderWidth), getResources().getColor(R.color.avatar_borderColor)))
-                    .into(avatar);
+            PicassoHelper.showCircleImage(user.getAvatar(), avatar, R.dimen.avatar_borderWidth, R.color.avatar_borderColor);
         } else {
             Picasso.with(getContext()).load(R.mipmap.avatar_default).into(avatar);
         }

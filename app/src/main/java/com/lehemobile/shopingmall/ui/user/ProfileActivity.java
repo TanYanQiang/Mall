@@ -15,6 +15,7 @@ import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
+import com.lehemobile.shopingmall.ui.view.Picasso.PicassoHelper;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -89,13 +90,7 @@ public class ProfileActivity extends BaseActivity implements ActivityCompat.OnRe
 
 
     private void updateAvatar() {
-        if(TextUtils.isEmpty(user.getAvatar())){
-
-            Picasso.with(this).load(R.mipmap.avatar_default).transform(new CropCircleTransformation()).into(avatar);
-            return;
-        }
-        Picasso.with(this).load(user.getAvatar()).transform(new CropCircleTransformation()).into(avatar);
-
+        PicassoHelper.showCircleImage(user.getAvatar(), avatar);
     }
 
     private void updateNick() {
