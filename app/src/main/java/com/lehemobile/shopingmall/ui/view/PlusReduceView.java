@@ -19,9 +19,23 @@ import org.androidannotations.annotations.ViewById;
  */
 @EViewGroup(R.layout.view_plus_reduce)
 public class PlusReduceView extends LinearLayout {
+    public interface OnPlusReduceListener {
+        /**
+         * 值改变
+         *
+         * @param number
+         */
+        void onNumberChanged(int number);
+    }
 
     @ViewById(R.id.number)
     EditText numberEt;
+
+    public void setOnPlusReduceListener(OnPlusReduceListener onPlusReduceListener) {
+        this.onPlusReduceListener = onPlusReduceListener;
+    }
+
+    private OnPlusReduceListener onPlusReduceListener;
 
     public PlusReduceView(Context context) {
         super(context);
@@ -45,6 +59,11 @@ public class PlusReduceView extends LinearLayout {
         numberEt.setText("1");
     }
 
+    public void setNumber(int number) {
+        numberEt.setText(String.valueOf(number));
+    }
+
+
     public int getNumber() {
         String string = numberEt.getText().toString();
         return Integer.parseInt(string);
@@ -54,11 +73,21 @@ public class PlusReduceView extends LinearLayout {
     void reduce() {
         int number = getNumber() - 1;
         number = number < 1 ? 1 : number;
+
+        onChanage(number);
         numberEt.setText(String.valueOf(number));
     }
 
     @Click
     void plus() {
-        numberEt.setText(String.valueOf(getNumber() + 1));
+        int number = getNumber() + 1;
+        numberEt.setText(String.valueOf(number));
+        onChanage(number);
+    }
+
+    private void onChanage(int number) {
+        if (onPlusReduceListener != null) {
+            onPlusReduceListener.onNumberChanged(number);
+        }
     }
 }

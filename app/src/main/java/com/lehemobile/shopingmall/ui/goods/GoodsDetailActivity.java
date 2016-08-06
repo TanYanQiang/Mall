@@ -20,6 +20,8 @@ import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity;
+import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity_;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.tgh.devkit.core.text.SpannableStringHelper;
@@ -299,6 +301,7 @@ public class GoodsDetailActivity extends BaseActivity {
     @OptionsItem(R.id.action_shopping)
     void goShopping() {
         Logger.i("点击购物车");
+        ShoppingCartActivity_.intent(this).start();
     }
 
     @OptionsItem(R.id.action_share)

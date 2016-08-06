@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:id="@+id/line"
+            style="@style/HorizontalLineStyle"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/goPay"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/line"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="去结算"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large" />
+
+        <CheckBox
+            android:id="@+id/selectAll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/line"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:background="@color/transparent"
+            android:button="@drawable/orange_radio"
+            android:paddingLeft="8dp"
+            android:text="全选"
+            android:textColor="@color/text_color_lv3"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/line"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:layout_toRightOf="@id/selectAll"
+            android:gravity="center"
+            android:text="合计："
+            android:textColor="@color/text_color_lv3"
+            android:textSize="@dimen/text_size_large" />
+
+        <TextView
+            android:id="@+id/totalPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/line"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/goPay"
+            android:layout_toRightOf="@id/label"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size_small"
+            tools:text="￥12" />
+    </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/listView"
+        style="@style/ListViewStyle"
+        android:layout_above="@id/bottomLayout"
+        android:divider="@color/transparent"
+        android:dividerHeight="0dp" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:text="你还没有添加商品到购物车"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</RelativeLayout>

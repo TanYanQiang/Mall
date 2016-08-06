@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginBottom="10dp"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_alignParentTop="true" />
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_alignParentBottom="true" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:background="@color/transparent"
+        android:button="@drawable/orange_radio" />
+
+    <ImageView
+        android:id="@+id/goodsThumb"
+        android:layout_width="@dimen/goods_thumb_width"
+        android:layout_height="@dimen/goods_thumb_height"
+        android:layout_marginBottom="22dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="22dp"
+        android:layout_toRightOf="@id/checkbox"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/goodsName"
+        style="@style/TextStyle.Title.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/goodsThumb"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/goodsThumb"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="超级无敌面膜超级无敌面膜超级无敌面膜超级无敌面膜超级无敌面膜超级无敌面膜" />
+
+
+    <com.lehemobile.shopingmall.ui.view.PlusReduceView_
+        android:id="@+id/plusReduceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/goodsName"
+        android:layout_below="@id/goodsName"
+        android:layout_marginTop="17dp" />
+
+    <TextView
+        android:id="@+id/goodsPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/plusReduceView"
+        android:layout_alignLeft="@id/goodsName"
+        android:layout_alignTop="@id/plusReduceView"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_large"
+        tools:text="￥12" />
+</RelativeLayout>

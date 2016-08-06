@@ -23,4 +23,5 @@
     <string name="title_activity_Heroes">英雄榜</string>
     <string name="title_activity_Category">全部分类</string>
     <string name="title_activity_AppleRefund">申请退款</string>
+    <string name="title_activity_ShoppingCart">购物车</string>
 </resources>

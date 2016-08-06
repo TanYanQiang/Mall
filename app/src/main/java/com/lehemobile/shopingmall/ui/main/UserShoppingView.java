@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity_;
 import com.lehemobile.shopingmall.ui.user.AccountActivity_;
 
 import org.androidannotations.annotations.Click;
@@ -44,5 +45,6 @@ public class UserShoppingView extends LinearLayout {
     @Click(R.id.shopping)
     void goShoppingCart() {
         //TODO 去购物车
+        ShoppingCartActivity_.intent(getContext()).start();
     }
 }

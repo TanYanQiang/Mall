@@ -22,7 +22,7 @@ public class Goods implements Serializable {
     private boolean favorite;
     private int favoriteCount;
 
-    private int buyCount; //购买数量
+    private int buyCount = 1; //购买数量
 
     private int tradingCount; //销售量
 
