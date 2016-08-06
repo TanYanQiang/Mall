@@ -7,44 +7,131 @@
     android:orientation="vertical"
     android:showDividers="middle">
 
-    <TextView
+
+    <RelativeLayout
         android:id="@+id/clearCache"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_gravity="center_vertical"
+        android:background="#f9f9f9"
         android:gravity="center_vertical"
-        android:minHeight="@dimen/line_height_lv1"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin">
+
+        <TextView
+            style="@style/TextStyle.Title.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="#f9f9f9"
+            android:gravity="center_vertical"
+            android:text="清除图片缓存" />
+
+        <TextView
+            android:id="@+id/cacheSize"
+            style="@style/TextStyle.Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="8dp"
+            android:drawableRight="@mipmap/ic_arrow_right"
+            android:gravity="center_vertical"
+            tools:text="100M" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_gravity="center_vertical"
+        android:background="#f9f9f9"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin">
+
+
+        <CheckBox
+            android:id="@+id/imageSwitch"
+            style="@style/TextStyle.Title.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:drawableRight="@drawable/orange_radio"
+            android:gravity="left|center_vertical"
+            android:text="2G/3G网络显示原图" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_gravity="center_vertical"
+        android:background="#f9f9f9"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin">
+
+        <CheckBox
+            android:id="@+id/notificationSwitch"
+            style="@style/TextStyle.Title.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:drawableRight="@drawable/orange_radio"
+            android:gravity="left|center_vertical"
+            android:text="接收通知" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_lv1"
+        android:layout_gravity="center_vertical"
+        android:background="#f9f9f9"
+        android:gravity="center_vertical"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin"
-        android:text="清除图片缓存"
-        android:textColor="@color/text_color_lv1"
-        android:textSize="@dimen/text_size_lv1" />
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/saleReminderSwitch"
+            style="@style/TextStyle.Title.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:drawableRight="@drawable/orange_radio"
+            android:gravity="left|center_vertical"
+            android:text="开售提醒" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/versionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#f9f9f9"
         android:gravity="center_vertical"
         android:minHeight="@dimen/line_height_lv1"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin">
 
         <TextView
+            style="@style/TextStyle.Title.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-
-            android:text="版本"
-            android:textColor="@color/text_color_lv1"
-            android:textSize="@dimen/text_size_lv1" />
+            android:text="版本" />
 
         <TextView
             android:id="@+id/version"
+            style="@style/TextStyle.Desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
-            android:textColor="@color/text_color_lv2"
-            android:textSize="@dimen/text_size_lv1"
             tools:text="1.0" />
     </RelativeLayout>
 
@@ -54,6 +141,6 @@
         style="@style/Button.NormalCorners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="退出登录" />
 </LinearLayout>

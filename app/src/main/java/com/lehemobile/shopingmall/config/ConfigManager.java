@@ -14,6 +14,9 @@ public class ConfigManager {
     public static final String USER_ID = "user_id";
     public static final String USER = "user";
     public static final String REGION = "region";
+    public static final String IMAGE_SWITCH = "imageSwitch";
+    public static final String NOTIFICATION_SWITCH = "notificationSwitch";
+    public static final String SALE_REMINDER_SWITCH = "saleReminderSwitch";
 
     private static User _user;
 
@@ -67,6 +70,29 @@ public class ConfigManager {
         return getUser() != null;
     }
 
+    public static void setImageSwitch(boolean isChecked) {
+        getDefaultBindVersionStore().save(getKeyByUser(IMAGE_SWITCH), isChecked);
+    }
+
+    public static boolean getImageSwitch() {
+        return getDefaultBindVersionStore().getBoolean(getKeyByUser(IMAGE_SWITCH),true);
+    }
+
+    public static void setNotificationSwitch(boolean isChecked) {
+        getDefaultBindVersionStore().save(getKeyByUser(NOTIFICATION_SWITCH), isChecked);
+    }
+
+    public static boolean gettNotificationSwitch() {
+        return getDefaultBindVersionStore().getBoolean(getKeyByUser(NOTIFICATION_SWITCH),true);
+    }
+
+    public static void setSaleReminderSwitch(boolean isChecked) {
+        getDefaultBindVersionStore().save(getKeyByUser(SALE_REMINDER_SWITCH), isChecked);
+    }
+
+    public static boolean getSaleReminderSwitch() {
+        return getDefaultBindVersionStore().getBoolean(getKeyByUser(SALE_REMINDER_SWITCH),true);
+    }
 
     public static class Device {
         public static final String LAST_MOBILE = "last_mobile";

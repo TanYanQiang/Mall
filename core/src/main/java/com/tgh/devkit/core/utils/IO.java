@@ -22,6 +22,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.CharBuffer;
+import java.util.logging.Logger;
 
 /**
  * Created by albert on 16/1/8.
@@ -274,4 +275,24 @@ public class IO {
             }
         }
     }
+
+    public static long getSize(File file) {
+
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            long size = 0;
+            for (File f : files) {
+                long _size = getSize(f);
+                DebugLog.i("file:" + f.getName() + "  Size:" + _size);
+                size += _size;
+            }
+            return size;
+        }
+        if (file.exists()) {
+            return file.length();
+        }
+
+        return 0;
+    }
+
 }
