@@ -33,6 +33,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -44,6 +47,7 @@ import de.greenrobot.event.EventBus;
  * Created by  on 24/7/16.
  */
 @EActivity(R.layout.activity_goods_detail)
+@OptionsMenu(R.menu.menu_goods_detail)
 public class GoodsDetailActivity extends BaseActivity {
     @Extra
     int goodsId;
@@ -281,16 +285,26 @@ public class GoodsDetailActivity extends BaseActivity {
             return imageView;
         }
     }
+
     private void updateRecommendGoodsUI(List<Goods> recommendGoods) {
-        if(recommendGoods == null || recommendGoods.isEmpty()){
+        if (recommendGoods == null || recommendGoods.isEmpty()) {
             recommendLayout.setVisibility(View.GONE);
-        }else{
+        } else {
             recommendLayout.setVisibility(View.VISIBLE);
             RecommendGoodsAdapter adapter = new RecommendGoodsAdapter(this, recommendGoods);
             recommendList.setAdapter(adapter);
         }
     }
 
+    @OptionsItem(R.id.action_shopping)
+    void goShopping() {
+        Logger.i("点击购物车");
+    }
+
+    @OptionsItem(R.id.action_share)
+    void doShare() {
+        Logger.i("点击分享");
+    }
 
 
     @Click(R.id.favorite)
