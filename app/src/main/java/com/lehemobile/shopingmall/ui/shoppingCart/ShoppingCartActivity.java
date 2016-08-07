@@ -14,6 +14,7 @@ import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.model.ShoppingSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
+import com.lehemobile.shopingmall.ui.order.ConfirmOrderActivity_;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.text.SpannableStringHelper;
@@ -167,7 +168,7 @@ public class ShoppingCartActivity extends BaseActivity {
     @Click
     void goPay() {
         //// TODO: 6/8/16 去支付
-        List<Goods> goodsList = new ArrayList<>();
+        ArrayList<Goods> goodsList = new ArrayList<>();
         if (pageListHelper == null) return;
         ArrayList<ShoppingSession> data = pageListHelper.getData();
         if (data == null || data.isEmpty()) return;
@@ -182,6 +183,7 @@ public class ShoppingCartActivity extends BaseActivity {
         }
         //
         Logger.i("去付款");
+        ConfirmOrderActivity_.intent(this).goodsList(goodsList).start();
     }
 
 }

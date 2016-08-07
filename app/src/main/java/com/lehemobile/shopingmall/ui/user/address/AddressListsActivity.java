@@ -11,6 +11,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.AppConfig;
+import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.model.Address;
 import com.lehemobile.shopingmall.model.City;
 import com.lehemobile.shopingmall.model.District;
@@ -23,6 +24,7 @@ import com.tgh.devkit.list.adapter.BaseListAdapter;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 
@@ -37,6 +39,13 @@ import java.util.List;
 @EActivity(R.layout.activity_address_list)
 public class AddressListsActivity extends BaseActivity {
 
+    public static final int TYPE_CHOOSE_ADDRESS = 1;
+    public static final int TYPE_MANAGER_ADDRESS = 0;
+
+    @Extra
+    int type;
+
+
     public static final int REQUEST_ADD_CODE = 1;
     public static final int REQUEST_EDIT_CODE = 2;
     @ViewById
@@ -47,7 +56,7 @@ public class AddressListsActivity extends BaseActivity {
 
     @AfterViews
     void init() {
-
+        setTitle(type == TYPE_CHOOSE_ADDRESS ? R.string.title_activity_ChooseAddressList : R.string.title_activity_AddressList);
         pageListHelper = new PageListHelper<Address>(listView) {
             @Override
             public void loadData(int page, int pageCount) {
@@ -60,8 +69,13 @@ public class AddressListsActivity extends BaseActivity {
             }
 
             @Override
-            public void onItemClicked(int position, Address order) {
-
+            public void onItemClicked(int position, Address address) {
+                if (type == TYPE_CHOOSE_ADDRESS) {
+                    Intent intent = new Intent();
+                    intent.putExtra(AppConfig.Extra, address);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         };
         pageListHelper.setEmptyView(tv_empty);
@@ -136,6 +150,9 @@ public class AddressListsActivity extends BaseActivity {
                     ArrayList<Address> data = pageListHelper.getData();
                     for (Address ad : data) {
                         ad.setDefault(ad.equals(address));
+                        if (ad.isDefault()) {
+                            ConfigManager.setUserDefaultAddress(ad);
+                        }
                     }
                     pageListHelper.getAdapter().notifyDataSetChanged();
                 }

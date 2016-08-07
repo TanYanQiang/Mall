@@ -13,6 +13,7 @@
     <string name="title_activity_OrderPay">确认订单</string>
     <string name="title_activity_OrderKuaidi">物流详情</string>
     <string name="title_activity_AddressList">收货地址管理</string>
+    <string name="title_activity_ChooseAddressList">选择收货地址</string>
     <string name="title_activity_AddAddress">新增收货地址</string>
     <string name="title_activity_Favorite">我的收藏</string>
     <string name="title_activity_GoodsDetail">商品详情</string>
@@ -24,4 +25,5 @@
     <string name="title_activity_Category">全部分类</string>
     <string name="title_activity_AppleRefund">申请退款</string>
     <string name="title_activity_ShoppingCart">购物车</string>
+    <string name="title_activity_ConfirmOrder">确认订单</string>
 </resources>

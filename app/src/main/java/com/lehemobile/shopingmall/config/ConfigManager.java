@@ -1,6 +1,7 @@
 package com.lehemobile.shopingmall.config;
 
 import com.lehemobile.shopingmall.MyApplication;
+import com.lehemobile.shopingmall.model.Address;
 import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.model.User;
 import com.tgh.devkit.core.config.KeyValueStore;
@@ -17,6 +18,7 @@ public class ConfigManager {
     public static final String IMAGE_SWITCH = "imageSwitch";
     public static final String NOTIFICATION_SWITCH = "notificationSwitch";
     public static final String SALE_REMINDER_SWITCH = "saleReminderSwitch";
+    public static final String USER_DEFAULT_ADDRESS = "user_default_address";
 
     private static User _user;
 
@@ -75,7 +77,7 @@ public class ConfigManager {
     }
 
     public static boolean getImageSwitch() {
-        return getDefaultBindVersionStore().getBoolean(getKeyByUser(IMAGE_SWITCH),true);
+        return getDefaultBindVersionStore().getBoolean(getKeyByUser(IMAGE_SWITCH), true);
     }
 
     public static void setNotificationSwitch(boolean isChecked) {
@@ -83,7 +85,7 @@ public class ConfigManager {
     }
 
     public static boolean gettNotificationSwitch() {
-        return getDefaultBindVersionStore().getBoolean(getKeyByUser(NOTIFICATION_SWITCH),true);
+        return getDefaultBindVersionStore().getBoolean(getKeyByUser(NOTIFICATION_SWITCH), true);
     }
 
     public static void setSaleReminderSwitch(boolean isChecked) {
@@ -91,7 +93,15 @@ public class ConfigManager {
     }
 
     public static boolean getSaleReminderSwitch() {
-        return getDefaultBindVersionStore().getBoolean(getKeyByUser(SALE_REMINDER_SWITCH),true);
+        return getDefaultBindVersionStore().getBoolean(getKeyByUser(SALE_REMINDER_SWITCH), true);
+    }
+
+    public static void setUserDefaultAddress(Address address) {
+        getDefaultBindVersionStore().saveObject(getKeyByUser(USER_DEFAULT_ADDRESS), address);
+    }
+
+    public static Address getUserDefaultAddress() {
+        return getDefaultBindVersionStore().getObject(getKeyByUser(USER_DEFAULT_ADDRESS), Address.class);
     }
 
     public static class Device {

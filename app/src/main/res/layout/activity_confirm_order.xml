@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/addressView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin">
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="7dp"
+                android:src="@mipmap/ic_arrow_right" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/arrow">
+
+                <TextView
+                    android:id="@+id/name"
+                    style="@style/TextStyle.Title.Medium.Gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    tools:text="收货人:肖会军" />
+
+                <TextView
+                    android:id="@+id/mobile"
+                    style="@style/TextStyle.Title.Medium.Gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    tools:text="1807779990" />
+
+                <TextView
+                    android:id="@+id/address"
+                    style="@style/TextStyle.Title.Medium.Gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/name"
+                    android:layout_alignRight="@id/mobile"
+                    android:layout_below="@id/name"
+                    android:layout_marginTop="10dp"
+                    tools:text="收货地址:肖会军" />
+
+                <TextView
+                    android:id="@+id/tv_empty"
+                    style="@style/TextStyle.Desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="请选择收货地址"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f9f9f9"
+                android:gravity="center_vertical"
+                android:minHeight="40dp"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin">
+
+                <TextView
+                    android:id="@+id/orderNumber"
+                    style="@style/TextStyle.Desc.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    tools:text="订单号:SH201606231042136362" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/goodsInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f5f5f5"
+                android:divider="@drawable/order_goods_info_divider_horizontal"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/orderDesc"
+                style="@style/ActionLine.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/confirm_order_desc_editbox_bg"
+                android:gravity="center_vertical"
+                android:hint="备注"
+                android:minHeight="45dp"
+                android:padding="@dimen/margin_8"
+                android:singleLine="false" />
+
+            <TextView
+                android:id="@+id/orderCountPrice"
+                style="@style/TextStyle.Desc.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:gravity="center_vertical|right"
+                android:minHeight="40dp"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
+                tools:text="共1件商品  实付:  ￥168.00" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#f9f9f9">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin">
+
+                <TextView
+                    android:id="@+id/totalPriceLabel"
+                    style="@style/TextStyle.Title.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="商品总金额" />
+
+                <TextView
+                    android:id="@+id/freightLabel"
+                    style="@style/TextStyle.Title.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/totalPriceLabel"
+                    android:layout_below="@id/totalPriceLabel"
+                    android:layout_marginTop="5dp"
+                    android:text="+运费" />
+
+                <TextView
+                    android:id="@+id/totalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/totalPriceLabel"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size_large"
+                    tools:text="￥120" />
+
+                <TextView
+                    android:id="@+id/freight"
+                    style="@style/TextStyle.Title.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/freightLabel"
+                    tools:text="￥0" />
+            </RelativeLayout>
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/submit"
+            style="@style/Button.NormalCorners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="30dp"
+            android:text="确认订单" />
+    </LinearLayout>
+</ScrollView>
