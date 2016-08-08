@@ -1,6 +1,9 @@
 package com.lehemobile.shopingmall.ui.shoppingCart;
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -15,6 +18,7 @@ import com.lehemobile.shopingmall.model.ShoppingSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
 import com.lehemobile.shopingmall.ui.order.ConfirmOrderActivity_;
+import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.text.SpannableStringHelper;
@@ -25,6 +29,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -35,6 +42,7 @@ import java.util.List;
  * Created by tanyq on 27/7/16.
  */
 @EActivity(R.layout.activity_shopping)
+@OptionsMenu(R.menu.menu_shopping)
 public class ShoppingCartActivity extends BaseActivity {
     @ViewById
     TextView goPay;
@@ -52,8 +60,14 @@ public class ShoppingCartActivity extends BaseActivity {
     private PageListHelper<ShoppingSession> pageListHelper;
 
 
+    @ViewById
+    View deleteView;
+    @ViewById
+    View buyView;
+
     @AfterViews
     void init() {
+        updateBottomView(false);
 
         pageListHelper = new PageListHelper<ShoppingSession>(listView) {
             @Override
@@ -79,6 +93,15 @@ public class ShoppingCartActivity extends BaseActivity {
         pageListHelper.initStart();
 
     }
+
+    private void updateBottomView(boolean delete) {
+        buyView.setVisibility(delete ? View.GONE : View.VISIBLE);
+        deleteView.setVisibility(delete ? View.VISIBLE : View.GONE);
+        if (!delete) {
+            calculateTotalPrice();
+        }
+    }
+
 
     private void load(int page, int pageCount) {
         //TODO 调用接口加载数据
@@ -130,14 +153,17 @@ public class ShoppingCartActivity extends BaseActivity {
     }
 
     private void calculateTotalPrice() {
-        ArrayList<ShoppingSession> data = pageListHelper.getData();
+
         double totalPrice = 0;
         int count = 0;
-        for (ShoppingSession session : data) {
-            if (session.isSelected()) {
-                Goods goods = session.getGoods();
-                totalPrice += goods.getPrice() * goods.getBuyCount();
-                count += 1;
+        if (pageListHelper != null) {
+            ArrayList<ShoppingSession> data = pageListHelper.getData();
+            for (ShoppingSession session : data) {
+                if (session.isSelected()) {
+                    Goods goods = session.getGoods();
+                    totalPrice += goods.getPrice() * goods.getBuyCount();
+                    count += 1;
+                }
             }
         }
         updateTotalPrice(totalPrice);
@@ -153,7 +179,7 @@ public class ShoppingCartActivity extends BaseActivity {
         goPay.setText("去结算(" + count + ")");
     }
 
-    @CheckedChange(R.id.selectAll)
+    @CheckedChange({R.id.selectAll, R.id.selectDeleteAll})
     void onSelectAll(boolean isChecked, CompoundButton button) {
         if (pageListHelper == null) return;
         ArrayList<ShoppingSession> data = pageListHelper.getData();
@@ -161,22 +187,28 @@ public class ShoppingCartActivity extends BaseActivity {
         for (ShoppingSession session : data) {
             session.setSelected(isChecked);
         }
-        pageListHelper.getAdapter().reset(data);
+        pageListHelper.getAdapter().setData(data);
         calculateTotalPrice();
     }
 
-    @Click
-    void goPay() {
-        //// TODO: 6/8/16 去支付
+    private ArrayList<Goods> getSelectedGoods() {
         ArrayList<Goods> goodsList = new ArrayList<>();
-        if (pageListHelper == null) return;
+        if (pageListHelper == null) return goodsList;
         ArrayList<ShoppingSession> data = pageListHelper.getData();
-        if (data == null || data.isEmpty()) return;
+        if (data == null || data.isEmpty()) return goodsList;
         for (ShoppingSession session : data) {
             if (session.isSelected()) {
                 goodsList.add(session.getGoods());
             }
         }
+
+        return goodsList;
+    }
+
+    @Click
+    void goPay() {
+        //// TODO: 6/8/16 去支付
+        ArrayList<Goods> goodsList = getSelectedGoods();
         if (goodsList.isEmpty()) {
             showToast("你还没有选择任何商品哦(⊙o⊙)！");
             return;
@@ -184,6 +216,57 @@ public class ShoppingCartActivity extends BaseActivity {
         //
         Logger.i("去付款");
         ConfirmOrderActivity_.intent(this).goodsList(goodsList).start();
+    }
+
+    @Click
+    void deleteBtn() {
+        final ArrayList<Goods> goodsList = getSelectedGoods();
+        if (goodsList.isEmpty()) {
+            showToast("你还没有选择任何商品哦(⊙o⊙)！");
+            return;
+        }
+        DialogUtils.alert(this, null, "确认删除这" + goodsList.size() + "种商品吗?", android.R.string.cancel, null, android.R.string.ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doDelete(goodsList);
+            }
+        });
+    }
+
+    private void doDelete(ArrayList<Goods> goodsList) {
+        //TODO 刷新listview
+        updateDeleteGoodsUI(goodsList);
+    }
+
+    private void updateDeleteGoodsUI(ArrayList<Goods> goodsList) {
+        if (pageListHelper == null) return;
+        ArrayList<ShoppingSession> data = pageListHelper.getData();
+        ArrayList<ShoppingSession> shoppingSessions = new ArrayList<>();
+        for (Goods goods : goodsList) {
+            ShoppingSession session = new ShoppingSession();
+            session.setSelected(true);
+            session.setGoods(goods);
+            shoppingSessions.add(session);
+        }
+        data.removeAll(shoppingSessions);
+
+
+        pageListHelper.getAdapter().setData(data);
+
+    }
+
+    @OptionsItem(R.id.action_shopping)
+    void updateMenu(MenuItem item) {
+        CharSequence title = item.getTitle();
+        if (TextUtils.equals(title, "编辑")) {
+            //点击管理 ，选择删除商品
+            updateBottomView(true);
+            item.setTitle("完成");
+        } else if (TextUtils.equals(title, "完成")) {
+            //点击完成 ，回到购买商品
+            updateBottomView(false);
+            item.setTitle("编辑");
+        }
     }
 
 }
