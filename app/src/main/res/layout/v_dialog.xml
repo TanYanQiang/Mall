@@ -28,7 +28,7 @@
 
     <TextView
         android:id="@+id/tv_message"
-        style="@style/TextStyle.Desc"
+        style="@style/TextStyle.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -58,7 +58,7 @@
 
         <TextView
             android:id="@+id/tv_left"
-            style="@style/TextStyle.Title"
+            style="@style/TextStyle.Title.Large.Gray"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -68,7 +68,7 @@
 
         <TextView
             android:id="@+id/tv_center"
-            style="@style/TextStyle.Desc"
+            style="@style/TextStyle.Title.Large.Gray"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -80,7 +80,8 @@
 
         <TextView
             android:id="@+id/tv_right"
-            style="@style/TextStyle.Title"
+            style="@style/TextStyle.Title.Large.Gray"
+            android:textColor="#CCFAC506"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

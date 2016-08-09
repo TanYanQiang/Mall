@@ -18,6 +18,7 @@ import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.ChooseRegionEvent;
 import com.lehemobile.shopingmall.model.Region;
+import com.lehemobile.shopingmall.ui.category.CategoryActivity_;
 import com.lehemobile.shopingmall.ui.common.NavigationView;
 import com.lehemobile.shopingmall.ui.main.MainGoodsFragment_;
 import com.lehemobile.shopingmall.ui.main.NewTodayGoodsFragment_;
@@ -124,6 +125,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @OptionsItem(R.id.action_search)
     void doSearch() {
         Logger.i(" click search ");
+        CategoryActivity_.intent(this).start();
     }
 
     String[] titles = new String[]{"今日上线", "化妆", "护肤", "美体", "即将上线"};
