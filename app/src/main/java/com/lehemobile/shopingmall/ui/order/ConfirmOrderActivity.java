@@ -176,6 +176,8 @@ public class ConfirmOrderActivity extends BaseActivity {
             showToast("请选择收货地址");
             return;
         }
+        Order order = new Order();
+        OrderPayActivity_.intent(this).order(order).start();
     }
 
 

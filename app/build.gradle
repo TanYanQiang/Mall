@@ -48,22 +48,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.lehe
             zipAlignEnabled true
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    appendVersionNameVersionCode(variant, output)
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    appendVersionNameVersionCode(variant, output)
+//                }
+//            }
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.lehe
             zipAlignEnabled true
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    appendVersionNameVersionCode(variant, output)
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    appendVersionNameVersionCode(variant, output)
+//                }
+//            }
         }
     }
     productFlavors {
