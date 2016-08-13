@@ -7,8 +7,10 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity_;
 import com.lehemobile.shopingmall.ui.user.AccountActivity_;
+import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
@@ -44,7 +46,10 @@ public class UserShoppingView extends LinearLayout {
 
     @Click(R.id.shopping)
     void goShoppingCart() {
-        //TODO 去购物车
-        ShoppingCartActivity_.intent(getContext()).start();
+        if(ConfigManager.isLogin()) {
+            ShoppingCartActivity_.intent(getContext()).start();
+        }else{
+            LoginActivity_.intent(getContext()).start();
+        }
     }
 }
