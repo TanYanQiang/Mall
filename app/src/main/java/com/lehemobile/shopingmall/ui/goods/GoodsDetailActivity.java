@@ -330,6 +330,7 @@ public class GoodsDetailActivity extends BaseActivity {
     @Click
     void addShoppingCart() {
         //TODO 点击到购物车
+        showBuySelectView();
     }
 
     @Click

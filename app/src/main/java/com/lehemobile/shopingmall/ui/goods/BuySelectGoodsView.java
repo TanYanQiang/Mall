@@ -38,6 +38,12 @@ public class BuySelectGoodsView extends LinearLayout {
     @ViewById
     TextView stock;
 
+    public void setOnBuySelectGoodsListener(OnBuySelectGoodsListener onBuySelectGoodsListener) {
+        this.onBuySelectGoodsListener = onBuySelectGoodsListener;
+    }
+
+    private OnBuySelectGoodsListener onBuySelectGoodsListener;
+
     private GoodsDetailSession session;
 
     public BuySelectGoodsView(Context context) {
@@ -60,7 +66,7 @@ public class BuySelectGoodsView extends LinearLayout {
     public void bindData(GoodsDetailSession session) {
         this.session = session;
         Goods goods = session.getGoods();
-        PicassoHelper.showGoodsThumb(getContext(),goods.getThumbnail(),goodsThumb);
+        PicassoHelper.showGoodsThumb(getContext(), goods.getThumbnail(), goodsThumb);
         goodsName.setText(goods.getName());
         goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
         stock.setText(getResources().getString(R.string.label_goods_stock, goods.getStock()));
@@ -68,6 +74,8 @@ public class BuySelectGoodsView extends LinearLayout {
 
     @Click
     void close() {
-        //TODO close
+        if (onBuySelectGoodsListener != null) {
+            onBuySelectGoodsListener.onClose();
+        }
     }
 }

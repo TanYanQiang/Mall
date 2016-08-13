@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.AppConfig;
@@ -43,6 +44,10 @@ public class NavigationView extends FrameLayout {
 
     @ViewById
     ImageView avatar;
+
+    @ViewById
+    TextView bubble;
+
     private OnNavigationItemSelectedListener onNavigationItemSelectedListener;
 
     public void setOnNavigationItemSelectedListener(OnNavigationItemSelectedListener onNavigationItemSelectedListener) {
@@ -87,9 +92,24 @@ public class NavigationView extends FrameLayout {
         if (ConfigManager.isLogin()) {
             User user = ConfigManager.getUser();
             PicassoHelper.showCircleImage(user.getAvatar(), avatar, R.dimen.avatar_borderWidth, R.color.avatar_borderColor);
+            messageBubble();
         } else {
             Picasso.with(getContext()).load(R.mipmap.avatar_default).into(avatar);
+            messageBubble();
         }
+    }
+
+    private void messageBubble() {
+        //// TODO: 13/8/16 读取本地未读消息数
+        int count = 0;
+        if (ConfigManager.isLogin()) {
+            count = 1;
+        } else {
+            count = 0;
+        }
+
+        bubble.setVisibility(count > 0 ? VISIBLE : GONE);
+        bubble.setText(String.valueOf(count));
     }
 
     boolean setSelected(View view) {
