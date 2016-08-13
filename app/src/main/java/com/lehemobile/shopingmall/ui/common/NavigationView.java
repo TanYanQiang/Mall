@@ -91,7 +91,7 @@ public class NavigationView extends FrameLayout {
     private void updateUI() {
         if (ConfigManager.isLogin()) {
             User user = ConfigManager.getUser();
-            PicassoHelper.showCircleImage(user.getAvatar(), avatar, R.dimen.avatar_borderWidth, R.color.avatar_borderColor);
+            PicassoHelper.showCircleImage(user.getAvatar(), avatar, R.dimen.avatar_borderWidth, R.color.nav_avatar_borderColor);
             messageBubble();
         } else {
             Picasso.with(getContext()).load(R.mipmap.avatar_default).into(avatar);
