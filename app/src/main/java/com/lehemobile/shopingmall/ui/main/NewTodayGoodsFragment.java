@@ -131,8 +131,24 @@ public class NewTodayGoodsFragment extends BaseFragment {
     public void onDetach() {
         super.onDetach();
         Logger.i("Detach");
-        if(newTodayGoodsHeaderView != null){
-            newTodayGoodsHeaderView.onDestroy();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Logger.i("onPause");
+        if (newTodayGoodsHeaderView != null) {
+            newTodayGoodsHeaderView.stopBannerSwitch();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Logger.i("onResume");
+        if (newTodayGoodsHeaderView != null) {
+            newTodayGoodsHeaderView.startBannerSwitch();
         }
     }
 

@@ -70,7 +70,6 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
     private BannerAdapter bannerAdapter;
     private InfinitePagerAdapter infinitePagerAdapter;
     private CountDownTimer countDownTimer;
-    private boolean isDestory = false;
 
 
     public NewTodayGoodsHeaderView(Context context) {
@@ -92,7 +91,6 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
 
     @AfterViews
     void init() {
-        isDestory = false;
         initGalleryUI();
     }
 
@@ -221,22 +219,18 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
         banner.setCurrentItem(currentItem, true);
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        Logger.i("onDetachedFromWindow");
-        super.onDetachedFromWindow();
-        cancelCountDownTimer();
-    }
-
-    public void onDestroy() {
-        isDestory = true;
-        cancelCountDownTimer();
-    }
-
     private void cancelCountDownTimer() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
             countDownTimer = null;
         }
+    }
+
+    public void stopBannerSwitch() {
+        cancelCountDownTimer();
+    }
+
+    public void startBannerSwitch() {
+        startCounting();
     }
 }
