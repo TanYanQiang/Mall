@@ -2,6 +2,7 @@ package com.lehemobile.shopingmall.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -59,6 +60,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @ViewById
     BaseViewPager viewPager;
+    private int clickCount;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,7 +106,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            doubleClickExit();
         }
     }
 
@@ -161,5 +164,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onEventMainThread(ChooseRegionEvent event) {
         updateRegionUI();
     }
+
+
+    private void doubleClickExit() {
+        clickCount++;
+        if (clickCount == 2) {
+            finish();
+        } else {
+            showToast("再按一次退出"+getString(R.string.app_name));
+            decreaseClickCount();
+        }
+    }
+
+    void decreaseClickCount() {
+        if (countDownTimer == null) {
+            countDownTimer = new CountDownTimer(3000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    clickCount = 0;
+                    countDownTimer = null;
+                }
+            };
+            countDownTimer.start();
+        }
+    }
+
 
 }
