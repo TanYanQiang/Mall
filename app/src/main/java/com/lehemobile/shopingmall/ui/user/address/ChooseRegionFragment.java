@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.model.Province;
 import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine;
@@ -70,7 +69,7 @@ public class ChooseRegionFragment extends BaseFragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                 Region region = new Region();
-                region.setId(jsonObject1.optString("province_id"));
+                region.setId(jsonObject1.optInt("province_id"));
                 region.setName(jsonObject1.optString("province_name"));
 
                 datas.add(region);

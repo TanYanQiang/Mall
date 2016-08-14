@@ -6,12 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.ChooseRegionEvent;
-import com.lehemobile.shopingmall.model.City;
-import com.lehemobile.shopingmall.model.District;
-import com.lehemobile.shopingmall.model.Province;
 import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.orhanobut.logger.Logger;
@@ -34,9 +30,9 @@ public class ChooseRegionActivity extends BaseActivity {
     @Extra
     int type;
 
-    private Province province;
-    private City city;
-    private District district;
+    private Region province;
+    private Region city;
+    private Region district;
 
     @AfterViews
     void init() {
@@ -52,7 +48,7 @@ public class ChooseRegionActivity extends BaseActivity {
 
     private void showFragment(Fragment fragment, String tag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.container, fragment, tag);
+        fragmentTransaction.replace(R.id.container, fragment, tag);
         if (!TextUtils.isEmpty(tag)) {
             fragmentTransaction.addToBackStack(tag);
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -79,7 +75,7 @@ public class ChooseRegionActivity extends BaseActivity {
         ChooseProvinceFragment fragment = ChooseProvinceFragment_.builder().build();
         fragment.setOnChooseProvinceListener(new ChooseProvinceFragment.OnChooseProvinceListener() {
             @Override
-            public void onChooseProvince(Province province) {
+            public void onChooseProvince(Region province) {
                 Logger.i("select Province:" + province.getName());
                 showChooseCity(province);
             }
@@ -87,12 +83,12 @@ public class ChooseRegionActivity extends BaseActivity {
         showFragment(fragment, null);
     }
 
-    private void showChooseCity(Province province) {
+    private void showChooseCity(Region province) {
         this.province = province;
         ChooseCityFragment fragment = ChooseCityFragment_.builder().province(province).build();
         fragment.setOnChooseCityListener(new ChooseCityFragment.OnChooseCityListener() {
             @Override
-            public void onChooseCity(City city) {
+            public void onChooseCity(Region city) {
                 Logger.i("select city:" + city.getName());
                 showChooseDistrict(city);
             }
@@ -100,12 +96,12 @@ public class ChooseRegionActivity extends BaseActivity {
         showFragment(fragment, "city");
     }
 
-    private void showChooseDistrict(City city) {
+    private void showChooseDistrict(Region city) {
         this.city = city;
         ChooseDistrictFragment fragment = ChooseDistrictFragment_.builder().city(city).build();
         fragment.setOnChooseDistrictListener(new ChooseDistrictFragment.OnChooseDistrictListener() {
             @Override
-            public void onChooseDistrict(District district) {
+            public void onChooseDistrict(Region district) {
                 ChooseRegionActivity.this.district = district;
                 onComplete();
             }

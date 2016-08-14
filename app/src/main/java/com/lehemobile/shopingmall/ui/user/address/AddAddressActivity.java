@@ -7,9 +7,7 @@ import android.widget.TextView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.model.Address;
-import com.lehemobile.shopingmall.model.City;
-import com.lehemobile.shopingmall.model.District;
-import com.lehemobile.shopingmall.model.Province;
+import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.tgh.devkit.core.utils.Strings;
 
@@ -126,9 +124,9 @@ public class AddAddressActivity extends BaseActivity {
     @OnActivityResult(REQUEST_CHOOSE_REGION_CODE)
     void onChooseRegionResult(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            Province province = (Province) data.getSerializableExtra("province");
-            City city = (City) data.getSerializableExtra("city");
-            District district = (District) data.getSerializableExtra("district");
+            Region province = (Region) data.getSerializableExtra("province");
+            Region city = (Region) data.getSerializableExtra("city");
+            Region district = (Region) data.getSerializableExtra("district");
             if (address == null) {
                 address = new Address();
             }

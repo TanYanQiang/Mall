@@ -15,10 +15,9 @@ apt {
 
 
 android {
-    def APP_HOST = "appHost";
-    def APP_PORT = "appPort";
+    def API_BASE_URL = "appBaseUrl";
+    def API_CHECK_CHAR = "apiCheckChar";
     def BUGLY_APPID = "buglyAppId"
-
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -30,8 +29,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", APP_HOST, "\"cn-api.kkpoker.com\"")
-        buildConfigField("int", APP_PORT, "80")
+
     }
     signingConfigs {
         lehe {
@@ -72,19 +70,9 @@ android {
             versionCode 1
             versionName "1.0"
 
-            buildConfigField("String", APP_HOST, "\"cn-api.kkpoker.com\"")
-            buildConfigField("int", APP_PORT, "80")
+            buildConfigField("String", API_BASE_URL, "\"http://120.76.46.223/mobile/wapi\"")
+            buildConfigField("String", API_CHECK_CHAR, "\"rewt4234543rewt4234543\"")
             buildConfigField("String", BUGLY_APPID, "\"b86ba76f73\"")
-
-        }
-        mall {
-            applicationId "com.lehemobile.mall"
-            versionCode 1
-            versionName "1.0"
-
-            buildConfigField("String", APP_HOST, "\"cn-api.kkpoker.com\"")
-            buildConfigField("int", APP_PORT, "80")
-            buildConfigField("String", BUGLY_APPID, "\"900044129\"")
 
         }
     }

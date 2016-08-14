@@ -7,26 +7,23 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.model.City;
-import com.lehemobile.shopingmall.model.Province;
+import com.lehemobile.shopingmall.api.AddressApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine_;
-import com.tgh.devkit.core.utils.IO;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,7 +33,7 @@ import java.util.List;
 @EFragment(R.layout.fragment_choose_region_list)
 public class ChooseCityFragment extends BaseFragment {
     public interface OnChooseCityListener {
-        void onChooseCity(City city);
+        void onChooseCity(Region city);
     }
 
     @ViewById
@@ -47,7 +44,7 @@ public class ChooseCityFragment extends BaseFragment {
     EditText searchEdit;
 
     @FragmentArg
-    Province province;
+    Region province;
 
     private OnChooseCityListener onChooseCityListener;
 
@@ -62,55 +59,48 @@ public class ChooseCityFragment extends BaseFragment {
     }
 
     private void loadData() {
-        InputStream open = null;
-        try {
-            open = getContext().getAssets().open("city.json");
-            String json = new String(IO.read(open));
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray jsonArray = jsonObject.optJSONArray("list");
-            List<City> datas = new ArrayList<>();
+        showLoading(R.string.loading);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                City city = new City();
-                city.setId(jsonObject1.optInt("city_id"));
-                city.setName(jsonObject1.optString("city_name"));
-
-                datas.add(city);
+        Request<List<Region>> request = AddressApi.getRegion(province.getId(), AddressApi.LEVEL_CITY, new Response.Listener<List<Region>>() {
+            @Override
+            public void onResponse(List<Region> response) {
+                dismissLoading();
+                updateUI(response);
             }
-            updateUI(datas);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        }, new AppErrorListener(getContext()) {
+            @Override
+            public void onError(int code, String msg) {
+                super.onError(code, msg);
+            }
+        });
+        VolleyHelper.execute(request);
 
     }
 
-    private void updateUI(List<City> data) {
+    private void updateUI(List<Region> data) {
         CityAdapter adapter = new CityAdapter(getContext(), data);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Object item = adapterView.getAdapter().getItem(i);
-                if (item instanceof City) {
+                if (item instanceof Region) {
                     if (onChooseCityListener != null) {
-                        onChooseCityListener.onChooseCity((City) item);
+                        onChooseCityListener.onChooseCity((Region) item);
                     }
                 }
             }
         });
     }
 
-    private class CityAdapter extends BaseListAdapter<City> {
+    private class CityAdapter extends BaseListAdapter<Region> {
 
-        public CityAdapter(Context context, Collection<? extends City> data) {
+        public CityAdapter(Context context, Collection<? extends Region> data) {
             super(context, data);
         }
 
         @Override
-        public void bindData(int position, View convertView, City item) {
+        public void bindData(int position, View convertView, Region item) {
             ListViewSingleLine view = (ListViewSingleLine) convertView;
             view.bindData(item.getName());
         }

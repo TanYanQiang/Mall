@@ -7,15 +7,18 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
-import com.lehemobile.shopingmall.model.City;
-import com.lehemobile.shopingmall.model.District;
-import com.lehemobile.shopingmall.model.Province;
+import com.lehemobile.shopingmall.api.AddressApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine_;
 import com.lehemobile.shopingmall.ui.view.ListViewEditTextVIew;
 import com.lehemobile.shopingmall.ui.view.ListViewEditTextVIew_;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.tgh.devkit.core.utils.IO;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
@@ -46,7 +49,7 @@ public class ChooseDistrictFragment extends BaseFragment {
     private ListViewEditTextVIew editTextVIew;
 
     public interface OnChooseDistrictListener {
-        void onChooseDistrict(District district);
+        void onChooseDistrict(Region district);
     }
 
     @ViewById
@@ -57,7 +60,7 @@ public class ChooseDistrictFragment extends BaseFragment {
     EditText searchEdit;
 
     @FragmentArg
-    City city;
+    Region city;
 
     private OnChooseDistrictListener onChooseDistrictListener;
 
@@ -76,7 +79,7 @@ public class ChooseDistrictFragment extends BaseFragment {
         if (editTextVIew == null) return;
         String otherDistrict = editTextVIew.getEditText();
         if (Strings.isNullOrEmpty(otherDistrict)) return;
-        District district = new District();
+        Region district = new Region();
         district.setId(-1);
         district.setName(otherDistrict);
         if (onChooseDistrictListener != null) {
@@ -85,40 +88,32 @@ public class ChooseDistrictFragment extends BaseFragment {
     }
 
     private void loadData() {
-        InputStream open = null;
-        try {
-            open = getContext().getAssets().open("district.json");
-            String json = new String(IO.read(open));
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray jsonArray = jsonObject.optJSONArray("list");
-            List<District> datas = new ArrayList<>();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                District district = new District();
-                district.setId(jsonObject1.optInt("district_id"));
-                district.setName(jsonObject1.optString("district_name"));
-                datas.add(district);
+        Request<List<Region>> request = AddressApi.getRegion(city.getId(), AddressApi.LEVEL_DISTRICT, new Response.Listener<List<Region>>() {
+            @Override
+            public void onResponse(List<Region> response) {
+                dismissLoading();
+                updateUI(response);
             }
-            updateUI(datas);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        }, new AppErrorListener(getContext()) {
+            @Override
+            public void onError(int code, String msg) {
+                super.onError(code, msg);
+            }
+        });
+        VolleyHelper.execute(request);
 
     }
 
-    private void updateUI(List<District> data) {
+    private void updateUI(List<Region> data) {
         DistrictAdapter adapter = new DistrictAdapter(getContext(), data);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Object item = adapterView.getAdapter().getItem(i);
-                if (item instanceof District) {
+                if (item instanceof Region) {
                     if (onChooseDistrictListener != null) {
-                        onChooseDistrictListener.onChooseDistrict((District) item);
+                        onChooseDistrictListener.onChooseDistrict((Region) item);
                     }
                 }
             }
@@ -127,14 +122,14 @@ public class ChooseDistrictFragment extends BaseFragment {
         listView.addFooterView(editTextVIew);
     }
 
-    private class DistrictAdapter extends BaseListAdapter<District> {
+    private class DistrictAdapter extends BaseListAdapter<Region> {
 
-        public DistrictAdapter(Context context, Collection<? extends District> data) {
+        public DistrictAdapter(Context context, Collection<? extends Region> data) {
             super(context, data);
         }
 
         @Override
-        public void bindData(int position, View convertView, District item) {
+        public void bindData(int position, View convertView, Region item) {
             ListViewSingleLine view = (ListViewSingleLine) convertView;
             view.bindData(item.getName());
         }

@@ -11,9 +11,9 @@ public class Address implements Serializable {
     private String name;
     private String mobile;
 
-    private Province province;
-    private City city;
-    private District district;
+    private Region province;
+    private Region city;
+    private Region district;
     private String detailedAddress;
 
     private boolean isDefault = false;
@@ -60,27 +60,27 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public Province getProvince() {
+    public Region getProvince() {
         return province;
     }
 
-    public void setProvince(Province province) {
+    public void setProvince(Region province) {
         this.province = province;
     }
 
-    public City getCity() {
+    public Region getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Region city) {
         this.city = city;
     }
 
-    public District getDistrict() {
+    public Region getDistrict() {
         return district;
     }
 
-    public void setDistrict(District district) {
+    public void setDistrict(Region district) {
         this.district = district;
     }
 
