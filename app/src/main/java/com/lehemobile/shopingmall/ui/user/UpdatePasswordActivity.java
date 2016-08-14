@@ -1,11 +1,19 @@
 package com.lehemobile.shopingmall.ui.user;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.EditText;
 
+import com.android.volley.Response;
+import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.UserApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.utils.Validation;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.Click;
@@ -35,6 +43,17 @@ public class UpdatePasswordActivity extends BaseActivity {
         String oldPasswordStr = getInputText(oldPassword);
         String newPasswordStr = getInputText(newPassword);
         //TODO 修改密码
+        showLoading("正在提交数据...");
+        BaseRequest<Void> request = UserApi.updatePassword(oldPasswordStr, newPasswordStr, new Response.Listener<Void>() {
+            @Override
+            public void onResponse(Void response) {
+                showToast("密码修改成功，请重新登录");
+                LoginActivity_.intent(UpdatePasswordActivity.this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK).start();
+                MyApplication.getInstance().onUserLogout();
+                finish();
+            }
+        }, new AppErrorListener(this));
+        VolleyHelper.execute(request);
     }
 
     boolean validate() {
@@ -54,5 +73,11 @@ public class UpdatePasswordActivity extends BaseActivity {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        VolleyHelper.cancel();
     }
 }

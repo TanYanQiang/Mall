@@ -28,8 +28,8 @@ public class UserApi {
         @Override
         public User parse(JSONObject jobj) throws Exception {
             User user = new User();
-            user.setUserId(jobj.optInt("user_id"));
-            user.setNick(jobj.optString("user_nick"));
+            user.setUserId(jobj.optInt("uid"));
+            user.setNick(jobj.optString("user_name"));
             user.setAvatar(jobj.optString("user_avatar"));
             user.setGender(jobj.optInt("user_gender"));
             user.setMobile(jobj.optString("user_mobile"));
@@ -43,13 +43,11 @@ public class UserApi {
 
     public static BaseRequest<User> login(final String mobile, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
-        params.put("mobile", mobile);
+        params.put("username", mobile);
         params.put("password", Md5.toString(password));
-        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/login", params, listener, errorListener) {
+        return new BaseRequest<User>("login", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
-
-                //TODO 解析登录json 返回User信息
                 JSONObject result = baseJson.getJSONObject("result");
                 User user = parseUser.parse(result);
                 return user;
@@ -116,6 +114,19 @@ public class UserApi {
             protected User treatResponse(JSONObject baseJson) throws Exception {
                 User user = new User();
                 return user;
+            }
+        };
+    }
+
+    public static BaseRequest<Void> updatePassword(String oldPassword, String newPassword, Response.Listener<Void> listener, AppErrorListener errorListener) {
+        Map<String, String> params = new HashMap<>();
+        params.put("old_password", Md5.toString(oldPassword));
+        params.put("new_password", Md5.toString(newPassword));
+        params.put("again_password", Md5.toString(newPassword));
+        return new BaseRequest<Void>("login", params, listener, errorListener) {
+            @Override
+            protected Void treatResponse(JSONObject baseJson) throws Exception {
+                return null;
             }
         };
     }

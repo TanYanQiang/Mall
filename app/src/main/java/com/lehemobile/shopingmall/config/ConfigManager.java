@@ -19,6 +19,7 @@ public class ConfigManager {
     public static final String NOTIFICATION_SWITCH = "notificationSwitch";
     public static final String SALE_REMINDER_SWITCH = "saleReminderSwitch";
     public static final String USER_DEFAULT_ADDRESS = "user_default_address";
+    private static final java.lang.String USER_TOKEN = "user_token";
 
     private static User _user;
 
@@ -103,6 +104,17 @@ public class ConfigManager {
     public static Address getUserDefaultAddress() {
         return getDefaultBindVersionStore().getObject(getKeyByUser(USER_DEFAULT_ADDRESS), Address.class);
     }
+
+    public static String getUserToken() {
+        KeyValueStoreInternal instance = getDefaultBindVersionStore();
+        return instance.getString(USER_TOKEN, "lehe");
+    }
+
+    public static void setUserToken(String userToken) {
+        KeyValueStoreInternal instance = getDefaultBindVersionStore();
+        instance.save(USER_TOKEN, userToken);
+    }
+
 
     public static class Device {
         public static final String LAST_MOBILE = "last_mobile";

@@ -2,6 +2,7 @@ package com.lehemobile.shopingmall.api.base;
 
 import android.text.TextUtils;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,7 +25,7 @@ import java.util.Map;
  */
 public abstract class BaseRequest<T> extends Request<T> {
     public static AppErrorListener fooErrorListener = new AppErrorListener(MyApplication.getInstance());
-
+    private Map<String, String> headers;
     private Response.Listener<T> listener;
     private Map<String, String> params;
 
@@ -50,8 +51,23 @@ public abstract class BaseRequest<T> extends Request<T> {
 
     @Override
     public Map<String, String> getParams() {
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        params.putAll(ApiUtils.createCommonParams());
         Logger.i("params:" + params);
         return params;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        if (headers == null) {
+            headers = ApiUtils.createCommonHeaders();
+        }
+        if (BuildConfig.DEBUG) {
+            Logger.i("request headers:" + headers);
+        }
+        return headers;
     }
 
     @Override
@@ -67,11 +83,9 @@ public abstract class BaseRequest<T> extends Request<T> {
             }*/
 
             String json = new String(response.data, "UTF-8");
-            Logger.i("request url = %s \n response = %s", this.getUrl(), json);
+            Logger.i("request url = %s \nresponse = %s", this.getUrl(), json);
 
             JSONObject base = new JSONObject(json);
-
-            Logger.i(base.toString());
             int code = base.optInt("code", -1);
             if (code != 0) {
                 return Response.error(new AppServerError(response));

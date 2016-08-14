@@ -11,6 +11,7 @@ import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.config.IPConfig;
 import com.lehemobile.shopingmall.model.UploadImage;
 import com.tgh.devkit.core.encrypt.HMAC;
+import com.tgh.devkit.core.encrypt.Md5;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.core.utils.Utils;
 
@@ -56,6 +57,54 @@ public class ApiUtils {
             params.put(args[i], args[i + 1]);
         }
         return params;
+    }
+
+    public static Map<String, String> createCommonHeaders() {
+
+        final Context context = MyApplication.getInstance();
+
+        String deviceTime = String.valueOf(System.currentTimeMillis());
+
+        String appId = Utils.getPackageName(context);
+        String userId = String.valueOf(ConfigManager.getUserId());
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Device-Time", deviceTime);
+        headers.put("App-Name", silentURLEncode(Utils.getAppName(context)));
+        headers.put("Device-Name", silentURLEncode(Build.MODEL));
+        headers.put("Device-Model", silentURLEncode(Build.MODEL));
+        headers.put("System-Name", "Android");
+        headers.put("System-Version", silentURLEncode(Build.VERSION.RELEASE));
+        headers.put("App-Id", appId);
+        headers.put("App-Version", Utils.getAppVersionName(context));
+        headers.put("User-Platform", "android");
+        headers.put("User-Id", userId);
+        headers.put("Device-Product", silentURLEncode(Build.PRODUCT));
+        headers.put("Device-Fingerprint", silentURLEncode(Build.FINGERPRINT));
+        headers.put("Device-Hardware", silentURLEncode(Build.HARDWARE));
+
+        String token = ConfigManager.getUserToken();
+        String baseHash = appId + deviceTime + userId;
+
+        byte[] bytes = HMAC.sha512(baseHash, token);
+        String hmac = Strings.toHex(bytes);
+        headers.put("Hmac", hmac);
+        return headers;
+    }
+
+    public static Map<String, String> createCommonParams() {
+
+        String userId = String.valueOf(ConfigManager.getUserId());
+
+        Map<String, String> headers = new HashMap<>();
+
+        headers.put("uid", userId);
+
+
+        String token = ConfigManager.getUserToken();
+
+        headers.put("signature", Md5.toString(userId + token));
+        return headers;
     }
 
     public static BaseMultiPartRequest<UploadImage> uploadImage(
