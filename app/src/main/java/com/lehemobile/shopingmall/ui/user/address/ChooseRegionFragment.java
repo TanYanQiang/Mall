@@ -7,11 +7,16 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.AddressApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine_;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.tgh.devkit.core.utils.IO;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
@@ -58,28 +63,21 @@ public class ChooseRegionFragment extends BaseFragment {
     }
 
     private void loadData() {
-        InputStream open = null;
-        try {
-            open = getContext().getAssets().open("province.json");
-            String json = new String(IO.read(open));
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray jsonArray = jsonObject.optJSONArray("list");
-            List<Region> datas = new ArrayList<>();
+        showLoading(R.string.loading);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                Region region = new Region();
-                region.setId(jsonObject1.optInt("province_id"));
-                region.setName(jsonObject1.optString("province_name"));
-
-                datas.add(region);
+        Request<List<Region>> request = AddressApi.getRegion(1, AddressApi.LEVEL_PROVINCE, new Response.Listener<List<Region>>() {
+            @Override
+            public void onResponse(List<Region> response) {
+                dismissLoading();
+                updateUI(response);
             }
-            updateUI(datas);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        }, new AppErrorListener(getContext()) {
+            @Override
+            public void onError(int code, String msg) {
+                super.onError(code, msg);
+            }
+        });
+        VolleyHelper.execute(request);
 
     }
 
