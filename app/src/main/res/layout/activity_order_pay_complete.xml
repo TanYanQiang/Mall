@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="134dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="11dp"
+            android:drawableTop="@mipmap/ic_success"
+            android:textColor="#66cc22"
+            android:textSize="@dimen/text_size_large"
+            tools:text="订单支付成功" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#f9f9f9"
+        android:divider="@drawable/divider_horizontal"
+        android:orientation="vertical"
+        android:showDividers="none">
+
+        <TextView
+            android:id="@+id/orderNumber"
+            style="@style/TextStyle.Title.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:minHeight="40dp"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:textColor="@color/text_color_lv2"
+            tools:text="订单号:SH201606231042136362" />
+
+        <LinearLayout
+            android:id="@+id/goodsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f5f5f5"
+            android:divider="@drawable/order_goods_info_divider_horizontal"
+            android:orientation="vertical"
+            android:showDividers="middle" />
+
+        <TextView
+            android:id="@+id/orderCountPrice"
+            style="@style/TextStyle.Desc.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right"
+            android:minHeight="40dp"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            tools:text="共1件商品  实付:  ￥168.00" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/goHome"
+        style="@style/Button.NormalCorners"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="回到首页" />
+</LinearLayout>

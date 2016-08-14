@@ -70,6 +70,9 @@ public class OrderPayActivity extends BaseActivity {
         }
 
         Logger.i(orderPaySession.getCurrentPaymentMode().getTitle());
+
+        //// TODO: 14/8/16 支付结果页面
+        OrderPayCompleteActivity_.intent(this).order(order).payStatus(false).start();
     }
 
 
