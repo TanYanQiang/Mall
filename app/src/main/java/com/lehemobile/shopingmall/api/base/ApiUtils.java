@@ -6,12 +6,14 @@ import android.os.Build;
 import com.android.volley.Request;
 import com.android.volley.Response;
 
+import com.lehemobile.shopingmall.BuildConfig;
 import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.config.IPConfig;
 import com.lehemobile.shopingmall.model.UploadImage;
 import com.tgh.devkit.core.encrypt.HMAC;
 import com.tgh.devkit.core.encrypt.Md5;
+import com.tgh.devkit.core.encrypt.SHA;
 import com.tgh.devkit.core.utils.DeviceId;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.core.utils.Utils;
@@ -84,6 +86,10 @@ public class ApiUtils {
         headers.put("Device-Product", silentURLEncode(Build.PRODUCT));
         headers.put("Device-Fingerprint", silentURLEncode(Build.FINGERPRINT));
         headers.put("Device-Hardware", silentURLEncode(Build.HARDWARE));
+
+        String encrypt = Md5.toString(SHA.sha1(deviceIdentifier) + BuildConfig.apiCheckChar );
+        headers.put("APPID", deviceIdentifier);
+        headers.put("encryptedval", encrypt);
         return headers;
     }
 

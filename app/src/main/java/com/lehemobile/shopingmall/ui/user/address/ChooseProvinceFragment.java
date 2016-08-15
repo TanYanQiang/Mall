@@ -1,8 +1,12 @@
 package com.lehemobile.shopingmall.ui.user.address;
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -14,16 +18,21 @@ import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.api.AddressApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.model.Region;
+import com.lehemobile.shopingmall.model.User;
+import com.lehemobile.shopingmall.session.TeamUserSession;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine;
 import com.lehemobile.shopingmall.ui.common.ListViewSingleLine_;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
+import com.orhanobut.logger.Logger;
+import com.tgh.devkit.core.utils.TextWatcherAdapter;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,6 +41,9 @@ import java.util.List;
  */
 @EFragment(R.layout.fragment_choose_region_list)
 public class ChooseProvinceFragment extends BaseFragment {
+    private ProvinceAdapter adapter;
+    private List<Region> provinceData;
+
     public interface OnChooseProvinceListener {
         void onChooseProvince(Region province);
     }
@@ -53,7 +65,6 @@ public class ChooseProvinceFragment extends BaseFragment {
 
     @AfterViews
     void init() {
-        searchLayout.setVisibility(View.VISIBLE);
         loadData();
     }
 
@@ -77,11 +88,12 @@ public class ChooseProvinceFragment extends BaseFragment {
     }
 
     private void updateUI(List<Region> data) {
-        if (data == null) {
+        if (data == null || data.isEmpty()) {
             listView.setEmptyView(tv_empty);
             return;
         }
-        ProvinceAdapter adapter = new ProvinceAdapter(getContext(), data);
+        provinceData = data;
+        adapter = new ProvinceAdapter(getContext(), data);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,6 +106,7 @@ public class ChooseProvinceFragment extends BaseFragment {
                 }
             }
         });
+        initSearch();
     }
 
     private class ProvinceAdapter extends BaseListAdapter<Region> {
@@ -118,5 +131,58 @@ public class ChooseProvinceFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         VolleyHelper.cancel(this);
+    }
+
+
+    private void initSearch() {
+        searchLayout.setVisibility(View.VISIBLE);
+        searchEdit.setText("");
+        searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                switch (i) {
+                    case EditorInfo.IME_ACTION_SEARCH:
+                        doSearch();
+                        break;
+                }
+                return false;
+            }
+        });
+        searchEdit.addTextChangedListener(new TextWatcherAdapter() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                doSearch();
+            }
+        });
+    }
+
+    private void doSearch() {
+        InputMethodManager imm = ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE));
+        imm.hideSoftInputFromWindow(searchEdit.getWindowToken(), 0);
+
+        String keyword = getInputText(searchEdit);
+        if (TextUtils.isEmpty(keyword)) {
+            adapter.setData(provinceData);
+        } else {
+            List<Region> searchResult = searchByName(keyword);
+            adapter.setData(searchResult);
+        }
+
+    }
+
+    private List<Region> searchByName(String keyword) {
+
+        List<Region> searchResult = new ArrayList<>();
+        if (adapter != null) {
+
+            for (int i = 0; i < provinceData.size(); i++) {
+                Region region = provinceData.get(i);
+                if (region.getName().contains(keyword) || region.getPinyin().contains(keyword)) {
+                    searchResult.add(region);
+                }
+
+            }
+        }
+        return searchResult;
     }
 }

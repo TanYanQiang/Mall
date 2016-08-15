@@ -63,6 +63,7 @@ public class MyApplication extends Application {
 
     public void onUserLogout() {
         ConfigManager.setUserId(0);
+        ConfigManager.setUserToken(null);
         ConfigManager.deleteCacheUser();
         EventBus.getDefault().post(new LogoutEvent());
     }
