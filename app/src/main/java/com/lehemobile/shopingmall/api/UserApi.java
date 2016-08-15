@@ -21,8 +21,8 @@ import java.util.Map;
 public class UserApi {
 
 
-    public static final int TYPE_REGISTER = 1;
-    public static final int TYPE_RESET_PASSWORD = 2;
+    public static final String TYPE_REGISTER = "register";
+    public static final String TYPE_RESET_PASSWORD = "forget";
 
     private static ApiUtils.ParseJsonObject<User> parseUser = new ApiUtils.ParseJsonObject<User>() {
         @Override
@@ -61,13 +61,13 @@ public class UserApi {
      * 请求短信验证码
      */
     public static BaseRequest<Map<String, Object>> requestSmsCode(
-            String mobile, int type,
+            String mobile, String type,
             Response.Listener<Map<String, Object>> listener,
             AppErrorListener errorListener) {
         Map<String, String> parmas = new HashMap<>();
         parmas.put("mobile", mobile);
-        parmas.put("source", "" + type);
-        return new BaseRequest<Map<String, Object>>(Request.Method.GET, IPConfig.getAPIBaseUrl() + "ShortMessage/getMessage", parmas, listener, errorListener) {
+        parmas.put("flag", type);
+        return new BaseRequest<Map<String, Object>>("sms", parmas, listener, errorListener) {
 
             @Override
             protected Map<String, Object> treatResponse(JSONObject baseJson) throws Exception {

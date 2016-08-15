@@ -33,7 +33,7 @@ public class RequestSmsCodePasswordFragment extends BaseFragment {
     @FragmentArg
     String mobile;
     @FragmentArg
-    int type;
+    String type;
     @FragmentArg
     String passwordLabelText;
 

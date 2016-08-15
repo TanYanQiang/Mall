@@ -90,21 +90,19 @@ public class RegisterStep1Activity extends BaseActivity {
         }
         //TODO  调用该接口获取验证码
         showLoading("正在发送验证码...");
-//        BaseRequest<Map<String, Object>> request = UserApi.requestSmsCode(mobile, UserApi.TYPE_REGISTER, new Response.Listener<Map<String, Object>>() {
-//            @Override
-//            public void onResponse(Map<String, Object> response) {
-//                dismissLoading();
-//                RegisterStep2Activity_.intent(RegisterStep1Activity.this).mobile(mobile).start();
-//            }
-//        }, new AppErrorListener(this) {
-//            @Override
-//            public void onError(int code, String msg) {
-//                super.onError(code, msg);
-//            }
-//        });
-//        VolleyHelper.execute(request, this);
-        dismissLoading();
-        RegisterStep2Activity_.intent(RegisterStep1Activity.this).mobile(mobile).start();
+        BaseRequest<Map<String, Object>> request = UserApi.requestSmsCode(mobile, UserApi.TYPE_REGISTER, new Response.Listener<Map<String, Object>>() {
+            @Override
+            public void onResponse(Map<String, Object> response) {
+                dismissLoading();
+                RegisterStep2Activity_.intent(RegisterStep1Activity.this).mobile(mobile).start();
+            }
+        }, new AppErrorListener(this) {
+            @Override
+            public void onError(int code, String msg) {
+                super.onError(code, msg);
+            }
+        });
+        VolleyHelper.execute(request, this);
     }
 
     @Click(R.id.login)

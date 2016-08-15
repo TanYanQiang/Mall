@@ -103,7 +103,7 @@ public class ApiUtils {
 
         headers.put("uid", userId);
         headers.put("token", ConfigManager.getUserToken());
-        headers.put("appId", deviceIdentifier);
+        headers.put("appid", deviceIdentifier);
         return headers;
     }
 
