@@ -11,6 +11,7 @@ import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.ui.MainActivity_;
 import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
@@ -48,7 +49,10 @@ public class UpdatePasswordActivity extends BaseActivity {
             @Override
             public void onResponse(Void response) {
                 showToast("密码修改成功，请重新登录");
-                LoginActivity_.intent(UpdatePasswordActivity.this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK).start();
+                Intent[] intents = new Intent[2];
+                intents[0] = MainActivity_.intent(UpdatePasswordActivity.this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK).get();
+                intents[1] = LoginActivity_.intent(UpdatePasswordActivity.this).get();
+                startActivities(intents);
                 MyApplication.getInstance().onUserLogout();
                 finish();
             }

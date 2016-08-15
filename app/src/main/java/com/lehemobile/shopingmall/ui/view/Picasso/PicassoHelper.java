@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.lehemobile.shopingmall.MyApplication;
@@ -31,6 +32,10 @@ public class PicassoHelper {
     }
 
     public static void showCircleImage(String imageUrl, ImageView imageView) {
+        if (TextUtils.isEmpty(imageUrl)) {
+            Picasso.with(MyApplication.getInstance()).load(R.mipmap.avatar_default).into(imageView);
+            return;
+        }
         Picasso.with(MyApplication.getInstance()).load(imageUrl).transform(new CropCircleTransformation()).into(imageView);
     }
 
@@ -40,6 +45,10 @@ public class PicassoHelper {
 
     public static void showCircleImage(String imageUrl, ImageView imageView, @DrawableRes int placeholder, @DimenRes int borderWidth, @ColorRes int borderColor) {
         MyApplication context = MyApplication.getInstance();
+        if (TextUtils.isEmpty(imageUrl)) {
+            Picasso.with(context).load(R.mipmap.avatar_default).into(imageView);
+            return;
+        }
         Picasso.with(context)
                 .load(imageUrl)
                 .placeholder(placeholder)

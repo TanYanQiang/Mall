@@ -107,7 +107,7 @@ public class ConfigManager {
 
     public static String getUserToken() {
         KeyValueStoreInternal instance = getDefaultBindVersionStore();
-        return instance.getString(USER_TOKEN, "lehe");
+        return instance.getString(USER_TOKEN, "");
     }
 
     public static void setUserToken(String userToken) {

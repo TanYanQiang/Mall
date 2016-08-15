@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by tanyq on 7/7/16.
  */
 public class User implements Serializable {
+    private String token;
     private int userId;
     private String mobile;
     private String nick;
@@ -95,5 +96,13 @@ public class User implements Serializable {
 
     public void setCommission(String commission) {
         this.commission = commission;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

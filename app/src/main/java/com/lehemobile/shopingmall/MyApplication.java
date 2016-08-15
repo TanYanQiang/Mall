@@ -56,6 +56,7 @@ public class MyApplication extends Application {
 
     public void onUserLogin(User user) {
         ConfigManager.setUserId(user.getUserId());
+        ConfigManager.setUserToken(user.getToken());
         ConfigManager.saveUser(user);
         EventBus.getDefault().post(new LoginEvent());
     }

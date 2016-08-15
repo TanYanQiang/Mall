@@ -94,8 +94,9 @@ public class AddressListsActivity extends BaseActivity {
         Logger.i("删除:" + address.getDetailedAddress());
 
         //
-        pageListHelper.getData().remove(address);
-        pageListHelper.getAdapter().notifyDataSetChanged();
+        ArrayList<Address> data = pageListHelper.getData();
+        data.remove(address);
+        pageListHelper.getAdapter().setData(data);
 
     }
 

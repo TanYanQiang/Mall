@@ -30,7 +30,7 @@ public class UserApi {
             User user = new User();
             user.setUserId(jobj.optInt("uid"));
             user.setNick(jobj.optString("user_name"));
-            user.setAvatar(jobj.optString("user_avatar"));
+            user.setAvatar(jobj.optString("user_photo"));
             user.setGender(jobj.optInt("user_gender"));
             user.setMobile(jobj.optString("user_mobile"));
             user.setRegisterTime(jobj.optString("user_register_time"));
@@ -50,6 +50,8 @@ public class UserApi {
             protected User treatResponse(JSONObject baseJson) throws Exception {
                 JSONObject result = baseJson.getJSONObject("result");
                 User user = parseUser.parse(result);
+                String token = result.optString("token");
+                user.setToken(token);
                 return user;
             }
         };
@@ -122,8 +124,8 @@ public class UserApi {
         Map<String, String> params = new HashMap<>();
         params.put("old_password", Md5.toString(oldPassword));
         params.put("new_password", Md5.toString(newPassword));
-        params.put("again_password", Md5.toString(newPassword));
-        return new BaseRequest<Void>("login", params, listener, errorListener) {
+        params.put("again_newpwd", Md5.toString(newPassword));
+        return new BaseRequest<Void>("changepwd", params, listener, errorListener) {
             @Override
             protected Void treatResponse(JSONObject baseJson) throws Exception {
                 return null;

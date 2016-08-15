@@ -82,13 +82,6 @@ public class ApiUtils {
         headers.put("Device-Product", silentURLEncode(Build.PRODUCT));
         headers.put("Device-Fingerprint", silentURLEncode(Build.FINGERPRINT));
         headers.put("Device-Hardware", silentURLEncode(Build.HARDWARE));
-
-        String token = ConfigManager.getUserToken();
-        String baseHash = appId + deviceTime + userId;
-
-        byte[] bytes = HMAC.sha512(baseHash, token);
-        String hmac = Strings.toHex(bytes);
-        headers.put("Hmac", hmac);
         return headers;
     }
 
@@ -99,11 +92,7 @@ public class ApiUtils {
         Map<String, String> headers = new HashMap<>();
 
         headers.put("uid", userId);
-
-
-        String token = ConfigManager.getUserToken();
-
-        headers.put("signature", Md5.toString(userId + token));
+        headers.put("token", ConfigManager.getUserToken());
         return headers;
     }
 
