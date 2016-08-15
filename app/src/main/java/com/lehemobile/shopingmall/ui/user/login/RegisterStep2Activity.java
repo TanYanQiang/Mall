@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
@@ -8,14 +10,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Response;
+import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
+import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.AfterViews;
@@ -24,6 +29,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by tanyq on 8/7/16.
@@ -112,9 +119,10 @@ public class RegisterStep2Activity extends BaseActivity {
         showLoading("正在提交信息...");
         BaseRequest<User> request = UserApi.register(mobile, smsCode, password, new Response.Listener<User>() {
             @Override
-            public void onResponse(User response) {
+            public void onResponse(User user) {
                 dismissLoading();
                 showToast("注册成功");
+                MyApplication.getInstance().onUserLogin(user);
             }
         }, new AppErrorListener(this) {
             @Override
@@ -128,9 +136,21 @@ public class RegisterStep2Activity extends BaseActivity {
 
 
     @Override
-    public void onDestroy() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
         VolleyHelper.cancel(this);
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(LoginEvent event) {
+        Logger.i("Login Success");
+        finish();
     }
 
 }

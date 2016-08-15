@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -10,6 +12,7 @@ import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
@@ -24,6 +27,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by tanyq on 7/7/16.
@@ -98,22 +103,37 @@ public class LoginActivity extends BaseActivity {
         RegisterStep1Activity_.intent(this).start();
     }
 
+    @Click(R.id.thirdQQ)
+    void thridQQLogin() {
+        Logger.i("thridQQLogin");
+    }
+
+    @Click(R.id.thirdWeibo)
+    void thirdWeiboLogin() {
+        Logger.i("thirdWeiboLogin");
+    }
+
+    @Click(R.id.thirdWeixin)
+    void thirdWeixinLogin() {
+        Logger.i("thirdWeixinLogin");
+    }
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         VolleyHelper.cancel(this);
+        EventBus.getDefault().unregister(this);
     }
 
-    @Click(R.id.thirdQQ)
-    void thridQQLogin(){
-        Logger.i("thridQQLogin");
-    }
-    @Click(R.id.thirdWeibo)
-    void thirdWeiboLogin(){
-        Logger.i("thirdWeiboLogin");
-    }
-    @Click(R.id.thirdWeixin)
-    void thirdWeixinLogin(){
-        Logger.i("thirdWeixinLogin");
+    public void onEventMainThread(LoginEvent event) {
+        Logger.i("Login Success");
+        finish();
     }
 }

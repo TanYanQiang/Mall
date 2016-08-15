@@ -1,16 +1,19 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Response;
+import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.ui.MainActivity_;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.tgh.devkit.core.utils.Strings;
@@ -71,8 +74,11 @@ public class RestPasswordStep2Activity extends BaseActivity {
             public void onResponse(User response) {
                 dismissLoading();
                 showToast("密码设置成功");
-                LoginActivity_.intent(RestPasswordStep2Activity.this).start();
-                finish();
+                Intent[] intents = new Intent[2];
+                intents[0] = MainActivity_.intent(RestPasswordStep2Activity.this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK).get();
+                intents[1] = LoginActivity_.intent(RestPasswordStep2Activity.this).get();
+                startActivities(intents);
+                MyApplication.getInstance().onUserLogout();
             }
         }, new AppErrorListener(this) {
             @Override

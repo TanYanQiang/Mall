@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,9 +14,11 @@ import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.text.SpannableStringHelper;
 import com.tgh.devkit.core.text.TextHelper;
 import com.tgh.devkit.core.utils.Strings;
@@ -28,6 +32,8 @@ import org.androidannotations.annotations.ViewById;
 import org.w3c.dom.Text;
 
 import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 import static com.tgh.devkit.core.utils.Strings.isNullOrEmpty;
 
@@ -50,7 +56,6 @@ public class RegisterStep1Activity extends BaseActivity {
 
     @ViewById
     TextView login;
-
     @AfterViews
     void init() {
         String mobile = ConfigManager.Device.getLastMobile();
@@ -111,8 +116,20 @@ public class RegisterStep1Activity extends BaseActivity {
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         VolleyHelper.cancel(this);
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(LoginEvent event) {
+        Logger.i("Login Success");
+        finish();
     }
 }
