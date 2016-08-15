@@ -8,6 +8,7 @@ import com.lehemobile.shopingmall.R;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -17,24 +18,19 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.activity_setup)
 public class SetupActivity extends BaseActivity {
     public static final int WHAT_SETUP = 1;
-    @ViewById
-    ImageView bg;
+
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == WHAT_SETUP) {
-                MainActivity_.intent(SetupActivity.this).start();
-                finish();
+                startMainActivity();
             }
         }
     };
 
     @AfterViews
     void init() {
-        String url = "http://s.cn.bing.net/az/hprichbg/rb/WatchmanPeak_ZH-CN11491247109_1920x1080.jpg";
-        Picasso.with(this).load(url)
-                .into(bg);
 
         handler.sendEmptyMessageDelayed(WHAT_SETUP, 1500);
     }
@@ -45,5 +41,14 @@ public class SetupActivity extends BaseActivity {
         if (handler != null) {
             handler.removeMessages(WHAT_SETUP);
         }
+    }
+
+    @Click(R.id.goMain)
+    void startMainActivity() {
+        if (handler != null) {
+            handler.removeMessages(WHAT_SETUP);
+        }
+        MainActivity_.intent(SetupActivity.this).start();
+        finish();
     }
 }
