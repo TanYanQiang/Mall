@@ -12,6 +12,7 @@ import com.lehemobile.shopingmall.config.IPConfig;
 import com.lehemobile.shopingmall.model.UploadImage;
 import com.tgh.devkit.core.encrypt.HMAC;
 import com.tgh.devkit.core.encrypt.Md5;
+import com.tgh.devkit.core.utils.DeviceId;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.core.utils.Utils;
 
@@ -64,7 +65,7 @@ public class ApiUtils {
         final Context context = MyApplication.getInstance();
 
         String deviceTime = String.valueOf(System.currentTimeMillis());
-
+        String deviceIdentifier = DeviceId.getDeviceID(context);
         String appId = Utils.getPackageName(context);
         String userId = String.valueOf(ConfigManager.getUserId());
 
@@ -75,6 +76,7 @@ public class ApiUtils {
         headers.put("Device-Model", silentURLEncode(Build.MODEL));
         headers.put("System-Name", "Android");
         headers.put("System-Version", silentURLEncode(Build.VERSION.RELEASE));
+        headers.put("Device-Identifier", deviceIdentifier);
         headers.put("App-Id", appId);
         headers.put("App-Version", Utils.getAppVersionName(context));
         headers.put("User-Platform", "android");
@@ -86,6 +88,8 @@ public class ApiUtils {
     }
 
     public static Map<String, String> createCommonParams() {
+        final Context context = MyApplication.getInstance();
+        String deviceIdentifier = DeviceId.getDeviceID(context);
 
         String userId = String.valueOf(ConfigManager.getUserId());
 
@@ -93,6 +97,7 @@ public class ApiUtils {
 
         headers.put("uid", userId);
         headers.put("token", ConfigManager.getUserToken());
+        headers.put("appId", deviceIdentifier);
         return headers;
     }
 
