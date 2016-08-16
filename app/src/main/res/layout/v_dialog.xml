@@ -6,7 +6,8 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:background="@drawable/bg_dialog"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <Space
         android:layout_width="match_parent"
@@ -17,6 +18,8 @@
         style="@style/TextStyle.Title.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:gravity="center"
         tools:text="Title" />
 
@@ -31,6 +34,8 @@
         style="@style/TextStyle.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:visibility="gone"
         tools:text="msg" />
@@ -69,12 +74,12 @@
         <TextView
             android:id="@+id/tv_center"
             style="@style/TextStyle.Title.Large.Gray"
-            android:textColor="@color/positive_text_color"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_dialog_btn_center"
             android:gravity="center"
+            android:textColor="@color/positive_text_color"
             android:textStyle="bold"
             android:visibility="gone"
             tools:text="Send" />
@@ -82,12 +87,12 @@
         <TextView
             android:id="@+id/tv_right"
             style="@style/TextStyle.Title.Large.Gray"
-            android:textColor="@color/positive_text_color"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_dialog_btn_right"
             android:gravity="center"
+            android:textColor="@color/positive_text_color"
             tools:text="OK" />
     </LinearLayout>
 

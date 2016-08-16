@@ -104,7 +104,7 @@ public class ProfileActivity extends BaseActivity implements ActivityCompat.OnRe
         if (PermissionUtils.hasSelfPermissions(this, permission)) {
             showChooseImage();
         } else {
-            if (!PermissionUtils.shouldShowRequestPermissionRationale(this, permission)) {
+            if (PermissionUtils.shouldShowRequestPermissionRationale(this, permission)) {
                 showRationaleFormStorage(new PermissionHelper.PermissionRequest() {
                     @Override
                     public void proceed() {
