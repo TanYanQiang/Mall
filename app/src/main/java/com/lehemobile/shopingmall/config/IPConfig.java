@@ -27,8 +27,8 @@ public class IPConfig {
     }
 
     public static String getApiUrl(String operation) {
-        String url = "%s/index.php?op=%s&apicheckchar=%s";
-        url = String.format(url, getAPIBaseUrl(), operation, BuildConfig.apiCheckChar);
+        String url = "%s/index.php?op=%s";
+        url = String.format(url, getAPIBaseUrl(), operation);
         return url;
     }
 }
