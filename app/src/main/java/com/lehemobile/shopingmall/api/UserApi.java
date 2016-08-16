@@ -80,19 +80,26 @@ public class UserApi {
      * @param mobile
      * @param smsCode
      * @param password
+     * @param realName      真是姓名
+     * @param idCard        身份证
      * @param listener
      * @param errorListener
      * @return
      */
-    public static BaseRequest<User> register(String mobile, String smsCode, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
+    public static BaseRequest<User> register(String mobile, String smsCode, String password, String realName, String idCard, Response.Listener<User> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
         params.put("smsCode", smsCode);
+        params.put("name", realName);
+        params.put("idcard", idCard);
         params.put("password", Md5.toString(password));
-        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/register", params, listener, errorListener) {
+        return new BaseRequest<User>("register", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
-                User user = new User();
+                JSONObject result = baseJson.getJSONObject("result");
+                User user = parseUser.parse(result);
+                String token = result.optString("token");
+                user.setToken(token);
                 return user;
             }
         };

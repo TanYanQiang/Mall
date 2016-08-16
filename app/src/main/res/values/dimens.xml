@@ -28,7 +28,7 @@
 
     <dimen name="avatar_size">80dp</dimen>
     <dimen name="avatar_borderWidth">2dp</dimen>
-    <dimen name="hero_avatar_borderWidth">4dp</dimen>
+    <dimen name="hero_avatar_borderWidth">2dp</dimen>
     <dimen name="goods_thumb_width">90dp</dimen>
     <dimen name="goods_thumb_height">90dp</dimen>
     <dimen name="goods_thumb_border_width">0.5dp</dimen>

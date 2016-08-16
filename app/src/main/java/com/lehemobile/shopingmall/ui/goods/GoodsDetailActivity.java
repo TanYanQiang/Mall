@@ -340,11 +340,20 @@ public class GoodsDetailActivity extends BaseActivity {
     }
 
     private void showBuySelectView() {
-        BuySelectGoodsView selectGoodsView = BuySelectGoodsView_.build(this);
+        final BuySelectGoodsView selectGoodsView = BuySelectGoodsView_.build(this);
         selectGoodsView.bindData(session);
-        Dialog dialog = new DialogBuilder(this).contentView(selectGoodsView).build();
 
+        final Dialog dialog = new DialogBuilder(this).contentView(selectGoodsView).build();
         dialog.show();
+
+        selectGoodsView.setOnBuySelectGoodsListener(new BuySelectGoodsView.OnBuySelectGoodsListener() {
+            @Override
+            public void onClose() {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
     }
 
 }

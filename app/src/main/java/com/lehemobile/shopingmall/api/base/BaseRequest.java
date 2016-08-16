@@ -62,8 +62,9 @@ public abstract class BaseRequest<T> extends Request<T> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         if (headers == null) {
-            headers = ApiUtils.createCommonHeaders();
+            headers = new HashMap<>();
         }
+        headers.putAll(ApiUtils.createCommonHeaders());
         if (BuildConfig.DEBUG) {
             Logger.i("request headers:" + headers);
         }
@@ -73,15 +74,6 @@ public abstract class BaseRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
-           /* //在测试版本中，只要在assets目录下放入和访问api路径同名的json文件，即可使用该文件的内容作为返回值，
-            //比如请求Stat/career_stat接口，那么放入Stat_career_stat.json文件即可
-            JSONObject mockResponse = foundMockResponse();
-            if (mockResponse != null) {
-                return Response.success(
-                        treatResponse(mockResponse),
-                        HttpHeaderParser.parseCacheHeaders(response));
-            }*/
-
             String json = new String(response.data, "UTF-8");
             Logger.i("request url = %s \nresponse = %s", this.getUrl(), json);
 
