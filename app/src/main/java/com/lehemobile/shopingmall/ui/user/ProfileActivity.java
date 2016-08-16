@@ -18,6 +18,7 @@ import com.lehemobile.shopingmall.ui.view.Picasso.CropCircleTransformation;
 import com.lehemobile.shopingmall.ui.view.Picasso.PicassoHelper;
 import com.lehemobile.shopingmall.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.tgh.devkit.core.utils.PermissionHelper;
 import com.tgh.devkit.core.utils.PermissionUtils;
@@ -27,6 +28,8 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import java.io.File;
 
 
 /**
@@ -151,6 +154,12 @@ public class ProfileActivity extends BaseActivity implements ActivityCompat.OnRe
 
     private void uploadAvatar(String imagePath) {
         //TODO 上传图片
+        //Picasso 显示本地图片
+        Picasso.with(this)
+                .load(new File(imagePath))
+                .memoryPolicy(MemoryPolicy.NO_CACHE)  //不缓存
+                .transform(new CropCircleTransformation())
+                .into(avatar);
     }
 
     @Override
