@@ -5,14 +5,13 @@ import android.app.Dialog;
 import android.graphics.Paint;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
@@ -20,7 +19,6 @@ import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
-import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity;
 import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity_;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -37,7 +35,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.OptionsMenuItem;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -84,12 +82,27 @@ public class GoodsDetailActivity extends BaseActivity {
     @ViewById
     TextView favorite;
 
+    @ViewById
+    View progressLayout;
+    @ViewById
+    ContentLoadingProgressBar progress;
+
     private GoodsDetailSession session;
     private GalleryAdapter galleryAdapter;
     private InfinitePagerAdapter infinitePagerAdapter;
 
+    private void updateProgressUI(boolean visibility) {
+        progressLayout.setVisibility(visibility ? View.VISIBLE : View.GONE);
+        if (visibility) {
+            progress.show();
+        } else {
+            progress.hide();
+        }
+    }
 
     private void loadData() {
+
+        updateProgressUI(true);
         //TODO 加载数据
         session = new GoodsDetailSession();
 
@@ -126,8 +139,7 @@ public class GoodsDetailActivity extends BaseActivity {
         }
 
         session.setRecommendGoods(recommendGoods);
-
-        updateUI();
+        updateUI(); 
     }
 
     @AfterViews
@@ -201,9 +213,9 @@ public class GoodsDetailActivity extends BaseActivity {
         recommendList.setLayoutManager(layoutManager);
     }
 
-
-    private void updateUI() {
-
+    @UiThread
+    void updateUI() {
+        updateProgressUI(false);
         updateGalleryUI(session.getGoods().getImages());
         updateGoodsInfoUI();
         updateDetailUI();
