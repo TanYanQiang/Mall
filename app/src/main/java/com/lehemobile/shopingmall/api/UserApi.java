@@ -89,10 +89,11 @@ public class UserApi {
     public static BaseRequest<User> register(String mobile, String smsCode, String password, String realName, String idCard, Response.Listener<User> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
-        params.put("smsCode", smsCode);
-        params.put("name", realName);
+        params.put("code", smsCode);
+        params.put("realname", realName);
         params.put("idcard", idCard);
         params.put("password", Md5.toString(password));
+        params.put("agian_password", Md5.toString(password));
         return new BaseRequest<User>("register", params, listener, errorListener) {
             @Override
             protected User treatResponse(JSONObject baseJson) throws Exception {
@@ -105,24 +106,17 @@ public class UserApi {
         };
     }
 
-    /**
-     * @param mobile
-     * @param smsCode
-     * @param password
-     * @param listener
-     * @param errorListener
-     * @return
-     */
-    public static BaseRequest<User> restPassword(String mobile, String smsCode, String password, Response.Listener<User> listener, AppErrorListener errorListener) {
+
+    public static BaseRequest<Void> restPassword(String mobile,String token, String password, Response.Listener<Void> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
-        params.put("smsCode", smsCode);
+        params.put("checkchar", token);
         params.put("password", Md5.toString(password));
-        return new BaseRequest<User>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/register", params, listener, errorListener) {
+        params.put("agian_password", Md5.toString(password));
+        return new BaseRequest<Void>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/register", params, listener, errorListener) {
             @Override
-            protected User treatResponse(JSONObject baseJson) throws Exception {
-                User user = new User();
-                return user;
+            protected Void treatResponse(JSONObject baseJson) throws Exception {
+                return null;
             }
         };
     }
@@ -136,6 +130,21 @@ public class UserApi {
             @Override
             protected Void treatResponse(JSONObject baseJson) throws Exception {
                 return null;
+            }
+        };
+    }
+
+    public static BaseRequest<String> forgetPassword(String mobile, String smsCode, String idCard, Response.Listener<String> listener, AppErrorListener errorListener) {
+        Map<String, String> params = new HashMap<>();
+        params.put("mobile", mobile);
+        params.put("code", smsCode);
+        params.put("idcard", idCard);
+        return new BaseRequest<String>("forgetpwd", params, listener, errorListener) {
+            @Override
+            protected String treatResponse(JSONObject baseJson) throws Exception {
+                JSONObject result = baseJson.optJSONObject("result");
+                String token = result.optString("token");
+                return token;
             }
         };
     }

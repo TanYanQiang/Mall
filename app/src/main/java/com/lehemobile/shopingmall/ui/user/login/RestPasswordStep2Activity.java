@@ -32,6 +32,8 @@ public class RestPasswordStep2Activity extends BaseActivity {
 
     @Extra
     String mobile;
+    @Extra
+    String token;
 
     @ViewById
     EditText newPassword;
@@ -67,11 +69,10 @@ public class RestPasswordStep2Activity extends BaseActivity {
             return;
         }
 
-        //TODO 调用接口注册
         showLoading("正在提交信息...");
-        BaseRequest<User> request = UserApi.restPassword(mobile, null, password, new Response.Listener<User>() {
+        BaseRequest<Void> request = UserApi.restPassword(mobile, token, password, new Response.Listener<Void>() {
             @Override
-            public void onResponse(User response) {
+            public void onResponse(Void response) {
                 dismissLoading();
                 showToast("密码设置成功");
                 Intent[] intents = new Intent[2];
@@ -79,6 +80,7 @@ public class RestPasswordStep2Activity extends BaseActivity {
                 intents[1] = LoginActivity_.intent(RestPasswordStep2Activity.this).get();
                 startActivities(intents);
                 MyApplication.getInstance().onUserLogout();
+                finish();
             }
         }, new AppErrorListener(this) {
             @Override

@@ -1,6 +1,8 @@
 package com.lehemobile.shopingmall.ui.user.login;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,9 +14,11 @@ import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.ConfigManager;
+import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.core.utils.TextWatcherAdapter;
 
@@ -24,6 +28,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 import static com.tgh.devkit.core.utils.Strings.isNullOrEmpty;
 
@@ -88,18 +94,34 @@ public class RestPasswordStep1Activity extends BaseActivity {
             return;
         }
 
-        //TODO 找回密码
+        showLoading("正在提交数据...");
+        BaseRequest<String> request = UserApi.forgetPassword(mobile, smsCode, _idCard, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String token) {
+                Logger.i("token:" + token);
+                RestPasswordStep2Activity_.intent(RestPasswordStep1Activity.this).token(token).start();
+            }
+        }, new AppErrorListener(this));
 
+        VolleyHelper.execute(request, this);
+
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(countDownTimer != null){
+        if (countDownTimer != null) {
             countDownTimer.cancel();
             countDownTimer = null;
         }
         VolleyHelper.cancel(this);
+        EventBus.getDefault().unregister(this);
     }
 
 
@@ -142,7 +164,6 @@ public class RestPasswordStep1Activity extends BaseActivity {
         }
 
         inputSmsCode.setText("");
-        //TODO  调用该接口获取验证码
         showLoading("正在发送验证码...");
         BaseRequest<Map<String, Object>> request = UserApi.requestSmsCode(mobile, UserApi.TYPE_RESET_PASSWORD, new Response.Listener<Map<String, Object>>() {
             @Override
@@ -158,5 +179,10 @@ public class RestPasswordStep1Activity extends BaseActivity {
             }
         });
         VolleyHelper.execute(request, this);
+    }
+
+    public void onEventMainThread(LoginEvent event) {
+        Logger.i("Login Success");
+        finish();
     }
 }

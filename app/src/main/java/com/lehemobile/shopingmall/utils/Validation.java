@@ -2,6 +2,7 @@ package com.lehemobile.shopingmall.utils;
 
 import android.text.TextUtils;
 
+import com.lehemobile.shopingmall.BuildConfig;
 import com.tgh.devkit.core.utils.DebugLog;
 
 import java.util.Locale;
@@ -100,6 +101,9 @@ public class Validation {
      * @return
      */
     public static boolean isIDcard(String idCard) {
+
+        if(BuildConfig.DEBUG) return true;
+
         String eifhteencard;
         if (idCard.length() == 15) {
             eifhteencard = uptoeighteen(idCard);
