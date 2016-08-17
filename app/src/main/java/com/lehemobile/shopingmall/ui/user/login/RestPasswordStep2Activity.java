@@ -11,6 +11,7 @@ import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.api.UserApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
+import com.lehemobile.shopingmall.event.RestPasswordEvent;
 import com.lehemobile.shopingmall.model.User;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.MainActivity_;
@@ -23,6 +24,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by tanyq on 8/7/16.
@@ -75,11 +78,7 @@ public class RestPasswordStep2Activity extends BaseActivity {
             public void onResponse(Void response) {
                 dismissLoading();
                 showToast("密码设置成功,请使用新密码登录APP");
-                Intent[] intents = new Intent[2];
-                intents[0] = MainActivity_.intent(RestPasswordStep2Activity.this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK).get();
-                intents[1] = LoginActivity_.intent(RestPasswordStep2Activity.this).get();
-                startActivities(intents);
-                MyApplication.getInstance().onUserLogout();
+                EventBus.getDefault().post(new RestPasswordEvent());
                 finish();
             }
         }, new AppErrorListener(this) {

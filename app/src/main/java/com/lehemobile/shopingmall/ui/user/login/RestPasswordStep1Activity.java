@@ -15,6 +15,7 @@ import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.LoginEvent;
+import com.lehemobile.shopingmall.event.RestPasswordEvent;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.utils.Validation;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
@@ -183,6 +184,11 @@ public class RestPasswordStep1Activity extends BaseActivity {
 
     public void onEventMainThread(LoginEvent event) {
         Logger.i("Login Success");
+        finish();
+    }
+
+    public void onEventMainThread(RestPasswordEvent event) {
+        Logger.i("Rest Password Success");
         finish();
     }
 }
