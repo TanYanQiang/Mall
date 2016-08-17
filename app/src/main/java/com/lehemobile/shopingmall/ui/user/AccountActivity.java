@@ -2,6 +2,7 @@ package com.lehemobile.shopingmall.ui.user;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -104,7 +105,12 @@ public class AccountActivity extends BaseActivity {
         nick.setText(user.getNick());
         userId.setText(getString(R.string.label_account_userID, "" + user.getUserId()));
         registerTime.setText(getString(R.string.label_account_user_registerTime, user.getRegisterTime()));
-        parentName.setText(getString(R.string.label_account_user_parent_name, user.getParentName()));
+        if(!TextUtils.isEmpty(user.getParentName())){
+            parentName.setText(getString(R.string.label_account_user_parent_name, user.getParentName()));
+        }else{
+            parentName.setText(getString(R.string.label_account_user_parent_name, "暂无"));
+        }
+
     }
 
     private boolean isLogin() {
