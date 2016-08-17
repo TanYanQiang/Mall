@@ -63,13 +63,22 @@ public class SettingActivity extends BaseActivity {
 
     }
 
+    private File getPicassoImageCache() {
+        String cachePath = getCacheDir().getPath();
+        File dir = new File(cachePath + File.separator + AppConfig.IMAGE_CACHE_DIR);
+        if (!IO.exist(dir)) {
+            dir.mkdirs();
+        }
+        return dir;
+    }
+
     private void updateLogoutBtn() {
         logoutBtn.setVisibility(ConfigManager.isLogin() ? View.VISIBLE : View.GONE);
     }
 
     @Background
     void calculateCacheSize() {
-        File cacheDir = IO.getCacheDir(this, AppConfig.IMAGE_CACHE_DIR);
+        File cacheDir = getPicassoImageCache();
         long totalSpace = cacheDir.getTotalSpace();
         Logger.i("cache totalSpace:" + totalSpace);
 
@@ -97,7 +106,7 @@ public class SettingActivity extends BaseActivity {
 
     @Background
     void clearCacheFile() {
-        File cacheDir = IO.getCacheDir(this, AppConfig.IMAGE_CACHE_DIR);
+        File cacheDir = getPicassoImageCache();
         IO.delete(cacheDir);
         showClearCacheToast();
     }
