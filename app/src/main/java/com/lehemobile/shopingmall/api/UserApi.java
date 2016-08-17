@@ -1,12 +1,16 @@
 package com.lehemobile.shopingmall.api;
 
+import android.text.format.DateUtils;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.api.base.ApiUtils;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.IPConfig;
 import com.lehemobile.shopingmall.model.User;
+import com.lehemobile.shopingmall.utils.Dates;
 import com.tgh.devkit.core.encrypt.Md5;
 
 import org.json.JSONObject;
@@ -29,12 +33,12 @@ public class UserApi {
         public User parse(JSONObject jobj) throws Exception {
             User user = new User();
             user.setUserId(jobj.optInt("uid"));
-            user.setNick(jobj.optString("user_name"));
+            user.setNick(jobj.optString("realname"));
             user.setAvatar(jobj.optString("user_photo"));
             user.setGender(jobj.optInt("user_gender"));
-            user.setMobile(jobj.optString("user_mobile"));
-            user.setRegisterTime(jobj.optString("user_register_time"));
-            user.setParentName(jobj.optString("user_parent_name"));
+            user.setMobile(jobj.optString("mobile"));
+            user.setRegisterTime(Dates.getDate(jobj.optLong("regtime")));
+            user.setParentName(jobj.optString("parent_name"));
             user.setRank(jobj.optString("user_rank"));
             user.setCommission(jobj.optString("user_commission"));
             return user;
