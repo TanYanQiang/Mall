@@ -139,7 +139,7 @@ public class GoodsDetailActivity extends BaseActivity {
         }
 
         session.setRecommendGoods(recommendGoods);
-        updateUI(); 
+        updateUI();
     }
 
     @AfterViews

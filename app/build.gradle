@@ -28,8 +28,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
-
+        resValue "string", "app_name", "ShopingMall"
     }
     signingConfigs {
         lehe {
@@ -43,6 +42,8 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.lehe
             zipAlignEnabled true
@@ -54,6 +55,7 @@ android {
         }
         debug {
             minifyEnabled false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.lehe
             zipAlignEnabled true
@@ -74,6 +76,7 @@ android {
             buildConfigField("String", API_CHECK_CHAR, "\"rewt4234543rewt4234543\"")
             buildConfigField("String", BUGLY_APPID, "\"b86ba76f73\"")
 
+            resValue("string", "app_name", "芮娜皇宫")
         }
     }
     lintOptions {
