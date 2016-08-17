@@ -99,7 +99,7 @@ public class RestPasswordStep1Activity extends BaseActivity {
             @Override
             public void onResponse(String token) {
                 Logger.i("token:" + token);
-                RestPasswordStep2Activity_.intent(RestPasswordStep1Activity.this).token(token).start();
+                RestPasswordStep2Activity_.intent(RestPasswordStep1Activity.this).mobile(mobile).token(token).start();
             }
         }, new AppErrorListener(this));
 

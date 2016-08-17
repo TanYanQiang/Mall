@@ -74,7 +74,7 @@ public class RestPasswordStep2Activity extends BaseActivity {
             @Override
             public void onResponse(Void response) {
                 dismissLoading();
-                showToast("密码设置成功");
+                showToast("密码设置成功,请使用新密码登录APP");
                 Intent[] intents = new Intent[2];
                 intents[0] = MainActivity_.intent(RestPasswordStep2Activity.this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK).get();
                 intents[1] = LoginActivity_.intent(RestPasswordStep2Activity.this).get();

@@ -113,7 +113,7 @@ public class UserApi {
         params.put("checkchar", token);
         params.put("password", Md5.toString(password));
         params.put("agian_password", Md5.toString(password));
-        return new BaseRequest<Void>(Request.Method.POST, IPConfig.getAPIBaseUrl() + "User/register", params, listener, errorListener) {
+        return new BaseRequest<Void>("setnewpwd", params, listener, errorListener) {
             @Override
             protected Void treatResponse(JSONObject baseJson) throws Exception {
                 return null;
@@ -143,7 +143,7 @@ public class UserApi {
             @Override
             protected String treatResponse(JSONObject baseJson) throws Exception {
                 JSONObject result = baseJson.optJSONObject("result");
-                String token = result.optString("token");
+                String token = result.optString("checkchar");
                 return token;
             }
         };
