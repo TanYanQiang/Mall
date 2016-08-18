@@ -11,6 +11,7 @@ import com.lehemobile.shopingmall.BuildConfig;
 import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.config.IPConfig;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.core.utils.DebugLog;
 import com.tgh.devkit.core.utils.IO;
 
 import org.json.JSONObject;
@@ -29,6 +30,8 @@ public abstract class BaseRequest<T> extends Request<T> {
     private Response.Listener<T> listener;
     private Map<String, String> params;
 
+    private String operation;
+
     public BaseRequest(int method, String url, Map<String, String> params, Response.Listener<T> listener, AppErrorListener errorListener) {
         super(method, url, errorListener == null ? fooErrorListener : errorListener);
         init(params, listener);
@@ -36,6 +39,7 @@ public abstract class BaseRequest<T> extends Request<T> {
 
     public BaseRequest(String operation, Map<String, String> params, Response.Listener<T> listener, AppErrorListener errorListener) {
         super(Method.POST, IPConfig.getApiUrl(operation), errorListener == null ? fooErrorListener : errorListener);
+        this.operation = operation;
         init(params, listener);
     }
 
@@ -74,6 +78,16 @@ public abstract class BaseRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
+            //在测试版本中，只要在assets目录下放入和访问api路径同名的json文件，即可使用该文件的内容作为返回值，
+            //比如请求useraddr(operation)接口，那么放入operation.json文件即可
+            JSONObject mockResponse = foundMockResponse();
+            if (mockResponse != null) {
+                return Response.success(
+                        treatResponse(mockResponse),
+                        HttpHeaderParser.parseCacheHeaders(response));
+            }
+
+
             String json = new String(response.data, "UTF-8");
             Logger.i("request url = %s \nresponse = %s", this.getUrl(), json);
 
@@ -89,18 +103,12 @@ public abstract class BaseRequest<T> extends Request<T> {
     }
 
     private JSONObject foundMockResponse() {
-        /*if (!BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             return null;
-        }*/
+        }
         try {
-            URL url = new URL(getUrl());
-            String path = url.getPath();
-            if (TextUtils.isEmpty(path)) {
-                return null;
-            }
-            path = path.substring(1);
-            String fileName = path.replaceAll("/", "_");
-            InputStream open = MyApplication.getInstance().getAssets().open(fileName + ".json");
+            if (TextUtils.isEmpty(operation)) return null;
+            InputStream open = MyApplication.getInstance().getAssets().open(operation + ".json");
             String json = new String(IO.read(open));
             return new JSONObject(json);
         } catch (Exception e) {

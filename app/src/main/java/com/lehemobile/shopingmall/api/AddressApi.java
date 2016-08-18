@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.api;
 
+import android.text.TextUtils;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.lehemobile.shopingmall.api.base.ApiUtils;
@@ -28,7 +30,34 @@ public class AddressApi {
         @Override
         public Address parse(JSONObject jobj) throws Exception {
             Address address = new Address();
-            //// TODO: 18/8/16 解析收货地址
+            address.setId(jobj.optInt("address_id"));
+            address.setName(jobj.optString("consignee"));
+            String tel = jobj.optString("tel");
+            address.setTel(tel);
+            String mobile = jobj.optString("mobile");
+            mobile = TextUtils.isEmpty(tel) ? mobile : tel;
+            address.setMobile(mobile);
+            address.setZipCode(jobj.optString("zipcode"));
+            address.setEmail(jobj.optString("email"));
+
+            address.setDetailedAddress(jobj.optString("address"));
+
+            Region province = new Region();
+            province.setName(jobj.optString("province_name"));
+            province.setId(jobj.optInt("province"));
+            address.setProvince(province);
+
+            Region city = new Region();
+            city.setName(jobj.optString("city_name"));
+            city.setId(jobj.optInt("city"));
+            address.setCity(city);
+
+            Region district = new Region();
+            district.setName(jobj.optString("district_name"));
+            district.setId(jobj.optInt("district"));
+            address.setDistrict(district);
+            //// TODO: 18/8/16  是否默认
+            address.setDefault(false);
             return address;
         }
     };
@@ -67,7 +96,7 @@ public class AddressApi {
         params.put("p", String.valueOf(page));
         params.put("p_number", String.valueOf(pageNumber));
 
-        return new BaseRequest<List<Address>>("getAddress", params, listener, errorListener) {
+        return new BaseRequest<List<Address>>("useraddr", params, listener, errorListener) {
             @Override
             protected List<Address> treatResponse(JSONObject baseJson) throws Exception {
                 JSONArray result = baseJson.optJSONArray("result");

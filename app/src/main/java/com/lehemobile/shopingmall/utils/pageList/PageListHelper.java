@@ -74,13 +74,16 @@ public abstract class PageListHelper<T> {
                 pageListView.setMode(PullToRefreshBase.Mode.DISABLED);
             }
         }
-
-        pageListView.setEmptyView(v_empty);
+        if (v_empty != null) {
+            pageListView.setEmptyView(v_empty);
+        }
     }
 
     public void onLoadError(String errorMsg) {
         pageListView.onRefreshComplete();
-        pageListView.setEmptyView(v_empty);
+        if (v_empty != null) {
+            pageListView.setEmptyView(v_empty);
+        }
     }
 
     public void initStart() {
@@ -99,10 +102,10 @@ public abstract class PageListHelper<T> {
 
 
     public void notifyDataSetChanged(List<T> result) {
-        if(adapter == null){
+        if (adapter == null) {
             adapter = newAdapter(result);
             pageListView.setAdapter(adapter);
-        }else{
+        } else {
             adapter.addAll(result);
         }
         adapter.notifyDataSetChanged();

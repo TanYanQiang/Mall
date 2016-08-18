@@ -7,6 +7,25 @@ import java.io.Serializable;
  * Created by  on 22/7/16.
  */
 public class Address implements Serializable {
+    /**
+     * "address_id": "1", //地址ID
+     * "address_name": "", //地址名称
+     * "consignee": "吴系挂", //收件人
+     * "email": "",  //收件人邮箱
+     * "country": 1 , //国家ID
+     * "country_name": '中国' , //国家名称
+     * "province": "13",  //省份ID
+     * "province": "湖南省",  //省份名称
+     * "city": "39",  //城市ID
+     * "city_name": "长沙",  //城市名称
+     * "district": '1129', //街道（县）ID
+     * "district_name":'雨花区'，//街道名称
+     * "address":"详细地址" //详细地址
+     * "zipcode":"411400", //邮编
+     * "tel":"13739076383", //电话
+     * "mobile": "", //手机
+     */
+
     private int id;
     private String name;
     private String mobile;
@@ -15,6 +34,10 @@ public class Address implements Serializable {
     private Region city;
     private Region district;
     private String detailedAddress;
+
+    private String zipCode;
+    private String tel;
+    private String email;
 
     private boolean isDefault = false;
 
@@ -82,6 +105,30 @@ public class Address implements Serializable {
 
     public void setDistrict(Region district) {
         this.district = district;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRegion() {

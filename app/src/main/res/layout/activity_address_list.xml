@@ -30,7 +30,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="你还没有收货地址(⊙o⊙)哦！"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <android.support.v4.widget.ContentLoadingProgressBar
