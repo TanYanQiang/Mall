@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -127,13 +128,6 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
         banner.setAdapter(bannerAdapter);
         indicator.addTabs(list.size());
         infinitePagerAdapter = new InfinitePagerAdapter(bannerAdapter);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startCounting();
-            }
-        }, DELAY_MILLIS);
-
     }
 
     public void bindData(NewTodayGoodsSession session) {
@@ -193,13 +187,12 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
     }
 
     private void startCounting() {
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-            countDownTimer = null;
-        }
+        cancelCountDownTimer();
+
         countDownTimer = new CountDownTimer(Integer.MAX_VALUE, DELAY_MILLIS) {
             @Override
             public void onTick(long millisUntilFinished) {
+                Logger.i("" + millisUntilFinished);
                 autoSelectedBanner();
             }
 
@@ -208,13 +201,21 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
 
             }
         };
-        countDownTimer.start();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (countDownTimer != null) {
+                    countDownTimer.start();
+                }
+            }
+        }, DELAY_MILLIS);
     }
 
     private void autoSelectedBanner() {
         if (banner == null) return;
 
         int currentItem = banner.getCurrentItem();
+        Logger.i("autoSelectedBanner: currentItem->" + currentItem);
         currentItem = (currentItem + 1) % banner.getAdapter().getCount();
         banner.setCurrentItem(currentItem, true);
     }
@@ -223,6 +224,7 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
         if (countDownTimer != null) {
             countDownTimer.cancel();
             countDownTimer = null;
+            Logger.i("cancel");
         }
     }
 
@@ -232,5 +234,12 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
 
     public void startBannerSwitch() {
         startCounting();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        Logger.i("onDetachedFromWindow");
+        cancelCountDownTimer();
     }
 }
