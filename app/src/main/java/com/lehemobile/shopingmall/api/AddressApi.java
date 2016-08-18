@@ -2,8 +2,10 @@ package com.lehemobile.shopingmall.api;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.lehemobile.shopingmall.api.base.ApiUtils;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
+import com.lehemobile.shopingmall.model.Address;
 import com.lehemobile.shopingmall.model.Region;
 
 import org.json.JSONArray;
@@ -22,6 +24,14 @@ public class AddressApi {
     public static int LEVEL_PROVINCE = 1;
     public static int LEVEL_CITY = 2;
     public static int LEVEL_DISTRICT = 3;
+    private static ApiUtils.ParseJsonObject<Address> parserAddress = new ApiUtils.ParseJsonObject<Address>() {
+        @Override
+        public Address parse(JSONObject jobj) throws Exception {
+            Address address = new Address();
+            //// TODO: 18/8/16 解析收货地址
+            return address;
+        }
+    };
 
     /**
      * @param parent
@@ -48,6 +58,23 @@ public class AddressApi {
                     regions.add(region);
                 }
                 return regions;
+            }
+        };
+    }
+
+    public static Request<List<Address>> getAddressList(int page, int pageNumber, Response.Listener<List<Address>> listener, AppErrorListener errorListener) {
+        Map<String, String> params = new HashMap<>();
+        params.put("p", String.valueOf(page));
+        params.put("p_number", String.valueOf(pageNumber));
+
+        return new BaseRequest<List<Address>>("getAddress", params, listener, errorListener) {
+            @Override
+            protected List<Address> treatResponse(JSONObject baseJson) throws Exception {
+                JSONArray result = baseJson.optJSONArray("result");
+                ArrayList<Address> addresses = new ArrayList<>();
+                if (result == null) return addresses;
+                addresses = ApiUtils.parseJsonArray(result, parserAddress);
+                return addresses;
             }
         };
     }

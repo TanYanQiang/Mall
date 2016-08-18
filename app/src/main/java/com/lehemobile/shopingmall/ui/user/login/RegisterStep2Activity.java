@@ -115,7 +115,6 @@ public class RegisterStep2Activity extends BaseActivity {
             return;
         }
 
-        //TODO 调用接口注册
         showLoading("正在提交信息...");
         BaseRequest<User> request = UserApi.register(mobile, smsCode, password,_name,_idCard, new Response.Listener<User>() {
             @Override

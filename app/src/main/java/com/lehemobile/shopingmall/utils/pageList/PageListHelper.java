@@ -75,13 +75,12 @@ public abstract class PageListHelper<T> {
             }
         }
 
-        if (session.getData().isEmpty() && v_empty != null) {
-            v_empty.setVisibility(View.VISIBLE);
-        }
+        pageListView.setEmptyView(v_empty);
     }
 
     public void onLoadError(String errorMsg) {
         pageListView.onRefreshComplete();
+        pageListView.setEmptyView(v_empty);
     }
 
     public void initStart() {

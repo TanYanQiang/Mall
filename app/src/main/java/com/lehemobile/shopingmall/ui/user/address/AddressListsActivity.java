@@ -2,18 +2,25 @@ package com.lehemobile.shopingmall.ui.user.address;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.AddressApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.model.Address;
 import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
@@ -49,6 +56,10 @@ public class AddressListsActivity extends BaseActivity {
     PullToRefreshListView listView;
     @ViewById
     TextView tv_empty;
+
+    @ViewById
+    ContentLoadingProgressBar progress;
+
     private PageListHelper<Address> pageListHelper;
 
     @AfterViews
@@ -101,27 +112,24 @@ public class AddressListsActivity extends BaseActivity {
     }
 
     private void load(int page, int pageCount) {
-        //TODO 调用接口加载数据
-        List<Address> addressList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            Address address = new Address();
-            address.setId(i + 1);
-            address.setName("谭燕强");
-            address.setMobile("186****036" + i);
-            Region province = new Region();
-            province.setName("北京市");
-            address.setProvince(province);
-            Region city = new Region();
-            city.setName("北京市");
-            address.setCity(city);
-            Region district = new Region();
-            district.setName("朝阳区");
-            address.setDistrict(district);
-            address.setDetailedAddress("安定路39号长新大厦1105");
-            address.setDefault(i == 0);
-            addressList.add(address);
+        if (page == 1) {
+            progress.show();
         }
-        pageListHelper.onLoadSuccess(addressList);
+        Request<List<Address>> request = AddressApi.getAddressList(page, pageCount, new Response.Listener<List<Address>>() {
+            @Override
+            public void onResponse(final List<Address> response) {
+                progress.hide();
+                pageListHelper.onLoadSuccess(response);
+            }
+        }, new AppErrorListener(this) {
+            @Override
+            public void onError(int code, final String msg) {
+                progress.hide();
+                pageListHelper.onLoadError(msg);
+                super.onError(code, msg);
+            }
+        });
+        VolleyHelper.execute(request);
 
     }
 
@@ -189,5 +197,11 @@ public class AddressListsActivity extends BaseActivity {
             lists.set(indexOf, address);
             pageListHelper.getAdapter().setData(lists);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        VolleyHelper.cancel();
     }
 }

@@ -94,7 +94,6 @@ public class RequestSmsCodePasswordFragment extends BaseFragment {
     @Click
     void requestSmsCode() {
         inputSmsCode.setText("");
-        //TODO  调用该接口获取验证码
         showLoading("正在发送验证码...");
         BaseRequest<Map<String, Object>> request = UserApi.requestSmsCode(mobile, type, new Response.Listener<Map<String, Object>>() {
             @Override

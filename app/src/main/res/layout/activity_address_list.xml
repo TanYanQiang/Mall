@@ -3,15 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/action_add_address"
         style="@style/Button.NormalCorners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_red_solid"
-        android:layout_margin="0dp"
         android:layout_alignParentBottom="true"
+        android:layout_margin="0dp"
+        android:background="@drawable/btn_red_solid"
         android:text="新增收货地址" />
+
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listView"
         style="@style/ListViewStyle"
@@ -21,12 +23,20 @@
 
     <TextView
         android:id="@+id/tv_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/line_height_lv1"
+        style="@style/TextStyle.Desc.Small.Gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
+        android:gravity="center"
         android:text="你还没有收货地址(⊙o⊙)哦！"
         android:textStyle="bold"
         android:visibility="gone" />
 
-
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 </RelativeLayout>
