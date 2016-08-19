@@ -9,7 +9,8 @@
     <Space
         android:id="@+id/topSpace"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/activity_vertical_margin" />
 
     <TextView
         android:id="@+id/title"
@@ -54,7 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_kuaidi_item_2" />
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_kuaidi_item_1" />
     </FrameLayout>
 
 
@@ -67,9 +69,16 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@id/imageLayout">
 
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:text="1234567890"
+            android:visibility="invisible" />
+
         <View
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:background="@color/colorAccent" />
     </FrameLayout>
@@ -78,16 +87,26 @@
     <FrameLayout
         android:id="@+id/bottomLine"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignBottom="@id/line"
         android:layout_alignLeft="@id/imageLayout"
         android:layout_alignRight="@id/imageLayout"
-        android:layout_below="@id/imageLayout">
+        android:layout_below="@id/imageLayout"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:text="1234567890"
+            android:visibility="invisible" />
 
         <View
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:background="@color/colorAccent" />
     </FrameLayout>
+
 </RelativeLayout>

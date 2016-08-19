@@ -1,5 +1,7 @@
 package com.lehemobile.shopingmall.ui.order;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -56,8 +58,10 @@ public class OrderAppleRefundActivity extends BaseActivity {
         Logger.i("measuredWidth:" + measuredWidth);
 
         popupWindow = new PopupWindow(crateReasonView(), measuredWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
+        popupWindow.update();
         popupWindow.showAsDropDown(refundReason);
     }
 
