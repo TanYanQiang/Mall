@@ -107,4 +107,68 @@ public class AddressApi {
             }
         };
     }
+
+    public static Request<Void> deleteAddress(int addressId, Response.Listener<Void> listener, AppErrorListener errorListener) {
+        Map<String, String> params = ApiUtils.quickParams("id", String.valueOf(addressId));
+        //// TODO: 18/8/16 删除收货地址
+        return new BaseRequest<Void>("deleteaddr", params, listener, errorListener) {
+            @Override
+            protected Void treatResponse(JSONObject baseJson) throws Exception {
+                return null;
+            }
+        };
+    }
+
+    public static Request<Address> saveAddress(final Address address, Response.Listener<Address> listener, AppErrorListener errorListener) {
+        String operation = "saveaddr";
+        Map<String, String> params = new HashMap<>();
+        params.put("consignee", address.getName());
+        params.put("mobile", address.getMobile());
+
+        params.put("province", String.valueOf(address.getProvince().getId()));
+        params.put("province_name", address.getProvince().getName());
+
+        params.put("city", String.valueOf(address.getCity().getId()));
+        params.put("city_name", address.getCity().getName());
+
+        params.put("district", String.valueOf(address.getDistrict().getId()));
+        params.put("district_name", address.getDistrict().getName());
+        params.put("address", address.getDetailedAddress());
+        if (address.getId() > 0) {
+            params.put("address_id", String.valueOf(address.getId()));
+            operation = "updateaddr"; //更新
+        }
+
+        return new BaseRequest<Address>(operation, params, listener, errorListener) {
+            @Override
+            protected Address treatResponse(JSONObject baseJson) throws Exception {
+                //// TODO: 18/8/16 新增地址需要返回ID
+                JSONObject jsonObject = baseJson.optJSONObject("result");
+                int id = jsonObject.optInt("address_id");
+                if (id > 0) {
+                    address.setId(id);
+                }
+                return address;
+            }
+        };
+    }
+
+    /**
+     * @param addressId
+     * @param isDefault
+     * @param listener
+     * @param errorListener
+     * @return
+     */
+    public static BaseRequest<Void> setDefault(int addressId, boolean isDefault, Response.Listener<Void> listener, AppErrorListener errorListener) {
+        //// TODO: 19/8/16 设置默认收货地址
+        Map<String, String> params = ApiUtils.quickParams("address_id", String.valueOf(addressId), "isdefault", String.valueOf(isDefault ? 1 : 0));
+        return new BaseRequest<Void>("setdefault", params, listener, errorListener) {
+            @Override
+            protected Void treatResponse(JSONObject baseJson) throws Exception {
+                return null;
+            }
+        };
+    }
+
 }

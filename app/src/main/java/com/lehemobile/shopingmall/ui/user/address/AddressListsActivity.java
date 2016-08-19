@@ -15,6 +15,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.api.AddressApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.model.Address;
@@ -100,15 +101,19 @@ public class AddressListsActivity extends BaseActivity {
     }
 
 
-    private void deleteAddress(Address address) {
-        //TODO 删除
-        Logger.i("删除:" + address.getDetailedAddress());
-
-        //
-        ArrayList<Address> data = pageListHelper.getData();
-        data.remove(address);
-        pageListHelper.getAdapter().setData(data);
-
+    private void deleteAddress(final Address address) {
+        showLoading("正在提交数据...");
+        Request<Void> request = AddressApi.deleteAddress(address.getId(), new Response.Listener<Void>() {
+            @Override
+            public void onResponse(Void response) {
+                showToast("删除成功");
+                dismissLoading();
+                ArrayList<Address> data = pageListHelper.getData();
+                data.remove(address);
+                pageListHelper.getAdapter().setData(data);
+            }
+        }, new AppErrorListener(this));
+        VolleyHelper.execute(request);
     }
 
     private void load(int page, int pageCount) {
@@ -150,17 +155,25 @@ public class AddressListsActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onCheckSelectdListener(Address address) {
+                public void onCheckSelectdListener(final Address address) {
                     Logger.i("check Selected:" + address.getDetailedAddress());
 
-                    ArrayList<Address> data = pageListHelper.getData();
-                    for (Address ad : data) {
-                        ad.setDefault(ad.equals(address));
-                        if (ad.isDefault()) {
-                            ConfigManager.setUserDefaultAddress(ad);
+                    showLoading("正在提交数据...");
+                    BaseRequest<Void> request = AddressApi.setDefault(address.getId(), address.isDefault(), new Response.Listener<Void>() {
+                        @Override
+                        public void onResponse(Void response) {
+                            dismissLoading();
+                            ArrayList<Address> data = pageListHelper.getData();
+                            for (Address ad : data) {
+                                ad.setDefault(ad.equals(address));
+                                if (ad.isDefault()) {
+                                    ConfigManager.setUserDefaultAddress(ad);
+                                }
+                            }
+                            pageListHelper.getAdapter().notifyDataSetChanged();
                         }
-                    }
-                    pageListHelper.getAdapter().notifyDataSetChanged();
+                    }, null);
+                    VolleyHelper.execute(request);
                 }
 
                 @Override

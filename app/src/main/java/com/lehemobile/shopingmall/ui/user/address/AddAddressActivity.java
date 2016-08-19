@@ -4,11 +4,16 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.AddressApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.model.Address;
 import com.lehemobile.shopingmall.model.Region;
 import com.lehemobile.shopingmall.ui.BaseActivity;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.tgh.devkit.core.utils.Strings;
 
 import org.androidannotations.annotations.AfterViews;
@@ -103,14 +108,32 @@ public class AddAddressActivity extends BaseActivity {
     }
 
     private void addAddress(Address address) {
-        //TODO 添加收货地
-        onFinish(address);
+        showLoading("正在提交数据...");
+        Request<Address> request = AddressApi.saveAddress(address, new Response.Listener<Address>() {
+            @Override
+            public void onResponse(Address address) {
+                showToast("添加成功");
+                dismissLoading();
+                onFinish(address);
+            }
+        }, new AppErrorListener(this));
+
+        VolleyHelper.execute(request);
+
     }
 
     private void editAddress(Address address) {
-        //TODO 编辑收货地
+        showLoading("正在提交数据...");
+        Request<Address> request = AddressApi.saveAddress(address, new Response.Listener<Address>() {
+            @Override
+            public void onResponse(Address address) {
+                dismissLoading();
+                showToast("编辑成功");
+                onFinish(address);
+            }
+        }, new AppErrorListener(this));
 
-        onFinish(address);
+        VolleyHelper.execute(request);
 
     }
 

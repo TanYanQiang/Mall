@@ -10,9 +10,14 @@ import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.AddressApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.model.Address;
 import com.lehemobile.shopingmall.utils.DialogUtils;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.AfterViews;
@@ -88,8 +93,6 @@ public class AddressListItemView extends RelativeLayout {
                 if (onAddressListListener != null) {
                     address.setDefault(checked);
                     Logger.i("address " + address.getId() + ", default:" + checked);
-                    //TODO 调用接口设置默认值
-
                     onAddressListListener.onCheckSelectdListener(address);
                 }
             }
