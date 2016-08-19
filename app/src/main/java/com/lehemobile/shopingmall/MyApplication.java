@@ -1,12 +1,15 @@
 package com.lehemobile.shopingmall;
 
 import android.app.Application;
+import android.content.Intent;
 
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.event.LogoutEvent;
 import com.lehemobile.shopingmall.model.User;
+import com.lehemobile.shopingmall.ui.MainActivity_;
+import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.OkHttpDownloader;
@@ -66,6 +69,14 @@ public class MyApplication extends Application {
         ConfigManager.setUserToken(null);
         ConfigManager.deleteCacheUser();
         EventBus.getDefault().post(new LogoutEvent());
+    }
+
+    public void otherDeviceLogin() {
+        onUserLogout();
+        Intent[] intents = new Intent[2];
+        intents[0] = MainActivity_.intent(instance).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK).get();
+        intents[1] = LoginActivity_.intent(instance).get();
+        instance.startActivities(intents);
     }
 
 }

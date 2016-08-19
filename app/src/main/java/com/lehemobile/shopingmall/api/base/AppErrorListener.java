@@ -1,5 +1,6 @@
 package com.lehemobile.shopingmall.api.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -9,8 +10,10 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.core.utils.DebugLog;
 
 import org.json.JSONObject;
 
@@ -76,11 +79,26 @@ public class AppErrorListener implements Response.ErrorListener {
             JSONObject jsonObject = new JSONObject(response);
             int code = jsonObject.optInt("code");
             String msg = jsonObject.optString("msg");
-            onError(code, msg);
+            if (!specialTreat(code, msg, jsonObject)) {
+                onError(code, msg);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             Logger.e(e.fillInStackTrace(), "volleyError");
             onError(CODE_SERVER_ERROR, SERVER_ERROR_DESC);
         }
+    }
+
+    private boolean specialTreat(int code, String msg, JSONObject base) {
+        switch (code) {
+            case 5:  //强制升级
+
+                return true;
+            case 1102: //在另外一台设备登录
+                MyApplication.getInstance().otherDeviceLogin();
+                return true;
+        }
+
+        return false;
     }
 }
