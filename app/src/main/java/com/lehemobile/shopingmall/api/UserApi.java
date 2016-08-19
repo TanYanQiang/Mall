@@ -111,7 +111,7 @@ public class UserApi {
     }
 
 
-    public static BaseRequest<Void> restPassword(String mobile,String token, String password, Response.Listener<Void> listener, AppErrorListener errorListener) {
+    public static BaseRequest<Void> restPassword(String mobile, String token, String password, Response.Listener<Void> listener, AppErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
         params.put("checkchar", token);
@@ -149,6 +149,31 @@ public class UserApi {
                 JSONObject result = baseJson.optJSONObject("result");
                 String token = result.optString("checkchar");
                 return token;
+            }
+        };
+    }
+
+
+    public static BaseRequest<Void> logout(Response.Listener<Void> listener, AppErrorListener errorListener) {
+        //// TODO: 19/8/16 退出登录
+        return new BaseRequest<Void>("logout", null, listener, errorListener) {
+            @Override
+            protected Void treatResponse(JSONObject baseJson) throws Exception {
+                return null;
+            }
+        };
+    }
+
+    public static BaseRequest<User> updateUserInfo(User user, Response.Listener<User> listener, AppErrorListener errorListener) {
+        //// TODO: 19/8/16 更新用户信息，昵称和头像
+        Map<String, String> params = new HashMap<>();
+        params.put("realname", user.getNick());
+        params.put("user_photo", user.getAvatar());
+
+        return new BaseRequest<User>("update", params, listener, errorListener) {
+            @Override
+            protected User treatResponse(JSONObject baseJson) throws Exception {
+                return null;
             }
         };
     }

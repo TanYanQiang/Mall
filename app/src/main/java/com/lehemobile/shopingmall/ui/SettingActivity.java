@@ -6,11 +6,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.MyApplication;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.UserApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.config.AppConfig;
 import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.utils.DialogUtils;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.tgh.devkit.core.utils.IO;
@@ -140,14 +145,37 @@ public class SettingActivity extends BaseActivity {
     @Click(R.id.logoutBtn)
     void onLogout() {
 
-        DialogUtils.alert(this, null, "确认退出登录吗？", android.R.string.cancel, null, android.R.string.ok, new View.OnClickListener() {
+        confirm(null, "确认退出登录吗？", new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                logout();
+            }
+        });
+    }
+
+    private void logout() {
+        showLoading("正在退出登录...");
+        BaseRequest<Void> request = UserApi.logout(new Response.Listener<Void>() {
+            @Override
+            public void onResponse(Void response) {
+                dismissLoading();
+                MyApplication.getInstance().onUserLogout();
+                updateLogoutBtn();
+            }
+        }, new AppErrorListener(this) {
+            @Override
+            public void onError(int code, String msg) {
+                dismissLoading();
                 MyApplication.getInstance().onUserLogout();
                 updateLogoutBtn();
             }
         });
-
+        VolleyHelper.execute(request);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        VolleyHelper.cancel();
+    }
 }

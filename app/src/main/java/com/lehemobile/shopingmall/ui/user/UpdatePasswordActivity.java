@@ -43,7 +43,6 @@ public class UpdatePasswordActivity extends BaseActivity {
     private void updatePassword() {
         String oldPasswordStr = getInputText(oldPassword);
         String newPasswordStr = getInputText(newPassword);
-        //TODO 修改密码
         showLoading("正在提交数据...");
         BaseRequest<Void> request = UserApi.updatePassword(oldPasswordStr, newPasswordStr, new Response.Listener<Void>() {
             @Override
