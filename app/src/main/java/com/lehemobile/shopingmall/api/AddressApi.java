@@ -57,7 +57,7 @@ public class AddressApi {
             district.setId(jobj.optInt("district"));
             address.setDistrict(district);
             //// TODO: 18/8/16  是否默认
-            address.setDefault(false);
+            address.setDefault(jobj.optInt("default") != 0);
             return address;
         }
     };
@@ -109,9 +109,9 @@ public class AddressApi {
     }
 
     public static Request<Void> deleteAddress(int addressId, Response.Listener<Void> listener, AppErrorListener errorListener) {
-        Map<String, String> params = ApiUtils.quickParams("id", String.valueOf(addressId));
+        Map<String, String> params = ApiUtils.quickParams("address_id", String.valueOf(addressId), "act", "delete");
         //// TODO: 18/8/16 删除收货地址
-        return new BaseRequest<Void>("deleteaddr", params, listener, errorListener) {
+        return new BaseRequest<Void>("doaddr", params, listener, errorListener) {
             @Override
             protected Void treatResponse(JSONObject baseJson) throws Exception {
                 return null;
@@ -120,10 +120,13 @@ public class AddressApi {
     }
 
     public static Request<Address> saveAddress(final Address address, Response.Listener<Address> listener, AppErrorListener errorListener) {
-        String operation = "saveaddr";
+        String operation = "doaddr";
+
         Map<String, String> params = new HashMap<>();
         params.put("consignee", address.getName());
-        params.put("mobile", address.getMobile());
+        params.put("tel", address.getMobile());
+
+        params.put("country", "1"); //默认都是中国
 
         params.put("province", String.valueOf(address.getProvince().getId()));
         params.put("province_name", address.getProvince().getName());
@@ -134,9 +137,12 @@ public class AddressApi {
         params.put("district", String.valueOf(address.getDistrict().getId()));
         params.put("district_name", address.getDistrict().getName());
         params.put("address", address.getDetailedAddress());
+        params.put("default", String.valueOf(address.isDefault() ? 1 : 0));
         if (address.getId() > 0) {
             params.put("address_id", String.valueOf(address.getId()));
-            operation = "updateaddr"; //更新
+            params.put("act", "edit");
+        } else {
+            params.put("act", "add");
         }
 
         return new BaseRequest<Address>(operation, params, listener, errorListener) {
@@ -144,6 +150,7 @@ public class AddressApi {
             protected Address treatResponse(JSONObject baseJson) throws Exception {
                 //// TODO: 18/8/16 新增地址需要返回ID
                 JSONObject jsonObject = baseJson.optJSONObject("result");
+                if (jsonObject == null) return address;
                 int id = jsonObject.optInt("address_id");
                 if (id > 0) {
                     address.setId(id);
@@ -162,8 +169,8 @@ public class AddressApi {
      */
     public static BaseRequest<Void> setDefault(int addressId, boolean isDefault, Response.Listener<Void> listener, AppErrorListener errorListener) {
         //// TODO: 19/8/16 设置默认收货地址
-        Map<String, String> params = ApiUtils.quickParams("address_id", String.valueOf(addressId), "isdefault", String.valueOf(isDefault ? 1 : 0));
-        return new BaseRequest<Void>("setdefault", params, listener, errorListener) {
+        Map<String, String> params = ApiUtils.quickParams("address_id", String.valueOf(addressId), "default", String.valueOf(isDefault ? 1 : 0), "act", "updatedefault");
+        return new BaseRequest<Void>("doaddr", params, listener, errorListener) {
             @Override
             protected Void treatResponse(JSONObject baseJson) throws Exception {
                 return null;
