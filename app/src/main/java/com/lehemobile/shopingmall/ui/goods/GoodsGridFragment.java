@@ -22,6 +22,8 @@ import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.user.favorite.FavoriteActivity;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
+import com.orhanobut.logger.Logger;
+import com.tgh.devkit.core.utils.DebugLog;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
 import org.androidannotations.annotations.AfterViews;
@@ -54,12 +56,11 @@ public class GoodsGridFragment extends BaseFragment {
 
     @AfterViews
     void init() {
-
-        initGridView();
+        Logger.i("AfterViews");
     }
 
     void initGridView() {
-
+        Logger.i("initGridView :" + gridView);
         pageListHelper = new PageListHelper<Goods>(gridView) {
             @Override
             public void loadData(int page, int pageCount) {
@@ -77,7 +78,12 @@ public class GoodsGridFragment extends BaseFragment {
                 GoodsDetailActivity_.intent(getContext()).goodsId(goods.getId()).start();
             }
         };
-
+        Logger.i("pageListHelper :" + pageListHelper);
+        BaseListAdapter<Goods> adapter = pageListHelper.getAdapter();
+        if (adapter != null) {
+            adapter.clear();
+        }
+        gridView.setVisibility(View.GONE);
         pageListHelper.setInitMode(PullToRefreshBase.Mode.PULL_FROM_END);
         pageListHelper.initStart();
         pageListHelper.setEmptyView(tv_empty);
@@ -90,23 +96,27 @@ public class GoodsGridFragment extends BaseFragment {
         BaseRequest<List<Goods>> request = GoodsApi.getGoodsList(category.getCategoryId(), page, pageCount, new Response.Listener<List<Goods>>() {
             @Override
             public void onResponse(List<Goods> response) {
+                Logger.i("response:" + response.size());
                 progress.hide();
                 pageListHelper.onLoadSuccess(response);
+                gridView.setVisibility(View.VISIBLE);
             }
         }, new AppErrorListener(getActivity()) {
             @Override
             public void onError(int code, String msg) {
                 progress.hide();
+                gridView.setVisibility(View.VISIBLE);
                 super.onError(code, msg);
+
                 pageListHelper.onLoadError(msg);
             }
         });
         VolleyHelper.execute(request);
 
-
     }
 
     public void loadData(Category category) {
+        Logger.i("loadData :" + category.getCategoryName());
         this.category = category;
         initGridView();
     }
@@ -114,6 +124,7 @@ public class GoodsGridFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Logger.i("----------->onDestroy");
         VolleyHelper.cancel();
     }
 

@@ -9,7 +9,7 @@
     <com.handmark.pulltorefresh.library.PullToRefreshGridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:horizontalSpacing="@dimen/margin_8"
         android:numColumns="2"
         android:verticalSpacing="@dimen/margin_8" />

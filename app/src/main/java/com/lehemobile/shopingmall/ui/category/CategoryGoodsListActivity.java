@@ -2,12 +2,18 @@ package com.lehemobile.shopingmall.ui.category;
 
 import android.support.design.widget.TabLayout;
 
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.CategoryApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.model.Category;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.goods.GoodsGridFragment;
 import com.lehemobile.shopingmall.ui.goods.GoodsGridFragment_;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.orhanobut.logger.Logger;
+import com.tgh.devkit.core.utils.DebugLog;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -32,6 +38,12 @@ public class CategoryGoodsListActivity extends BaseActivity {
     @AfterViews
     void init() {
         setTitle(category.getCategoryName());
+
+        gridFragment = GoodsGridFragment_.builder().build();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, gridFragment)
+                .commit();
+
 
         loadCategories();
 
@@ -58,19 +70,23 @@ public class CategoryGoodsListActivity extends BaseActivity {
     }
 
     private void loadCategories() {
-        List<Category> categories = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            Category category = new Category();
-            category.setCategoryName("面膜");
-            categories.add(category);
-        }
-        updateCategoryTabs(categories);
+        showLoading("正在加载数据....");
+        BaseRequest<List<Category>> request = CategoryApi.getCategories(category.getCategoryId(), new Response.Listener<List<Category>>() {
+            @Override
+            public void onResponse(List<Category> categories) {
+                updateCategoryTabs(categories);
+                dismissLoading();
+            }
+        }, new AppErrorListener(this));
+
+        VolleyHelper.execute(request);
+
     }
 
     private void updateCategoryTabs(List<Category> categories) {
 
         Category allCategory = new Category();
-        allCategory.setCategoryId(-1);
+        allCategory.setCategoryId(category.getCategoryId());
         allCategory.setCategoryName("全部分类");
         categories.add(0, allCategory);
 
@@ -78,19 +94,26 @@ public class CategoryGoodsListActivity extends BaseActivity {
             TabLayout.Tab tab = tabs.newTab().setText(category.getCategoryName()).setTag(category);
             tabs.addTab(tab);
         }
-        loadGoods(allCategory);
     }
 
     private void loadGoods(Category category) {
         if (gridFragment == null) {
-            gridFragment = GoodsGridFragment_.builder().category(category).build();
+            gridFragment = GoodsGridFragment_.builder().build();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, gridFragment)
                     .commit();
-        } else {
+        }
+        boolean added = gridFragment.isAdded();
+        DebugLog.i("gridFragment.isAdded():" + added);
+        if (gridFragment.isAdded()) {
             gridFragment.loadData(category);
         }
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gridFragment = null;
+    }
 }

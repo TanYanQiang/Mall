@@ -30,6 +30,11 @@ public class CategoryActivity extends BaseActivity {
 
     @AfterViews
     void init() {
+        fragment = CategoryDetailFragment_.builder().build();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+
         categoryGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

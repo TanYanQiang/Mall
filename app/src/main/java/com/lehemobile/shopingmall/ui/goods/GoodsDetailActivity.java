@@ -14,12 +14,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.GoodsApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.event.FavoriteEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity_;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.tgh.devkit.core.text.SpannableStringHelper;
@@ -103,43 +108,17 @@ public class GoodsDetailActivity extends BaseActivity {
     private void loadData() {
 
         updateProgressUI(true);
-        //TODO 加载数据
-        session = new GoodsDetailSession();
 
-        Goods goods = new Goods();
-        goods.setId(goodsId);
-        goods.setName("Watbalan水博兰水润保湿平衡面膜10片/27g ，肌肤水润平衡动力源，镇定肌肤，强化水分，超微颗粒深入肌底，长效补充水分");
-        goods.setPrice(100);
-        goods.setThumbnail("http://a.vpimg2.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110.jpg");
-        goods.setTradingCount(200);
-        List<String> images = new ArrayList<>();
-        images.add("http://a.vpimg2.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110.jpg");
-//        images.add("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/0/1981126-2_710x897_80.jpg");
-        goods.setImages(images);
+        BaseRequest<GoodsDetailSession> request = GoodsApi.getGoodsDetail(goodsId, new Response.Listener<GoodsDetailSession>() {
+            @Override
+            public void onResponse(GoodsDetailSession response) {
+                session = response;
+                updateUI();
+            }
+        }, new AppErrorListener(this));
 
-        goods.setDetail("http://a.appsimg.com/upload/merchandise/pdc/293/235/7649158865156235293/1/1981126-6_1440x8000_90.jpg");
+        VolleyHelper.execute(request);
 
-        List<String> detailImages = new ArrayList<>();
-//        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/884/474/1097265726116474884/9/8809261550468-110_1_1440x8000_90.jpg");
-//        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/884/474/1097265726116474884/9/8809261550468-110_2_1440x8000_90.jpg");
-//        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/884/474/1097265726116474884/9/8809261550468-110_4_1440x8000_90.jpg");
-        detailImages.add("http://a.appsimg.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110_2_1440x8000_90.jpg");
-        goods.setDetailImages(detailImages);
-        session.setGoods(goods);
-        session.setFavorite(false);
-        List<Goods> recommendGoods = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Goods reGoods = new Goods();
-            reGoods.setId(goodsId);
-            reGoods.setName("Watbalan水博兰水润保湿平衡面膜10片/27g ，肌肤水润平衡动力源，镇定肌肤，强化水分，超微颗粒深入肌底，长效补充水分");
-            reGoods.setPrice(100 * i);
-            reGoods.setThumbnail("http://a.vpimg2.com/upload/merchandise/pdc/473/177/1026334052051177473/6/8809383002388-110.jpg");
-
-            recommendGoods.add(reGoods);
-        }
-
-        session.setRecommendGoods(recommendGoods);
-        updateUI();
     }
 
     @AfterViews
@@ -247,7 +226,7 @@ public class GoodsDetailActivity extends BaseActivity {
         marketPrice.getPaint().setColor(getResources().getColor(R.color.text_color_lv3));
         marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
 
-        marketPrice.setText(getString(R.string.label_goods_detail_marketPrice, goods.getPriceString()));
+        marketPrice.setText(getString(R.string.label_goods_detail_marketPrice, goods.getMarketPriceString()));
 
         tradingCount.setText(getString(R.string.label_goods_trading_count, goods.getTradingCount()));
     }

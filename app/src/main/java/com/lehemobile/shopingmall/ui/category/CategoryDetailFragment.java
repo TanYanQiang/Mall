@@ -47,7 +47,7 @@ public class CategoryDetailFragment extends BaseFragment {
 
     @AfterViews
     void init() {
-        loadData(categoryId);
+
     }
 
 
@@ -58,7 +58,6 @@ public class CategoryDetailFragment extends BaseFragment {
             @Override
             public void onResponse(List<Category> response) {
                 CategoryDetailSession session = new CategoryDetailSession();
-                session.setTips("为你推荐");
                 session.setDetails(response);
                 updateUI(session.getDetails());
                 updateTips(session.getTips());

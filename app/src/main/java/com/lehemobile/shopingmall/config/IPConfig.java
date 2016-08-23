@@ -4,8 +4,10 @@ import android.text.TextUtils;
 
 import com.lehemobile.shopingmall.BuildConfig;
 import com.lehemobile.shopingmall.MyApplication;
+import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.config.KeyValueStore;
 import com.tgh.devkit.core.config.KeyValueStoreInternal;
+import com.tgh.devkit.core.utils.Strings;
 
 /**
  * Created by albert on 16/3/8.
@@ -26,9 +28,25 @@ public class IPConfig {
         return BuildConfig.appBaseUrl;
     }
 
+
     public static String getApiUrl(String operation) {
         String url = "%s/index.php?op=%s";
         url = String.format(url, getAPIBaseUrl(), operation);
         return url;
+    }
+
+    public static String getFullImageUrl(String url) {
+        if (!Strings.isNullOrEmpty(url)) {
+            if (!url.startsWith("http:") &&
+                    !url.startsWith("https:") &&
+                    !url.startsWith("file:")) {
+                Logger.i("imageHost:"+BuildConfig.imageHost);
+                return BuildConfig.imageHost + url;
+            } else {
+                return url;
+            }
+        } else {
+            return null;
+        }
     }
 }

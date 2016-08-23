@@ -19,7 +19,7 @@ import java.util.Map;
 public class CategoryApi {
 
     public static BaseRequest<List<Category>> getCategories(int categoryId, Response.Listener<List<Category>> listener, AppErrorListener errorListener) {
-        Map<String, String> params = ApiUtils.quickParams("parent_id", String.valueOf(categoryId));
+        Map<String, String> params = ApiUtils.quickParams( "cat_id", String.valueOf(categoryId));//"parent_id", String.valueOf(categoryId),
         return new BaseRequest<List<Category>>("category", params, listener, errorListener) {
             @Override
             protected List<Category> treatResponse(JSONObject baseJson) throws Exception {

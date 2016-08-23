@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.config.IPConfig;
 import com.lehemobile.shopingmall.model.Goods;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -51,7 +52,9 @@ public class GoodsGridItemView extends LinearLayout {
     }
 
     public void updateUI(Goods goods) {
-        Picasso.with(getContext()).load(goods.getThumbnail()).into(thumbImage);
+        Logger.i("imageURL:"+goods.getThumbnail());
+
+        Picasso.with(getContext()).load(IPConfig.getFullImageUrl(goods.getThumbnail())).placeholder(R.mipmap.ic_launcher).into(thumbImage);
         goodsPrice.setText(getResources().getString(R.string.label_order_price, goods.getPriceString()));
         goodsName.setText(goods.getName());
 

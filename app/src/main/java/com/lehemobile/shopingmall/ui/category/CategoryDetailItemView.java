@@ -3,6 +3,7 @@ package com.lehemobile.shopingmall.ui.category;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,7 +46,12 @@ public class CategoryDetailItemView extends LinearLayout {
 
     public void updateUI(Category detail) {
         title.setText(detail.getCategoryName());
-        Picasso.with(getContext()).load(detail.getCategoryImage()).placeholder(R.mipmap.test_category_detail_item).into(image);
+        if (TextUtils.isEmpty(detail.getCategoryImage())) {
+            Picasso.with(getContext()).load(R.mipmap.test_category_detail_item).into(image);
+        } else {
+            Picasso.with(getContext()).load(detail.getCategoryImage()).placeholder(R.mipmap.test_category_detail_item).into(image);
+        }
+
     }
 
 }

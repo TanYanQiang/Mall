@@ -17,6 +17,7 @@ public class Goods implements Serializable {
     private List<String> detailImages;
 
     private double price; //价格
+    private double marketPrice; //市场价格
     private int stock;
 
     private boolean favorite;
@@ -73,6 +74,9 @@ public class Goods implements Serializable {
     public String getPriceString() {
         return Strings.doubleTrans(price);
     }
+    public String getMarketPriceString() {
+        return Strings.doubleTrans(marketPrice);
+    }
 
     public void setPrice(double price) {
         this.price = price;
@@ -124,6 +128,14 @@ public class Goods implements Serializable {
 
     public void setTradingCount(int tradingCount) {
         this.tradingCount = tradingCount;
+    }
+
+    public double getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(double marketPrice) {
+        this.marketPrice = marketPrice;
     }
 
     @Override

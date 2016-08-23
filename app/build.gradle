@@ -16,6 +16,7 @@ apt {
 
 android {
     def API_BASE_URL = "appBaseUrl";
+    def IMAGE_HOST = "imageHost";
     def API_CHECK_CHAR = "apiCheckChar";
     def BUGLY_APPID = "buglyAppId"
 
@@ -73,6 +74,7 @@ android {
             versionName "1.0"
 
             buildConfigField("String", API_BASE_URL, "\"http://120.76.46.223/mobile/wapi\"")
+            buildConfigField("String", IMAGE_HOST, "\"http://120.76.46.223/\"")
             buildConfigField("String", API_CHECK_CHAR, "\"rewt4234543rewt4234543\"")
             buildConfigField("String", BUGLY_APPID, "\"b86ba76f73\"")
 

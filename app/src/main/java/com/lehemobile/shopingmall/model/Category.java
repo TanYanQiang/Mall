@@ -42,4 +42,20 @@ public class Category implements Serializable {
     public void setParentCategoryId(int parentCategoryId) {
         this.parentCategoryId = parentCategoryId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+
+        Category category = (Category) o;
+
+        return categoryId == category.categoryId;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return categoryId;
+    }
 }
