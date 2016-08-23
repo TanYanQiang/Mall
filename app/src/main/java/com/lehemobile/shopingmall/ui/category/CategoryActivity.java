@@ -1,18 +1,20 @@
 package com.lehemobile.shopingmall.ui.category;
 
-import android.view.View;
 import android.widget.RadioGroup;
 
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.CategoryApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.model.Category;
 import com.lehemobile.shopingmall.ui.BaseActivity;
-import com.orhanobut.logger.Logger;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,31 +40,24 @@ public class CategoryActivity extends BaseActivity {
     }
 
     private void loadData() {
-        //// TODO: 4/8/16 加载类别
-        List<Category> categories = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Category category = new Category();
-            switch (i) {
-                case 0:
-                    category.setCategoryName("推荐类别");
-                    break;
-                case 1:
-                    category.setCategoryName("护肤");
-                    break;
-                case 2:
-                    category.setCategoryName("日用");
-                    break;
-                default:
-                    category.setCategoryName("美妆");
-                    break;
+        showLoading("正在加载数据...");
+        BaseRequest<List<Category>> request = CategoryApi.getCategories(0, new Response.Listener<List<Category>>() {
+            @Override
+            public void onResponse(List<Category> categories) {
+                updateCategoryGroupUI(categories);
             }
-            category.setCategoryId(i);
-            categories.add(category);
-        }
-        updateCategoryGroupUI(categories);
+        }, new AppErrorListener(this));
+        VolleyHelper.execute(request);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        VolleyHelper.cancel();
     }
 
     private void updateCategoryGroupUI(List<Category> categories) {
+        dismissLoading();
         categoryGroup.removeAllViews();
         for (int i = 0; i < categories.size(); i++) {
             Category category = categories.get(i);

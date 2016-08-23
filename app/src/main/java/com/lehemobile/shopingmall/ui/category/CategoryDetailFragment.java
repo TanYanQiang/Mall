@@ -8,10 +8,15 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.CategoryApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.model.Category;
 import com.lehemobile.shopingmall.model.CategoryDetailSession;
 import com.lehemobile.shopingmall.ui.BaseFragment;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.orhanobut.logger.Logger;
 import com.tgh.devkit.core.utils.Strings;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
@@ -21,7 +26,6 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -50,21 +54,22 @@ public class CategoryDetailFragment extends BaseFragment {
     public void loadData(int categoryId) {
         progressBar.setVisibility(View.VISIBLE);
 
-        //// TODO: 4/8/16  加载数据
-        CategoryDetailSession session = new CategoryDetailSession();
-        session.setTips("为你推荐");
-        List<Category> details = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Category category = new Category();
-            category.setCategoryId(i);
-            category.setCategoryName(categoryId + "美容" + i);
-            category.setCategoryImage("http://a.vpimg3.com/upload/merchandise/pdcvis/2016/07/21/40/b9ee3af9-b518-4f9f-8ea7-c04163189051.jpg");
-            details.add(category);
-        }
-        session.setDetails(details);
-
-        updateUI(session.getDetails());
-        updateTips(session.getTips());
+        BaseRequest<List<Category>> request = CategoryApi.getCategories(categoryId, new Response.Listener<List<Category>>() {
+            @Override
+            public void onResponse(List<Category> response) {
+                CategoryDetailSession session = new CategoryDetailSession();
+                session.setTips("为你推荐");
+                session.setDetails(response);
+                updateUI(session.getDetails());
+                updateTips(session.getTips());
+            }
+        }, new AppErrorListener(getContext()) {
+            @Override
+            public void onError(int code, String msg) {
+                super.onError(code, msg);
+            }
+        });
+        VolleyHelper.execute(request);
     }
 
     private void updateTips(String tips) {
@@ -87,6 +92,12 @@ public class CategoryDetailFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        VolleyHelper.cancel();
     }
 
     private class CategoryDetailAdapter extends BaseListAdapter<Category> {
