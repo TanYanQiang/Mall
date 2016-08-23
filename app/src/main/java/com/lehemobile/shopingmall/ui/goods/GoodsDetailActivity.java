@@ -3,6 +3,8 @@ package com.lehemobile.shopingmall.ui.goods;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Paint;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -19,11 +21,16 @@ import com.lehemobile.shopingmall.R;
 import com.lehemobile.shopingmall.api.GoodsApi;
 import com.lehemobile.shopingmall.api.base.AppErrorListener;
 import com.lehemobile.shopingmall.api.base.BaseRequest;
+import com.lehemobile.shopingmall.config.ConfigManager;
 import com.lehemobile.shopingmall.event.FavoriteEvent;
+import com.lehemobile.shopingmall.event.LoginEvent;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.GoodsDetailSession;
 import com.lehemobile.shopingmall.ui.BaseActivity;
 import com.lehemobile.shopingmall.ui.shoppingCart.ShoppingCartActivity_;
+import com.lehemobile.shopingmall.ui.user.login.LoginActivity_;
+import com.lehemobile.shopingmall.ui.view.GalleryImageView;
+import com.lehemobile.shopingmall.ui.view.GalleryImageView_;
 import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -95,6 +102,18 @@ public class GoodsDetailActivity extends BaseActivity {
     private GoodsDetailSession session;
     private GalleryAdapter galleryAdapter;
     private InfinitePagerAdapter infinitePagerAdapter;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     private void updateProgressUI(boolean visibility) {
         progressLayout.setVisibility(visibility ? View.VISIBLE : View.GONE);
@@ -267,15 +286,13 @@ public class GoodsDetailActivity extends BaseActivity {
 
         @Override
         protected void bindData(View view, String item) {
-            ImageView imageView = (ImageView) view;
-            Picasso.with(context).load(item).into(imageView);
+            GalleryImageView galleryImageView = (GalleryImageView) view;
+            galleryImageView.bindData(item);
         }
 
         @Override
-        protected View newItemView(int position, ViewGroup container) {
-            ImageView imageView = new ImageView(context);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            return imageView;
+        protected View newItemView(final int position, ViewGroup container) {
+            return GalleryImageView_.build(context);
         }
     }
 
@@ -292,6 +309,10 @@ public class GoodsDetailActivity extends BaseActivity {
     @OptionsItem(R.id.action_shopping)
     void goShopping() {
         Logger.i("点击购物车");
+        if (!ConfigManager.isLogin()) {
+            LoginActivity_.intent(this).start();
+            return;
+        }
         ShoppingCartActivity_.intent(this).start();
     }
 
@@ -345,6 +366,11 @@ public class GoodsDetailActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    public void onEventMainThread(LoginEvent event) {
+        Logger.i("Login Success");
+        loadData();
     }
 
 }

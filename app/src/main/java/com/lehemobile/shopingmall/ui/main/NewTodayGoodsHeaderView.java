@@ -21,6 +21,8 @@ import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.session.NewTodayGoodsSession;
 import com.lehemobile.shopingmall.ui.common.WebViewActivity;
 import com.lehemobile.shopingmall.ui.goods.GoodsDetailActivity_;
+import com.lehemobile.shopingmall.ui.view.GalleryImageView;
+import com.lehemobile.shopingmall.ui.view.GalleryImageView_;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.tgh.devkit.viewpager.InfiniteViewPager;
@@ -174,15 +176,13 @@ public class NewTodayGoodsHeaderView extends LinearLayout {
 
         @Override
         protected void bindData(View view, Goods item) {
-            ImageView imageView = (ImageView) view;
-            Picasso.with(context).load(item.getThumbnail()).into(imageView);
+            GalleryImageView galleryImageView = (GalleryImageView) view;
+            galleryImageView.bindData(item.getThumbnail());
         }
 
         @Override
         protected View newItemView(final int position, ViewGroup container) {
-            ImageView imageView = new ImageView(context);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            return imageView;
+            return GalleryImageView_.build(context);
         }
     }
 

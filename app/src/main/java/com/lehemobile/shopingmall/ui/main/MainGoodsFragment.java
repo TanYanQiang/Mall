@@ -75,7 +75,7 @@ public class MainGoodsFragment extends BaseFragment {
         List<Goods> goodsList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Goods goods = new Goods();
-            goods.setId(i + 1);
+            goods.setId(168);
             goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 " + i);
             goods.setPrice(100 * i);
             String thumbnail = "http://d.vpimg1.com/upcb/2016/07/29/119/54467074.jpg";
