@@ -1,19 +1,26 @@
 package com.lehemobile.shopingmall.ui.goods;
 
 import android.content.Context;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.lehemobile.shopingmall.R;
+import com.lehemobile.shopingmall.api.GoodsApi;
+import com.lehemobile.shopingmall.api.base.AppErrorListener;
+import com.lehemobile.shopingmall.api.base.BaseRequest;
 import com.lehemobile.shopingmall.model.Category;
 import com.lehemobile.shopingmall.model.Goods;
 import com.lehemobile.shopingmall.ui.BaseFragment;
 import com.lehemobile.shopingmall.ui.user.favorite.FavoriteActivity;
+import com.lehemobile.shopingmall.utils.VolleyHelper;
 import com.lehemobile.shopingmall.utils.pageList.PageListHelper;
 import com.tgh.devkit.list.adapter.BaseListAdapter;
 
@@ -37,6 +44,12 @@ public class GoodsGridFragment extends BaseFragment {
 
     @ViewById
     PullToRefreshGridView gridView;
+    @ViewById
+    TextView tv_empty;
+
+    @ViewById
+    ContentLoadingProgressBar progress;
+
     private PageListHelper<Goods> pageListHelper;
 
     @AfterViews
@@ -67,29 +80,29 @@ public class GoodsGridFragment extends BaseFragment {
 
         pageListHelper.setInitMode(PullToRefreshBase.Mode.PULL_FROM_END);
         pageListHelper.initStart();
-
-
+        pageListHelper.setEmptyView(tv_empty);
     }
 
     private void load(int page, int pageCount) {
-        //TODO 调用接口加载数据
-        List<Goods> goodsList = new ArrayList<>();
-        for (int i = 0; i < 19; i++) {
-            Goods goods = new Goods();
-            goods.setId(i + 1);
-            goods.setName("气垫BB霜 保湿遮瑕美白粉底液替换套盒 保湿遮瑕美白粉底 " + i);
-            goods.setPrice(100 * page);
-            goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/28/175/03023995.jpg");
-            if (i % 3 == 0) {
-                goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/29/109/31408761.jpg");
-            } else if (i % 2 == 0) {
-                goods.setThumbnail("http://c.vpimg1.com/upcb/2016/07/19/32/16159711.jpg");
-            } else if (i % 5 == 0) {
-                goods.setThumbnail("http://img30.360buyimg.com/da/jfs/t2980/287/2188733782/207324/ce09cc13/579ff5d1Ndc188521.jpg");
-            }
-            goodsList.add(goods);
+        if (page == 1) {
+            progress.show();
         }
-        pageListHelper.onLoadSuccess(goodsList);
+        BaseRequest<List<Goods>> request = GoodsApi.getGoodsList(category.getCategoryId(), page, pageCount, new Response.Listener<List<Goods>>() {
+            @Override
+            public void onResponse(List<Goods> response) {
+                progress.hide();
+                pageListHelper.onLoadSuccess(response);
+            }
+        }, new AppErrorListener(getActivity()) {
+            @Override
+            public void onError(int code, String msg) {
+                progress.hide();
+                super.onError(code, msg);
+                pageListHelper.onLoadError(msg);
+            }
+        });
+        VolleyHelper.execute(request);
+
 
     }
 
@@ -98,9 +111,10 @@ public class GoodsGridFragment extends BaseFragment {
         initGridView();
     }
 
-    private void updateUI(List<Goods> goodsList) {
-        GoodsAdapter goodsAdapter = new GoodsAdapter(getContext(), goodsList);
-        gridView.setAdapter(goodsAdapter);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        VolleyHelper.cancel();
     }
 
     private class GoodsAdapter extends BaseListAdapter<Goods> {

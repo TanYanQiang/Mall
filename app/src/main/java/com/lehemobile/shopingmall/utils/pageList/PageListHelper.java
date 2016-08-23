@@ -63,7 +63,6 @@ public abstract class PageListHelper<T> {
 
     public void onLoadSuccess(List<T> result) {
         pageListView.onRefreshComplete();
-
         session.onLoaded(result);
         notifyDataSetChanged(result);
 

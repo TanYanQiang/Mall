@@ -19,7 +19,7 @@ import java.util.Map;
 public class CategoryApi {
 
     public static BaseRequest<List<Category>> getCategories(int categoryId, Response.Listener<List<Category>> listener, AppErrorListener errorListener) {
-        Map<String, String> params = ApiUtils.quickParams("catid", String.valueOf(categoryId));
+        Map<String, String> params = ApiUtils.quickParams("parent_id", String.valueOf(categoryId));
         return new BaseRequest<List<Category>>("category", params, listener, errorListener) {
             @Override
             protected List<Category> treatResponse(JSONObject baseJson) throws Exception {
@@ -31,6 +31,7 @@ public class CategoryApi {
                     Category category = new Category();
                     category.setCategoryId(jsonObject.optInt("cat_id"));
                     category.setCategoryName(jsonObject.optString("cat_name"));
+                    category.setCategoryImage(jsonObject.optString("cat_img"));
                     categories.add(category);
                 }
                 return categories;
